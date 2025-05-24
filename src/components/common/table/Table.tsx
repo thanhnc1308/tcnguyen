@@ -13,6 +13,9 @@ export type TableColumn = {
   label: string;
   dataType: TableColumnDataType;
   getCustomCell?: (row: unknown, column: TableColumn) => React.ReactNode;
+  filterable?: boolean;
+  sortable?: boolean;
+  filterOptions?: string[];
 };
 
 export default async function Table({
@@ -47,7 +50,64 @@ export default async function Table({
                       scope='col'
                       className='px-3 py-5 font-medium'
                     >
-                      {column.label}
+                      <div className='flex items-center'>
+                        {column.label}
+
+                        {column.filterable && (
+                          <>
+                            <button
+                              type='button'
+                              className='ml-2 cursor-pointer'
+                              aria-label='Filter'
+                            >
+                              <svg
+                                className='h-4 w-4'
+                                fill='none'
+                                viewBox='0 0 24 24'
+                                stroke='currentColor'
+                              >
+                                <path
+                                  strokeLinecap='round'
+                                  strokeLinejoin='round'
+                                  strokeWidth='2'
+                                  d='M4 6h16M4 12h16M4 18h16'
+                                />
+                              </svg>
+                            </button>
+                            <div className='filter-options hidden'>
+                              <select name='filter' id='filter' multiple>
+                                {column.filterOptions?.map((option) => (
+                                  <option key={option} value={option}>
+                                    {option}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+                          </>
+                        )}
+
+                        {column.sortable && (
+                          <button
+                            type='button'
+                            className='ml-2 cursor-pointer'
+                            aria-label='Sort'
+                          >
+                            <svg
+                              className='h-4 w-4'
+                              fill='none'
+                              viewBox='0 0 24 24'
+                              stroke='currentColor'
+                            >
+                              <path
+                                strokeLinecap='round'
+                                strokeLinejoin='round'
+                                strokeWidth='2'
+                                d='M5 15l7-7 7 7'
+                              />
+                            </svg>
+                          </button>
+                        )}
+                      </div>
                     </th>
                   );
                 })}

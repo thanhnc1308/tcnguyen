@@ -11,7 +11,7 @@ import {
   Status,
   UpdateAction,
 } from '@/components/guest-list/Table';
-import { Guest } from '@/types/guest';
+import { Guest, GuestConfirmationStatus } from '@/types/guest';
 import { PlusIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { Suspense } from 'react';
@@ -32,7 +32,12 @@ export default async function GuestListPage(props: {
   const rowsPerPage = Number(searchParams?.rowsPerPage) || 10;
 
   const columns: TableColumn[] = [
-    { key: 'name', label: 'Name', dataType: TableColumnDataType.String },
+    {
+      key: 'name',
+      label: 'Name',
+      dataType: TableColumnDataType.String,
+      sortable: true,
+    },
     {
       key: 'status',
       label: 'Status',
@@ -42,17 +47,33 @@ export default async function GuestListPage(props: {
         const guestStatus = guest.status as string;
         return <Status status={guestStatus} />;
       },
+      filterable: true,
+      filterOptions: [
+        GuestConfirmationStatus.Pending,
+        GuestConfirmationStatus.Accepted,
+        GuestConfirmationStatus.Declined,
+      ],
     },
     {
       key: 'memberCount',
       label: 'Member Count',
       dataType: TableColumnDataType.Number,
     },
-    { key: 'invited', label: 'Invited', dataType: TableColumnDataType.Boolean },
+    {
+      key: 'invited',
+      label: 'Invited',
+      dataType: TableColumnDataType.Boolean,
+      filterable: true,
+    },
     {
       key: 'guestSource',
       label: 'Guest Source',
       dataType: TableColumnDataType.String,
+      filterable: true,
+      filterOptions: [
+        GuestConfirmationStatus.Pending,
+        GuestConfirmationStatus.Accepted,
+      ],
     },
   ];
 
