@@ -1,3 +1,4 @@
+import CheckboxCell from './CheckboxCell';
 import Pagination from './Pagination';
 
 export enum TableColumnDataType {
@@ -84,12 +85,7 @@ export default async function Table({
                           key={column.key}
                           className='whitespace-nowrap px-3 py-3'
                         >
-                          <input
-                            type='checkbox'
-                            readOnly
-                            checked={row[column.key]}
-                            className='group block size-4 rounded border bg-white data-[checked]:bg-blue-500'
-                          />
+                          <CheckboxCell checked={row[column.key]} />
                         </td>
                       );
                     }
