@@ -1,7 +1,17 @@
-import Search from '@/common/Search';
-import Table from '@/common/Table';
-import TableSkeletons from '@/common/TableSkeletons';
+import { paginateGuestList } from '@/actions/guest.action';
+import Search from '@/components/common/table/Search';
+import Table, {
+  TableColumn,
+  TableColumnDataType,
+} from '@/components/common/table/Table';
+import TableSkeletons from '@/components/common/table/TableSkeletons';
 import GuestImport from '@/components/guest-list/GuestImport';
+import {
+  DeleteAction,
+  Status,
+  UpdateAction,
+} from '@/components/guest-list/Table';
+import { Guest, GuestConfirmationStatus } from '@/types/guest';
 import { PlusIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { Suspense } from 'react';
@@ -10,13 +20,69 @@ export default async function GuestListPage(props: {
   // https://nextjs.org/docs/app/api-reference/file-conventions/page
   searchParams?: Promise<{
     query?: string;
+    sort?: string;
     page?: string;
+    rowsPerPage?: string;
   }>;
 }) {
   const searchParams = await props.searchParams;
   const query = searchParams?.query || '';
+  const sort = searchParams?.sort || '';
   const currentPage = Number(searchParams?.page) || 1;
-  const rowsPerPage = 10;
+  const rowsPerPage = Number(searchParams?.rowsPerPage) || 10;
+
+  const columns: TableColumn[] = [
+    {
+      key: 'name',
+      label: 'Name',
+      dataType: TableColumnDataType.String,
+      sortable: true,
+    },
+    {
+      key: 'status',
+      label: 'Status',
+      dataType: TableColumnDataType.Custom,
+      getCustomCell: (row: unknown) => {
+        const guest = row as Guest;
+        const guestStatus = guest.status as string;
+        return <Status status={guestStatus} />;
+      },
+      filterable: true,
+      filterOptions: [
+        GuestConfirmationStatus.Pending,
+        GuestConfirmationStatus.Accepted,
+        GuestConfirmationStatus.Declined,
+      ],
+    },
+    {
+      key: 'memberCount',
+      label: 'Member Count',
+      dataType: TableColumnDataType.Number,
+    },
+    {
+      key: 'invited',
+      label: 'Invited',
+      dataType: TableColumnDataType.Boolean,
+      filterable: true,
+    },
+    {
+      key: 'guestSource',
+      label: 'Guest Source',
+      dataType: TableColumnDataType.String,
+      filterable: true,
+      filterOptions: [
+        GuestConfirmationStatus.Pending,
+        GuestConfirmationStatus.Accepted,
+      ],
+    },
+  ];
+
+  const { data: rows, total } = await paginateGuestList({
+    queryString: query,
+    sortString: sort,
+    currentPage,
+    rowsPerPage,
+  });
 
   return (
     <div className='w-full px-5'>
@@ -37,9 +103,20 @@ export default async function GuestListPage(props: {
       </div>
       <Suspense key={query + currentPage} fallback={<TableSkeletons />}>
         <Table
-          query={query}
-          currentPage={currentPage}
+          columns={columns}
+          rows={rows}
+          total={total}
           rowsPerPage={rowsPerPage}
+          hasActionsColumn
+          getActions={(row: unknown) => {
+            const guest = row as Guest;
+            return (
+              <>
+                <UpdateAction id={guest._id} />
+                <DeleteAction id={guest._id} />
+              </>
+            );
+          }}
         />
       </Suspense>
     </div>
