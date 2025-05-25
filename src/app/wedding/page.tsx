@@ -1,14 +1,15 @@
 import Navigation from '@/components/wedding/Navigation';
 import Banner from '@/components/wedding/Banner';
-import PostcardForm from '@/components/wedding/PostcardForm';
+import PhotoGallery from '@/components/wedding/PhotoGallery';
 import WeddingMonetaryGift from '@/components/wedding/WeddingMonetaryGift';
+import PostcardForm from '@/components/wedding/PostcardForm';
 
 export default function Wedding() {
   return (
     <>
       <Navigation />
       <Banner />
-      <div>Videos/photos album</div>
+      <PhotoGallery />
       <div>Events schedule</div>
       <div>Map/location</div>
       <WeddingMonetaryGift />
