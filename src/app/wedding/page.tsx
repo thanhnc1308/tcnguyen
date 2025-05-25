@@ -5,6 +5,8 @@ import WeddingMonetaryGift from '@/components/wedding/WeddingMonetaryGift';
 import PostcardForm from '@/components/wedding/PostcardForm';
 import WeddingGuestBook from '@/components/wedding/WeddingGuestBook';
 import Footer from '@/components/wedding/Footer';
+import EventInfo from '@/components/wedding/EventInfo';
+import EventInfoV2 from '@/components/wedding/EventInfoV2';
 
 export default function Wedding() {
   return (
@@ -12,8 +14,8 @@ export default function Wedding() {
       <Navigation />
       <Banner />
       <PhotoGallery />
-      <div>Events schedule</div>
-      <div>Map/location</div>
+      <EventInfo />
+      <EventInfoV2 />
       <WeddingMonetaryGift />
       <PostcardForm />
       <WeddingGuestBook />
