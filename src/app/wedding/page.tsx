@@ -4,6 +4,7 @@ import PhotoGallery from '@/components/wedding/PhotoGallery';
 import WeddingMonetaryGift from '@/components/wedding/WeddingMonetaryGift';
 import PostcardForm from '@/components/wedding/PostcardForm';
 import WeddingGuestBook from '@/components/wedding/WeddingGuestBook';
+import Footer from '@/components/wedding/Footer';
 
 export default function Wedding() {
   return (
@@ -16,6 +17,7 @@ export default function Wedding() {
       <WeddingMonetaryGift />
       <PostcardForm />
       <WeddingGuestBook />
+      <Footer />
     </>
   );
 }
