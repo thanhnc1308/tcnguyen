@@ -1,6 +1,7 @@
 import Navigation from '@/components/wedding/Navigation';
 import Banner from '@/components/wedding/Banner';
 import PostcardForm from '@/components/wedding/PostcardForm';
+import WeddingMonetaryGift from '@/components/wedding/WeddingMonetaryGift';
 
 export default function Wedding() {
   return (
@@ -10,7 +11,7 @@ export default function Wedding() {
       <div>Videos/photos album</div>
       <div>Events schedule</div>
       <div>Map/location</div>
-      <div>Wedding monetary gift QR</div>
+      <WeddingMonetaryGift />
       <PostcardForm />
     </>
   );
