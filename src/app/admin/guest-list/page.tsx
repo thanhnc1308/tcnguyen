@@ -5,12 +5,13 @@ import Table, {
   TableColumnDataType,
 } from '@/components/common/table/Table';
 import TableSkeletons from '@/components/common/table/TableSkeletons';
-import GuestImport from '@/components/guest-list/GuestImport';
+import GuestImport from '@/features/guest-list/components/GuestImport';
 import {
   DeleteAction,
   Status,
   UpdateAction,
-} from '@/components/guest-list/Table';
+} from '@/features/guest-list/components/Table';
+
 import { Guest, GuestConfirmationStatus } from '@/types/guest';
 import { PlusIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';

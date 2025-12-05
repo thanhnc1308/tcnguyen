@@ -9,16 +9,13 @@ interface NavigationProps {
 }
 
 export default function Navigation({
-  links = [
-    { label: 'HOME', href: '#' },
-    { label: 'EVENTS', href: '#' },
-    { label: 'GALLERY', href: '#' },
-    { label: 'HIGHLIGHTS', href: '#' },
-  ],
+  links = [],
   className = '',
 }: NavigationProps) {
   return (
-    <nav className={`flex justify-center pt-8 absolute top-0 left-0 right-0 z-20 ${className}`}>
+    <nav
+      className={`flex justify-center pt-8 absolute top-0 left-0 right-0 z-20 ${className}`}
+    >
       <div className='flex space-x-8 text-gray-600 font-medium tracking-wider'>
         {links.map((link, index) => (
           <a

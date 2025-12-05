@@ -1,5 +1,5 @@
-import Breadcrumbs from '@/components/guest-list/Breadcrumbs';
-import GuestDetailForm from '@/components/guest-list/GuestDetailForm';
+import Breadcrumbs from '@/features/guest-list/components/Breadcrumbs';
+import GuestDetailForm from '@/features/guest-list/components/GuestDetailForm';
 import { ActionType } from '@/types/common';
 import { Guest, GuestConfirmationStatus, GuestSource } from '@/types/guest';
 

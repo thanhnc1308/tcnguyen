@@ -1,6 +1,6 @@
 'use client';
 
-import DeleteGuestDialog from '@/components/guest-list/DeleteGuestDialog';
+import DeleteGuestDialog from '@/features/guest-list/components/DeleteGuestDialog';
 
 export default function RemoveGuestDialog() {
   return <DeleteGuestDialog />;

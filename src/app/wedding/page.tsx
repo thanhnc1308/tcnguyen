@@ -1,13 +1,13 @@
-import Navigation from '@/components/wedding/Navigation';
-import Banner from '@/components/wedding/Banner';
-import PhotoGallery from '@/components/wedding/PhotoGallery';
-import WeddingMonetaryGift from '@/components/wedding/WeddingMonetaryGift';
-import PostcardForm from '@/components/wedding/PostcardForm';
-import WeddingGuestBook from '@/components/wedding/WeddingGuestBook';
-import Footer from '@/components/wedding/Footer';
-import EventInfo from '@/components/wedding/EventInfo';
-import EventInfoV2 from '@/components/wedding/EventInfoV2';
-import InvitationCard from '@/components/wedding/InvitationCard';
+import Navigation from '@/features/wedding/components/Navigation';
+import Banner from '@/features/wedding/components/Banner';
+import PhotoGallery from '@/features/wedding/components/PhotoGallery';
+import WeddingMonetaryGift from '@/features/wedding/components/WeddingMonetaryGift';
+import PostcardForm from '@/features/wedding/components/PostcardForm';
+import WeddingGuestBook from '@/features/wedding/components/WeddingGuestBook';
+import Footer from '@/features/wedding/components/Footer';
+import EventInfo from '@/features/wedding/components/EventInfo';
+import EventInfoV2 from '@/features/wedding/components/EventInfoV2';
+import InvitationCard from '@/features/wedding/components/InvitationCard';
 
 export default function Wedding() {
   return (
@@ -18,7 +18,6 @@ export default function Wedding() {
       <PhotoGallery />
       <EventInfo />
       <EventInfoV2 />
-      <WeddingMonetaryGift />
       <WeddingMonetaryGift
         images={[
           {
