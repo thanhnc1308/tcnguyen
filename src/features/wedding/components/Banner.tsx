@@ -24,7 +24,7 @@ export default function WeddingBanner({
   groomName = 'Thành',
   brideName = 'Mến',
   weddingDate = '2026-03-03',
-  quote = 'Hehe.',
+  quote = '',
   backgroundImage = 'images/wedding-bg.JPG',
 }: WeddingBannerProps) {
   return (

@@ -18,6 +18,7 @@ import {
   Event,
   Restaurant,
 } from '@mui/icons-material';
+import { months, weekdays } from '../constants';
 
 interface WeddingEvent {
   id: string;
@@ -88,12 +89,15 @@ export default function EventInfo({
       Number.parseInt(month) - 1,
       Number.parseInt(day),
     );
-    return date.toLocaleDateString('vi-VN', {
-      weekday: 'long',
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    });
+
+    // Use consistent formatting to avoid hydration issues
+
+    const weekday = weekdays[date.getDay()];
+    const dayNum = date.getDate();
+    const monthName = months[date.getMonth()];
+    const yearNum = date.getFullYear();
+
+    return `${weekday}, ${dayNum} ${monthName}, ${yearNum}`;
   };
 
   return (

@@ -20,6 +20,7 @@ import {
   BookmarkBorder,
   Bookmark,
 } from '@mui/icons-material';
+import { months } from '../constants';
 
 interface WeddingWish {
   id: string;
@@ -146,11 +147,13 @@ export default function WeddingGuestBook({
 
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      month: 'long',
-      day: 'numeric',
-      year: 'numeric',
-    });
+
+    // Use consistent formatting to avoid hydration issues
+    const month = months[date.getMonth()];
+    const day = date.getDate();
+    const year = date.getFullYear();
+
+    return `${month} ${day}, ${year}`;
   };
 
   return (
