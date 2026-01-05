@@ -48,7 +48,7 @@ export default function WeddingGuestBook({
       message:
         'Wishing you both a lifetime of love, happiness, and beautiful memories together. May your journey as husband and wife be filled with endless joy and countless blessings. Congratulations on your special day!',
       date: '2023-10-29',
-      avatar: '/placeholder.svg?height=40&width=40&text=SJ',
+      avatar: '/images/wedding-bg.JPG?height=40&width=40&text=SJ',
       isLiked: false,
       isBookmarked: false,
       category: 'Family',
@@ -59,7 +59,7 @@ export default function WeddingGuestBook({
       message:
         "What a beautiful celebration of love! Seeing you two together fills my heart with joy. May your marriage be everything you've dreamed of and more. Here's to a wonderful future together!",
       date: '2023-10-29',
-      avatar: '/placeholder.svg?height=40&width=40&text=MC',
+      avatar: '/images/wedding-bg.JPG?height=40&width=40&text=MC',
       isLiked: true,
       isBookmarked: false,
       category: 'Friends',
@@ -70,7 +70,7 @@ export default function WeddingGuestBook({
       message:
         "From the bottom of my heart, congratulations! Your love story is truly inspiring, and I'm so happy to witness this beautiful beginning. May your days be filled with laughter, love, and adventure.",
       date: '2023-10-29',
-      avatar: '/placeholder.svg?height=40&width=40&text=ER',
+      avatar: '/images/wedding-bg.JPG?height=40&width=40&text=ER',
       isLiked: false,
       isBookmarked: true,
       category: 'Colleagues',
@@ -81,7 +81,7 @@ export default function WeddingGuestBook({
       message:
         'Congratulations to the happy couple! May your love continue to grow stronger with each passing day. Wishing you a marriage filled with understanding, patience, and unconditional love.',
       date: '2023-10-29',
-      avatar: '/placeholder.svg?height=40&width=40&text=DT',
+      avatar: '/images/wedding-bg.JPG?height=40&width=40&text=DT',
       isLiked: true,
       isBookmarked: false,
       category: 'Family',
@@ -92,7 +92,7 @@ export default function WeddingGuestBook({
       message:
         'What a magical day! Your wedding was absolutely beautiful, and seeing the love between you two brought tears to my eyes. May your marriage be blessed with happiness, health, and prosperity.',
       date: '2023-10-29',
-      avatar: '/placeholder.svg?height=40&width=40&text=LW',
+      avatar: '/images/wedding-bg.JPG?height=40&width=40&text=LW',
       isLiked: false,
       isBookmarked: false,
       category: 'Friends',
@@ -103,7 +103,7 @@ export default function WeddingGuestBook({
       message:
         'Cheers to the newlyweds! May your love story continue to unfold beautifully, filled with chapters of joy, adventure, and deep connection. Congratulations on finding your perfect match!',
       date: '2023-10-29',
-      avatar: '/placeholder.svg?height=40&width=40&text=RM',
+      avatar: '/images/wedding-bg.JPG?height=40&width=40&text=RM',
       isLiked: true,
       isBookmarked: true,
       category: 'Family',

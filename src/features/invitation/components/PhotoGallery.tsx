@@ -7,7 +7,7 @@ import {
   Dialog,
   DialogContent,
   IconButton,
-  GridLegacy as Grid,
+  Grid,
   Card,
   CardMedia,
   Chip,
@@ -238,11 +238,12 @@ export default function PhotoGallery({
           <Grid container spacing={3}>
             {filteredPhotos.map((photo, index) => (
               <Grid
-                item
-                xs={columns.xs}
-                sm={columns.sm}
-                md={columns.md}
-                lg={columns.lg}
+                size={{
+                  xs: columns.xs,
+                  sm: columns.sm,
+                  md: columns.md,
+                  lg: columns.lg,
+                }}
                 key={photo.id}
               >
                 <Card
@@ -446,7 +447,7 @@ export default function PhotoGallery({
                   }}
                 >
                   <Image
-                    src={selectedPhoto.fullImageUrl || '/placeholder.svg'}
+                    src={selectedPhoto.fullImageUrl || '/images/wedding-bg.JPG'}
                     alt={selectedPhoto.alt}
                     style={{
                       maxWidth: '90vw',

@@ -11,7 +11,7 @@ import {
   Card,
   CardMedia,
   CardContent,
-  GridLegacy as Grid,
+  Grid,
   Divider,
   Chip,
 } from '@mui/material';
@@ -208,7 +208,7 @@ export default function WeddingMonetaryGift({
           {selectedImage && (
             <Box>
               <Image
-                src={selectedImage.fullImageUrl || '/placeholder.svg'}
+                src={selectedImage.fullImageUrl || '/images/wedding-bg.JPG'}
                 width={800}
                 height={600}
                 alt={selectedImage.alt}
@@ -225,7 +225,7 @@ export default function WeddingMonetaryGift({
           {/* Bank Accounts Grid */}
           <Grid container spacing={3}>
             {accounts.map((account) => (
-              <Grid item xs={12} md={6} key={account.id}>
+              <Grid size={{ xs: 12, md: 6 }} key={account.id}>
                 <Card
                   sx={{
                     backgroundColor: 'rgba(255, 255, 255, 0.95)',

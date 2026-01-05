@@ -6,7 +6,7 @@ import {
   Container,
   Card,
   CardContent,
-  GridLegacy as Grid,
+  Grid,
   Divider,
   Button,
   Chip,
@@ -68,7 +68,7 @@ export default function EventInfo({
     },
   ],
   title = 'THÔNG TIN TIỆC CƯỚI',
-  backgroundImage = '/wedding-hero-bg.jpg',
+  backgroundImage = '/images/wedding-bg.JPG',
 }: EventInfoProps) {
   const handleDirections = (address: string, mapUrl?: string) => {
     if (mapUrl) {
@@ -146,7 +146,7 @@ export default function EventInfo({
         {/* Events Grid */}
         <Grid container spacing={4}>
           {events.map((event) => (
-            <Grid item xs={12} md={6} key={event.id}>
+            <Grid size={{ xs: 12, md: 6 }} key={event.id}>
               <Card
                 sx={{
                   height: '100%',

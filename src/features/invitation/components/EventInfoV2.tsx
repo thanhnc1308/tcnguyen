@@ -47,7 +47,7 @@ export default function EventInfoV2({
   venueName = 'Eros Palace Luxury',
   venueDetails = 'Sảnh Pacific - Tầng trệt',
   address = '15 Đông Khởi, Khu Phố 6, TP. Biên Hòa, Đồng Nai',
-  mapImage = '/wedding-map.png',
+  mapImage = '/images/wedding-bg.JPG',
   timeline = [
     {
       time: '11:00',
