@@ -5,7 +5,6 @@ import Link from 'next/link';
 
 const navigation = [
   { name: 'Guest List', href: '/admin/guest-list', current: false },
-  { name: 'Wedding editor', href: '/admin/wedding-editor', current: false },
 ];
 
 export default function AdminLayout({

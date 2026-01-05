@@ -21,6 +21,7 @@ import {
   CameraAlt,
   Download,
 } from '@mui/icons-material';
+import Image from 'next/image';
 
 interface WeddingPhoto {
   id: string;
@@ -47,9 +48,8 @@ export default function PhotoGallery({
       id: '1',
       title: 'Getting Ready',
       category: 'Preparation',
-      thumbnailUrl: '/placeholder.svg?height=300&width=400&text=Getting+Ready',
-      fullImageUrl:
-        '/placeholder.svg?height=800&width=1200&text=Getting+Ready+Full',
+      thumbnailUrl: '/images/bride.png',
+      fullImageUrl: '/images/groom.png',
       alt: 'Bride getting ready',
       photographer: 'John Smith',
       date: 'Morning',
@@ -59,9 +59,8 @@ export default function PhotoGallery({
       id: '2',
       title: 'First Look',
       category: 'Ceremony',
-      thumbnailUrl: '/placeholder.svg?height=300&width=400&text=First+Look',
-      fullImageUrl:
-        '/placeholder.svg?height=800&width=1200&text=First+Look+Full',
+      thumbnailUrl: '/images/bride.png',
+      fullImageUrl: '/images/groom.png',
       alt: 'First look moment',
       photographer: 'John Smith',
       date: 'Afternoon',
@@ -71,9 +70,8 @@ export default function PhotoGallery({
       id: '3',
       title: 'Walking Down the Aisle',
       category: 'Ceremony',
-      thumbnailUrl: '/placeholder.svg?height=300&width=400&text=Aisle+Walk',
-      fullImageUrl:
-        '/placeholder.svg?height=800&width=1200&text=Aisle+Walk+Full',
+      thumbnailUrl: '/images/bride.png',
+      fullImageUrl: '/images/groom.png',
       alt: 'Walking down the aisle',
       photographer: 'John Smith',
       date: 'Afternoon',
@@ -83,59 +81,12 @@ export default function PhotoGallery({
       id: '4',
       title: 'Exchange of Vows',
       category: 'Ceremony',
-      thumbnailUrl: '/placeholder.svg?height=300&width=400&text=Vows',
-      fullImageUrl: '/placeholder.svg?height=800&width=1200&text=Vows+Full',
+      thumbnailUrl: '/images/bride.png',
+      fullImageUrl: '/images/groom.png',
       alt: 'Exchange of vows',
       photographer: 'John Smith',
       date: 'Afternoon',
       description: 'Heartfelt vows exchanged between the couple',
-    },
-    {
-      id: '5',
-      title: 'First Kiss',
-      category: 'Ceremony',
-      thumbnailUrl: '/placeholder.svg?height=300&width=400&text=First+Kiss',
-      fullImageUrl:
-        '/placeholder.svg?height=800&width=1200&text=First+Kiss+Full',
-      alt: 'First kiss as married couple',
-      photographer: 'John Smith',
-      date: 'Afternoon',
-      description: 'The first kiss as husband and wife',
-    },
-    {
-      id: '6',
-      title: 'Couple Portraits',
-      category: 'Portraits',
-      thumbnailUrl: '/placeholder.svg?height=300&width=400&text=Portraits',
-      fullImageUrl:
-        '/placeholder.svg?height=800&width=1200&text=Portraits+Full',
-      alt: 'Couple portrait',
-      photographer: 'John Smith',
-      date: 'Golden Hour',
-      description: 'Romantic portraits during golden hour',
-    },
-    {
-      id: '7',
-      title: 'Reception Dance',
-      category: 'Reception',
-      thumbnailUrl: '/placeholder.svg?height=300&width=400&text=Dance',
-      fullImageUrl: '/placeholder.svg?height=800&width=1200&text=Dance+Full',
-      alt: 'First dance',
-      photographer: 'John Smith',
-      date: 'Evening',
-      description: "The couple's first dance as newlyweds",
-    },
-    {
-      id: '8',
-      title: 'Celebration',
-      category: 'Reception',
-      thumbnailUrl: '/placeholder.svg?height=300&width=400&text=Celebration',
-      fullImageUrl:
-        '/placeholder.svg?height=800&width=1200&text=Celebration+Full',
-      alt: 'Wedding celebration',
-      photographer: 'John Smith',
-      date: 'Evening',
-      description: 'Joyful celebration with family and friends',
     },
   ],
   title = 'Wedding Gallery',
@@ -494,7 +445,7 @@ export default function PhotoGallery({
                     width: '100%',
                   }}
                 >
-                  <img
+                  <Image
                     src={selectedPhoto.fullImageUrl || '/placeholder.svg'}
                     alt={selectedPhoto.alt}
                     style={{
