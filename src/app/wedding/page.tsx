@@ -7,14 +7,14 @@ import WeddingGuestBook from '@/features/wedding/components/WeddingGuestBook';
 import Footer from '@/features/wedding/components/Footer';
 import EventInfo from '@/features/wedding/components/EventInfo';
 import EventInfoV2 from '@/features/wedding/components/EventInfoV2';
-import InvitationCard from '@/features/wedding/components/InvitationCard';
+import Envelop from '@/features/wedding/components/Envelop';
 
 export default function Wedding() {
   return (
     <>
+      <Envelop />
       <Navigation />
       <Banner />
-      <InvitationCard />
       <PhotoGallery />
       <EventInfo />
       <EventInfoV2 />
