@@ -1,27 +1,14 @@
 'use client';
 
 import { Box, Typography, Container } from '@mui/material';
+import { useWeddingInvitation } from '@/features/invitation/context/WeddingInvitationContext';
+import { Guest } from '@/types/guest';
+import { BRIDE_NAME, GROOM_NAME } from '@/constants/wedding';
+import { getGuestPronoun } from '../helpers/guest';
 
-interface EnvelopProps {
-  groomName?: string;
-  brideName?: string;
-  guestName?: string;
-  onOpenInvitation?: () => void;
-}
-
-export default function Envelop({
-  groomName = 'Thành',
-  brideName = 'Mến',
-  onOpenInvitation,
-}: EnvelopProps) {
-  const handleOpenInvitation = () => {
-    if (onOpenInvitation) {
-      onOpenInvitation();
-    } else {
-      // Default behavior - could navigate to invitation page
-      console.log('Opening wedding invitation...');
-    }
-  };
+export default function Envelop({ guest }: { guest: Guest | null }) {
+  const { handleOpenInvitation } = useWeddingInvitation();
+  const guestPronoun = getGuestPronoun(guest);
 
   return (
     <Box
@@ -60,7 +47,7 @@ export default function Envelop({
               textTransform: 'uppercase',
             }}
           >
-            Bạn nhận được thư của
+            {guest?.name || ''}, {guestPronoun} nhận được thư của
           </Typography>
 
           {/* Couple Names */}
@@ -74,7 +61,7 @@ export default function Envelop({
               textShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)',
             }}
           >
-            {groomName} & {brideName}
+            {GROOM_NAME} & {BRIDE_NAME}
           </Typography>
 
           {/* Envelope with Open Text */}

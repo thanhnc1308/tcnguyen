@@ -2,6 +2,7 @@ import { Dancing_Script } from 'next/font/google';
 import CountdownTimer from './CountdownTimer';
 import { formatDisplayDate } from '@/utils/date';
 import SaveTheDateButton from './SaveTheDateButton';
+import { BRIDE_NAME, GROOM_NAME, WEDDING_DATE } from '@/constants/wedding';
 
 const dancingScript = Dancing_Script({
   variable: '--font-dancing-script',
@@ -12,20 +13,14 @@ const dancingScript = Dancing_Script({
 });
 
 interface WeddingBannerProps {
-  brideName?: string;
-  groomName?: string;
-  weddingDate?: string;
   quote?: string;
   backgroundImage?: string;
   showCountdown?: boolean;
 }
 
 export default function WeddingBanner({
-  groomName = 'Thành',
-  brideName = 'Mến',
-  weddingDate = '2026-03-03',
   quote = '',
-  backgroundImage = 'images/wedding-bg.JPG',
+  backgroundImage = '/images/wedding-bg.JPG',
 }: WeddingBannerProps) {
   return (
     <div className='relative min-h-screen overflow-hidden'>
@@ -47,7 +42,7 @@ export default function WeddingBanner({
             style={{ fontFamily: dancingScript.style.fontFamily }}
             className={`text-6xl md:text-7xl lg:text-8xl font-script text-gray-700 mb-4`}
           >
-            {groomName} & {brideName}
+            {GROOM_NAME} & {BRIDE_NAME}
           </h1>
 
           {/* Heart Fingerprint */}
@@ -63,7 +58,7 @@ export default function WeddingBanner({
         {/* Date */}
         <div className='text-center mb-6'>
           <p className='text-xl text-gray-600 font-light tracking-wider'>
-            {formatDisplayDate(weddingDate)}
+            {formatDisplayDate(WEDDING_DATE)}
           </p>
         </div>
 
@@ -75,7 +70,7 @@ export default function WeddingBanner({
         )}
 
         {/* Countdown Timer */}
-        <CountdownTimer weddingDate={weddingDate} />
+        <CountdownTimer weddingDate={WEDDING_DATE} />
 
         {/* Save the Date Button */}
         <SaveTheDateButton />
