@@ -1,7 +1,7 @@
 'use server';
 
-import userModel, { User } from '@/db/models/user.model';
-import dbConnect from '@/db/mongodb';
+import userModel, { User } from '@/server/db/models/user.model';
+import dbConnect from '@/server/db/mongodb';
 import { z } from 'zod';
 
 const fetchUserById = async (userId: string): Promise<User | null> => {

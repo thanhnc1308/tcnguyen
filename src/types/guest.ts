@@ -9,6 +9,17 @@ export enum GuestSource {
   Bride = 'bride',
 }
 
+export enum GuestAgeComparison {
+  Older = 'older',
+  Younger = 'younger',
+  Same = 'same',
+}
+
+export enum GuestGender {
+  Male = 'male',
+  Female = 'female',
+}
+
 export type Guest = {
   _id: string;
   name: string;
@@ -16,6 +27,8 @@ export type Guest = {
   memberCount: number;
   invited: boolean;
   guestSource: GuestSource;
+  ageComparison: GuestAgeComparison;
+  gender?: GuestGender;
 };
 
 export type GuestListPaginationResponse = {

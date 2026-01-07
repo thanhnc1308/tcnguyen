@@ -1,4 +1,4 @@
-import guestModel from '@/db/models/guest.model';
+import guestModel from '@/server/db/models/guest.model';
 import { GuestConfirmationStatus, GuestSource } from '@/types/guest';
 import { hash } from '@/utils';
 import { NextRequest, NextResponse } from 'next/server';

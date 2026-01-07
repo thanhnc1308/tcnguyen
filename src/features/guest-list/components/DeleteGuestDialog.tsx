@@ -4,11 +4,11 @@ import {
   DialogPanel,
   DialogTitle,
 } from '@headlessui/react';
-import Modal from '../common/Modal';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { DialogRouterIdentifier } from '@/types/dialog-router-identifier';
 import { deleteGuestById } from '@/actions/guest.action';
 import toast from 'react-hot-toast';
+import Modal from '@/components/common/Modal';
 
 export default function DeleteGuestDialog() {
   const router = useRouter();
