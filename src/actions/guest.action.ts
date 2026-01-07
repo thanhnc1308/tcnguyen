@@ -1,7 +1,7 @@
 'use server';
 
-import guestModel from '@/db/models/guest.model';
-import dbConnect from '@/db/mongodb';
+import guestModel from '@/server/db/models/guest.model';
+import dbConnect from '@/server/db/mongodb';
 import {
   Guest,
   GuestListPaginationResponse,
