@@ -1,13 +1,10 @@
 'use server';
 
 import userModel, { User } from '@/server/db/models/user.model';
-import dbConnect from '@/server/db/mongodb';
 import { z } from 'zod';
 
 const fetchUserById = async (userId: string): Promise<User | null> => {
   try {
-    await dbConnect();
-
     const _user = await userModel.findById(userId).exec();
 
     if (!_user) {
@@ -23,7 +20,6 @@ const fetchUserById = async (userId: string): Promise<User | null> => {
 
 const findUserByEmail = async (email: string): Promise<User | null> => {
   try {
-    await dbConnect();
     const _user = await userModel.findOne({ email }).exec();
 
     if (!_user) {
@@ -80,7 +76,6 @@ const createUser = async (user: CreateUserRequest) => {
   }
 
   try {
-    await dbConnect();
     await userModel.create(validatedFields.data);
   } catch (e) {
     console.error('createUser', e);
@@ -107,7 +102,6 @@ const updateUserById = async (userId: string, newUser: UpdateUserRequest) => {
   }
 
   try {
-    await dbConnect();
     await userModel.findByIdAndUpdate(userId, validatedFields.data);
   } catch (e) {
     console.error('updateUserById', e);

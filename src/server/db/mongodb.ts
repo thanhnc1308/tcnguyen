@@ -1,19 +1,37 @@
 import mongoose from 'mongoose';
 
-async function dbConnect() {
-  const MONGODB_URI = process.env.MONGODB_URI!;
+const MONGODB_URI = process.env.MONGODB_URI!;
 
-  if (!MONGODB_URI) {
-    throw new Error(
-      'Please define the MONGODB_URI environment variable inside .env.local',
-    );
+if (!MONGODB_URI) {
+  throw new Error(
+    'Please define the MONGODB_URI environment variable inside .env.local',
+  );
+}
+
+// Use globalThis which works in both Node.js and Edge/browser environments
+const globalWithMongoose = globalThis as typeof globalThis & {
+  mongooseConnection?: Promise<typeof mongoose>;
+};
+
+async function dbConnect() {
+  // Return cached connection if available
+  if (globalWithMongoose.mongooseConnection) {
+    return globalWithMongoose.mongooseConnection;
   }
 
+  console.log('Connecting to MongoDB...');
+
   const opts = {
-    bufferCommands: false,
+    bufferCommands: true, // Enable buffering so queries wait for connection
   };
 
-  return mongoose.connect(MONGODB_URI, opts);
+  // Cache the connection promise
+  globalWithMongoose.mongooseConnection = mongoose.connect(MONGODB_URI, opts);
+
+  return globalWithMongoose.mongooseConnection;
 }
+
+// Auto-connect on module load
+dbConnect();
 
 export default dbConnect;

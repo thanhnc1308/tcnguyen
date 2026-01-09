@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import '../mongodb'; // Auto-connect to MongoDB
 
 export interface User extends mongoose.Document {
   name: string;

@@ -1,5 +1,6 @@
 import { GuestConfirmationStatus, GuestSource } from '@/types/guest';
 import mongoose from 'mongoose';
+import '../mongodb'; // Auto-connect to MongoDB
 
 export interface Guest extends mongoose.Document {
   _id: string;

@@ -2,7 +2,6 @@ import type { NextAuthConfig, User } from 'next-auth';
 import Credentials from 'next-auth/providers/credentials';
 import GoogleProvider from 'next-auth/providers/google';
 import { z } from 'zod';
-import { saveOAuthUser } from './actions/auth.action';
 import { UserRole } from './types/auth';
 import { getUserRoleFromEmail } from './utils/auth';
 
@@ -74,6 +73,8 @@ export const authConfig = {
   },
   events: {
     async signIn({ user, account, profile }) {
+      // Dynamic import to avoid loading mongoose in Edge runtime
+      const { saveOAuthUser } = await import('./actions/auth.action');
       await saveOAuthUser(user, account, profile);
     },
   },

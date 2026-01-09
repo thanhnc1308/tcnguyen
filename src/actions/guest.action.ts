@@ -1,7 +1,6 @@
 'use server';
 
 import guestModel from '@/server/db/models/guest.model';
-import dbConnect from '@/server/db/mongodb';
 import {
   Guest,
   GuestListPaginationResponse,
@@ -41,8 +40,6 @@ const paginateGuestList = async ({
   rowsPerPage = 10,
 }: PaginationRequest): Promise<GuestListPaginationResponse> => {
   try {
-    await dbConnect();
-
     const filter = _buildFilter(queryString);
     const sort = _buildSort(sortString);
     const skip = (currentPage - 1) * rowsPerPage;
@@ -137,7 +134,6 @@ const createGuest = async (prevState: GuestState, formData: FormData) => {
   }
 
   try {
-    await dbConnect();
     await guestModel.create({
       _id: generateGuestId(validatedFields.data as Guest),
       ...validatedFields.data,
@@ -174,7 +170,6 @@ const updateGuestById = async (
   }
 
   try {
-    await dbConnect();
     await guestModel.findByIdAndUpdate(guestId, validatedFields.data);
   } catch (e) {
     console.error('updateGuestById', e);
@@ -193,7 +188,6 @@ const deleteGuestById = async (guestId: string | null) => {
   }
 
   try {
-    await dbConnect();
     await guestModel.findByIdAndDelete(guestId);
   } catch (e) {
     console.error('updateGuestById', e);
