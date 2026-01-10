@@ -19,12 +19,6 @@ async function dbConnect() {
     return globalWithMongoose.mongooseConnection;
   }
 
-  console.log('Connecting to MongoDB...', {
-    uri: process.env.MONGODB_URI,
-    NEXTAUTH_URL: process.env.NEXTAUTH_URL,
-    ADMIN_EMAILS: process.env.ADMIN_EMAILS,
-  });
-
   const opts = {
     bufferCommands: true, // Enable buffering so queries wait for connection
   };
