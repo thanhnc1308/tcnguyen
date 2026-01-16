@@ -47,24 +47,7 @@ export default function WeddingInvitation({ guest }: { guest: Guest | null }) {
           <PhotoGallery />
           <EventInfo />
           <EventInfoV2 />
-          <WeddingMonetaryGift
-            images={[
-              {
-                id: '1',
-                title: 'QR chú rể',
-                thumbnailUrl: '/images/groom.png',
-                fullImageUrl: '/images/groom.png',
-                alt: 'QR chú rể',
-              },
-              {
-                id: '2',
-                title: 'QR cô dâu',
-                thumbnailUrl: '/images/bride.png',
-                fullImageUrl: '/images/bride.png',
-                alt: 'QR cô dâu',
-              },
-            ]}
-          />
+          <WeddingMonetaryGift />
           <PostcardForm />
           <WeddingGuestBook />
           <Footer />
