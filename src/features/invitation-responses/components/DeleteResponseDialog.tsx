@@ -1,0 +1,66 @@
+import {
+  Button,
+  DialogBackdrop,
+  DialogPanel,
+  DialogTitle,
+} from '@headlessui/react';
+import { useRouter, useSearchParams } from 'next/navigation';
+import { DialogRouterIdentifier } from '@/types/dialog-router-identifier';
+import { deleteInvitationResponseById } from '@/actions/invitation-response.action';
+import toast from 'react-hot-toast';
+import Modal from '@/components/common/Modal';
+
+export default function DeleteResponseDialog() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+
+  const handleDelete = async () => {
+    try {
+      const id = searchParams?.get('id');
+      if (!id) {
+        throw new Error('Response ID not found');
+      }
+      await deleteInvitationResponseById(id);
+      toast.success('Response deleted successfully');
+      router.back();
+    } catch (error: unknown) {
+      console.error('handleDelete', error);
+      toast.error((error as Error).message);
+    }
+  };
+
+  return (
+    <Modal routeName={DialogRouterIdentifier.DeleteInvitationResponse}>
+      <DialogBackdrop className='fixed inset-0 bg-black/30' />
+      <div className='fixed inset-0 z-10 w-screen overflow-y-auto'>
+        <div className='flex min-h-full items-center justify-center p-4'>
+          <DialogPanel
+            transition
+            className='w-full max-w-md rounded-xl bg-white p-6 backdrop-blur-2xl duration-300 ease-out data-[closed]:transform-[scale(95%)] data-[closed]:opacity-0'
+          >
+            <DialogTitle as='h3' className='text-base/7 font-medium'>
+              Delete response confirmation
+            </DialogTitle>
+            <p className='mt-2 text-sm/6'>
+              Delete this invitation response from the list?
+            </p>
+            <div className='mt-4 flex justify-end'>
+              <Button
+                className='inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700 mr-2 cursor-pointer'
+                onClick={handleDelete}
+              >
+                Accept
+              </Button>
+              <Button
+                className='inline-flex items-center gap-2 rounded-md bg-gray-700 py-1.5 px-3 text-sm/6 font-semibold text-white shadow-inner shadow-white/10 focus:outline-none data-[hover]:bg-gray-600 data-[focus]:outline-1 data-[focus]:outline-white data-[open]:bg-gray-700 cursor-pointer'
+                onClick={() => router.back()}
+              >
+                Cancel
+              </Button>
+            </div>
+          </DialogPanel>
+        </div>
+      </div>
+    </Modal>
+  );
+}

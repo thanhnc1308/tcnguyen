@@ -5,6 +5,11 @@ import Link from 'next/link';
 
 const navigation = [
   { name: 'Guest List', href: '/admin/guest-list', current: false },
+  {
+    name: 'Invitation Responses',
+    href: '/admin/invitation-responses',
+    current: false,
+  },
 ];
 
 export default function AdminLayout({
