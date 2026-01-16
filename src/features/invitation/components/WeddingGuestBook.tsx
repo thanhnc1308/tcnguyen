@@ -10,135 +10,28 @@ import {
   Paper,
   Avatar,
   Divider,
-  IconButton,
-  Chip,
   Pagination,
+  CircularProgress,
 } from '@mui/material';
-import {
-  Favorite,
-  FavoriteBorder,
-  BookmarkBorder,
-  Bookmark,
-} from '@mui/icons-material';
 import { months } from '../constants';
-
-interface WeddingWish {
-  id: string;
-  name: string;
-  message: string;
-  date: string;
-  avatar?: string;
-  isLiked?: boolean;
-  isBookmarked?: boolean;
-  category?: string;
-}
+import { trpc } from '@/utils/trpc';
 
 interface WeddingGuestBookProps {
-  wishes?: WeddingWish[];
-  title?: string;
   itemsPerPage?: number;
-  showPagination?: boolean;
 }
 
 export default function WeddingGuestBook({
-  wishes = [
-    {
-      id: '1',
-      name: 'Sarah Johnson',
-      message:
-        'Wishing you both a lifetime of love, happiness, and beautiful memories together. May your journey as husband and wife be filled with endless joy and countless blessings. Congratulations on your special day!',
-      date: '2023-10-29',
-      avatar: '/images/wedding-bg.JPG?height=40&width=40&text=SJ',
-      isLiked: false,
-      isBookmarked: false,
-      category: 'Family',
-    },
-    {
-      id: '2',
-      name: 'Michael Chen',
-      message:
-        "What a beautiful celebration of love! Seeing you two together fills my heart with joy. May your marriage be everything you've dreamed of and more. Here's to a wonderful future together!",
-      date: '2023-10-29',
-      avatar: '/images/wedding-bg.JPG?height=40&width=40&text=MC',
-      isLiked: true,
-      isBookmarked: false,
-      category: 'Friends',
-    },
-    {
-      id: '3',
-      name: 'Emily Rodriguez',
-      message:
-        "From the bottom of my heart, congratulations! Your love story is truly inspiring, and I'm so happy to witness this beautiful beginning. May your days be filled with laughter, love, and adventure.",
-      date: '2023-10-29',
-      avatar: '/images/wedding-bg.JPG?height=40&width=40&text=ER',
-      isLiked: false,
-      isBookmarked: true,
-      category: 'Colleagues',
-    },
-    {
-      id: '4',
-      name: 'David Thompson',
-      message:
-        'Congratulations to the happy couple! May your love continue to grow stronger with each passing day. Wishing you a marriage filled with understanding, patience, and unconditional love.',
-      date: '2023-10-29',
-      avatar: '/images/wedding-bg.JPG?height=40&width=40&text=DT',
-      isLiked: true,
-      isBookmarked: false,
-      category: 'Family',
-    },
-    {
-      id: '5',
-      name: 'Lisa Wang',
-      message:
-        'What a magical day! Your wedding was absolutely beautiful, and seeing the love between you two brought tears to my eyes. May your marriage be blessed with happiness, health, and prosperity.',
-      date: '2023-10-29',
-      avatar: '/images/wedding-bg.JPG?height=40&width=40&text=LW',
-      isLiked: false,
-      isBookmarked: false,
-      category: 'Friends',
-    },
-    {
-      id: '6',
-      name: 'Robert Martinez',
-      message:
-        'Cheers to the newlyweds! May your love story continue to unfold beautifully, filled with chapters of joy, adventure, and deep connection. Congratulations on finding your perfect match!',
-      date: '2023-10-29',
-      avatar: '/images/wedding-bg.JPG?height=40&width=40&text=RM',
-      isLiked: true,
-      isBookmarked: true,
-      category: 'Family',
-    },
-  ],
   itemsPerPage = 4,
-  showPagination = true,
 }: WeddingGuestBookProps) {
   const [currentPage, setCurrentPage] = useState(1);
-  const [wishList, setWishList] = useState(wishes);
 
-  const totalPages = Math.ceil(wishList.length / itemsPerPage);
-  const startIndex = (currentPage - 1) * itemsPerPage;
-  const currentWishes = wishList.slice(startIndex, startIndex + itemsPerPage);
-
-  const handleLike = (wishId: string) => {
-    setWishList((prev) =>
-      prev.map((wish) =>
-        wish.id === wishId ? { ...wish, isLiked: !wish.isLiked } : wish,
-      ),
-    );
-  };
-
-  const handleBookmark = (wishId: string) => {
-    setWishList((prev) =>
-      prev.map((wish) =>
-        wish.id === wishId
-          ? { ...wish, isBookmarked: !wish.isBookmarked }
-          : wish,
-      ),
-    );
-  };
+  const { data, isLoading } = trpc.invitation.getResponses.useQuery({
+    page: currentPage,
+    limit: itemsPerPage,
+  });
 
   const handlePageChange = (
-    event: React.ChangeEvent<unknown>,
+    _event: React.ChangeEvent<unknown>,
     value: number,
   ) => {
     setCurrentPage(value);
@@ -154,6 +47,9 @@ export default function WeddingGuestBook({
 
     return `${month} ${day}, ${year}`;
   };
+
+  const wishes = data?.data ?? [];
+  const totalPages = data?.totalPages ?? 0;
 
   return (
     <Box
@@ -208,6 +104,7 @@ export default function WeddingGuestBook({
             borderRadius: 2,
             overflow: 'hidden',
             boxShadow: '0 10px 30px rgba(0,0,0,0.2)',
+            minHeight: 200,
             '&::before': {
               content: '""',
               position: 'absolute',
@@ -282,14 +179,40 @@ export default function WeddingGuestBook({
 
           {/* Content */}
           <Box sx={{ pl: 10, pr: 4, py: 4, position: 'relative', zIndex: 2 }}>
-            {currentWishes.map((wish, index) => (
+            {isLoading && (
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  py: 8,
+                }}
+              >
+                <CircularProgress sx={{ color: '#8b4513' }} />
+              </Box>
+            )}
+
+            {!isLoading && wishes.length === 0 && (
+              <Box sx={{ textAlign: 'center', py: 8 }}>
+                <Typography
+                  sx={{
+                    fontFamily: "'Kalam', cursive",
+                    color: '#a0522d',
+                    fontSize: '1.1rem',
+                  }}
+                >
+                  ...
+                </Typography>
+              </Box>
+            )}
+
+            {wishes.map((wish, index) => (
               <Box key={wish.id} sx={{ mb: 4 }}>
                 {/* Wish Header */}
                 <Box
                   sx={{ display: 'flex', alignItems: 'center', mb: 2, gap: 2 }}
                 >
                   <Avatar
-                    src={wish.avatar}
                     sx={{
                       width: 40,
                       height: 40,
@@ -301,7 +224,9 @@ export default function WeddingGuestBook({
                     {wish.name
                       .split(' ')
                       .map((n) => n[0])
-                      .join('')}
+                      .join('')
+                      .slice(0, 2)
+                      .toUpperCase()}
                   </Avatar>
 
                   <Box sx={{ flex: 1 }}>
@@ -324,22 +249,9 @@ export default function WeddingGuestBook({
                         fontStyle: 'italic',
                       }}
                     >
-                      {formatDate(wish.date)}
+                      {formatDate(wish.createdAt)}
                     </Typography>
                   </Box>
-
-                  {wish.category && (
-                    <Chip
-                      label={wish.category}
-                      size='small'
-                      sx={{
-                        backgroundColor: '#f4e4bc',
-                        color: '#8b4513',
-                        fontSize: '0.7rem',
-                        height: 24,
-                      }}
-                    />
-                  )}
                 </Box>
 
                 {/* Wish Message */}
@@ -377,54 +289,10 @@ export default function WeddingGuestBook({
                   >
                     &quot;{wish.message}&quot;
                   </Typography>
-
-                  {/* Action Buttons */}
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      justifyContent: 'flex-end',
-                      mt: 2,
-                      gap: 1,
-                    }}
-                  >
-                    <IconButton
-                      size='small'
-                      onClick={() => handleLike(wish.id)}
-                      sx={{
-                        color: wish.isLiked ? '#ff6b6b' : '#a0522d',
-                        '&:hover': {
-                          backgroundColor: 'rgba(255, 107, 107, 0.1)',
-                        },
-                      }}
-                    >
-                      {wish.isLiked ? (
-                        <Favorite fontSize='small' />
-                      ) : (
-                        <FavoriteBorder fontSize='small' />
-                      )}
-                    </IconButton>
-
-                    <IconButton
-                      size='small'
-                      onClick={() => handleBookmark(wish.id)}
-                      sx={{
-                        color: wish.isBookmarked ? '#d4af37' : '#a0522d',
-                        '&:hover': {
-                          backgroundColor: 'rgba(212, 175, 55, 0.1)',
-                        },
-                      }}
-                    >
-                      {wish.isBookmarked ? (
-                        <Bookmark fontSize='small' />
-                      ) : (
-                        <BookmarkBorder fontSize='small' />
-                      )}
-                    </IconButton>
-                  </Box>
                 </Box>
 
                 {/* Divider */}
-                {index < currentWishes.length - 1 && (
+                {index < wishes.length - 1 && (
                   <Divider
                     sx={{
                       mt: 3,
@@ -440,7 +308,7 @@ export default function WeddingGuestBook({
         </Paper>
 
         {/* Pagination */}
-        {showPagination && totalPages > 1 && (
+        {totalPages > 1 && (
           <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
             <Pagination
               count={totalPages}

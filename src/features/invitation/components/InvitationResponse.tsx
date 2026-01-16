@@ -79,12 +79,14 @@ export default function InvitationResponse({
     guest?.memberCount?.toString() || '',
   );
   const [message, setMessage] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
 
   const isKnownGuest = guest !== null;
   const guestPronoun = getGuestPronoun(guest);
 
   const submitMutation = trpc.invitation.submitResponse.useMutation({
     onSuccess: () => {
+      setIsSubmitted(true);
       toast.success('Cảm ơn bạn đã phản hồi!');
       onSuccess?.();
     },
@@ -102,6 +104,39 @@ export default function InvitationResponse({
       message: message || undefined,
     });
   };
+
+  if (isSubmitted) {
+    return (
+      <FormContainer>
+        <Box sx={{ textAlign: 'center', py: 4 }}>
+          <Typography sx={{ fontSize: '3rem', mb: 2 }}>💝</Typography>
+          <Typography
+            sx={{
+              fontFamily: "'Dancing Script', cursive",
+              fontSize: '2rem',
+              color: '#c9a227',
+              fontWeight: 600,
+              mb: 2,
+              lineHeight: 1.4,
+            }}
+          >
+            Cảm ơn bạn đã phản hồi!
+          </Typography>
+          <Typography
+            sx={{
+              color: '#5a5a5a',
+              fontSize: '1rem',
+              lineHeight: 1.6,
+            }}
+          >
+            Chúng mình rất vui khi nhận được phản hồi của bạn.
+            <br />
+            Hẹn gặp bạn trong ngày vui của chúng mình nhé!
+          </Typography>
+        </Box>
+      </FormContainer>
+    );
+  }
 
   return (
     <FormContainer>
