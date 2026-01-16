@@ -5,12 +5,13 @@ import Navigation from '@/features/invitation/components/Navigation';
 import Banner from '@/features/invitation/components/Banner';
 import PhotoGallery from '@/features/invitation/components/PhotoGallery';
 import WeddingMonetaryGift from '@/features/invitation/components/WeddingMonetaryGift';
-import PostcardForm from '@/features/invitation/components/PostcardForm';
+import InvitationResponse from '@/features/invitation/components/InvitationResponse';
 import WeddingGuestBook from '@/features/invitation/components/WeddingGuestBook';
 import Footer from '@/features/invitation/components/Footer';
 import EventInfo from '@/features/invitation/components/EventInfo';
-import EventInfoV2 from '@/features/invitation/components/EventInfoV2';
 import Envelop from '@/features/invitation/components/Envelop';
+import InvitationMessage from '@/features/invitation/components/InvitationMessage';
+import GiftMessage from '@/features/invitation/components/GiftMessage';
 import { Box, Fade, Grow } from '@mui/material';
 import { Guest } from '@/types/guest';
 import { WeddingInvitationContext } from '@/features/invitation/context/WeddingInvitationContext';
@@ -44,11 +45,12 @@ export default function WeddingInvitation({ guest }: { guest: Guest | null }) {
         <Box>
           <Navigation />
           <Banner />
-          <PhotoGallery />
+          <InvitationMessage />
           <EventInfo />
-          <EventInfoV2 />
+          <PhotoGallery />
+          <GiftMessage />
           <WeddingMonetaryGift />
-          <PostcardForm />
+          <InvitationResponse guest={guest} />
           <WeddingGuestBook />
           <Footer />
         </Box>

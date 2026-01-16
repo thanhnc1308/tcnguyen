@@ -109,7 +109,6 @@ export default function WeddingGuestBook({
       category: 'Family',
     },
   ],
-  title = 'Wedding Wishes',
   itemsPerPage = 4,
   showPagination = true,
 }: WeddingGuestBookProps) {
@@ -196,20 +195,7 @@ export default function WeddingGuestBook({
               textShadow: '2px 2px 4px rgba(0,0,0,0.1)',
             }}
           >
-            {title}
-          </Typography>
-          <Typography
-            variant='h6'
-            sx={{
-              color: '#a0522d',
-              fontWeight: 300,
-              fontStyle: 'italic',
-              maxWidth: 600,
-              mx: 'auto',
-              lineHeight: 1.6,
-            }}
-          >
-            Heartfelt messages from our loved ones
+            Lời chúc
           </Typography>
         </Box>
 
@@ -483,20 +469,6 @@ export default function WeddingGuestBook({
             />
           </Box>
         )}
-
-        {/* Page Info */}
-        <Box sx={{ textAlign: 'center', mt: 3 }}>
-          <Typography
-            variant='body2'
-            sx={{
-              color: '#a0522d',
-              fontStyle: 'italic',
-              fontSize: '0.875rem',
-            }}
-          >
-            Page {currentPage} of {totalPages} • {wishList.length} wishes total
-          </Typography>
-        </Box>
       </Container>
     </Box>
   );

@@ -5,6 +5,7 @@ import { Box, Typography, Card, Button } from '@mui/material';
 import { ContentCopy } from '@mui/icons-material';
 import Image from 'next/image';
 import { BANK_ACCOUNTS } from '@/constants/wedding';
+import toast from 'react-hot-toast';
 
 interface WeddingMonetaryGiftProps {
   buttonVariant?: 'contained' | 'outlined' | 'text';
@@ -16,6 +17,7 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
 
   const handleCopyAccount = (account: (typeof BANK_ACCOUNTS)[0]) => {
     navigator.clipboard.writeText(account.accountNumber);
+    toast.success('Đã sao chép số tài khoản');
   };
 
   return (

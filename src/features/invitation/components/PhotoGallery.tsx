@@ -37,7 +37,6 @@ interface WeddingPhoto {
 
 interface PhotoGalleryProps {
   photos?: WeddingPhoto[];
-  title?: string;
   showCategories?: boolean;
   columns?: { xs: number; sm: number; md: number; lg: number };
 }
@@ -89,7 +88,6 @@ export default function PhotoGallery({
       description: 'Heartfelt vows exchanged between the couple',
     },
   ],
-  title = 'Wedding Gallery',
   showCategories = true,
   columns = { xs: 1, sm: 2, md: 3, lg: 4 },
 }: PhotoGalleryProps) {
@@ -163,19 +161,7 @@ export default function PhotoGallery({
               fontSize: { xs: '3rem', md: '4rem' },
             }}
           >
-            {title}
-          </Typography>
-          <Typography
-            variant='h6'
-            sx={{
-              color: '#9ca3af',
-              fontWeight: 300,
-              maxWidth: 600,
-              mx: 'auto',
-              lineHeight: 1.6,
-            }}
-          >
-            Capturing the most precious moments of our special day
+            Một số khoảnh khắc của chúng mình
           </Typography>
         </Box>
 
