@@ -3,6 +3,7 @@ import './globals.css';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { ThemeProvider } from '@mui/material/styles';
 import theme from '../theme';
+import { TRPCProvider } from '@/providers/TRPCProvider';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -32,7 +33,9 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <AppRouterCacheProvider>
-          <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          <TRPCProvider>
+            <ThemeProvider theme={theme}>{children}</ThemeProvider>
+          </TRPCProvider>
         </AppRouterCacheProvider>
       </body>
     </html>

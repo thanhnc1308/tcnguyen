@@ -2,10 +2,19 @@
 
 import type React from 'react';
 import { useState } from 'react';
-import { Box, TextField, Button, Typography, styled } from '@mui/material';
+import {
+  Box,
+  TextField,
+  Button,
+  Typography,
+  styled,
+  CircularProgress,
+} from '@mui/material';
 import { Guest } from '@/types/guest';
 import { getGuestPronoun } from '../helpers/guest';
 import { capitalizeFirstLetter } from '@/utils';
+import { trpc } from '@/utils/trpc';
+import toast from 'react-hot-toast';
 
 const FormContainer = styled(Box)(() => ({
   backgroundColor: '#fef9e7',
@@ -58,16 +67,12 @@ const SubmitButton = styled(Button)(() => ({
 
 interface InvitationResponseProps {
   guest: Guest | null;
-  onSubmit?: (data: {
-    name: string;
-    numberOfGuests: number;
-    message: string;
-  }) => void;
+  onSuccess?: () => void;
 }
 
 export default function InvitationResponse({
   guest,
-  onSubmit,
+  onSuccess,
 }: InvitationResponseProps) {
   const [name, setName] = useState(guest?.name || '');
   const [numberOfGuests, setNumberOfGuests] = useState(
@@ -78,17 +83,24 @@ export default function InvitationResponse({
   const isKnownGuest = guest !== null;
   const guestPronoun = getGuestPronoun(guest);
 
+  const submitMutation = trpc.invitation.submitResponse.useMutation({
+    onSuccess: () => {
+      toast.success('Cảm ơn bạn đã phản hồi!');
+      onSuccess?.();
+    },
+    onError: (error) => {
+      toast.error(error.message || 'Có lỗi xảy ra, vui lòng thử lại.');
+    },
+  });
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (onSubmit) {
-      onSubmit({
-        name,
-        numberOfGuests: parseInt(numberOfGuests) || 1,
-        message,
-      });
-    } else {
-      console.log('Form submitted:', { name, numberOfGuests, message });
-    }
+    submitMutation.mutate({
+      guestId: guest?._id,
+      name,
+      numberOfGuests: parseInt(numberOfGuests) || 1,
+      message: message || undefined,
+    });
   };
 
   return (
@@ -222,8 +234,17 @@ export default function InvitationResponse({
 
         {/* Submit Button */}
         <Box sx={{ textAlign: 'center' }}>
-          <SubmitButton type='submit' variant='contained' fullWidth>
-            Gửi phản hồi
+          <SubmitButton
+            type='submit'
+            variant='contained'
+            fullWidth
+            disabled={submitMutation.isPending}
+          >
+            {submitMutation.isPending ? (
+              <CircularProgress size={24} sx={{ color: '#ffffff' }} />
+            ) : (
+              'Gửi phản hồi'
+            )}
           </SubmitButton>
         </Box>
       </Box>
