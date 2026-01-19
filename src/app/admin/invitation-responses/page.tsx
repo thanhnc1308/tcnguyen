@@ -69,7 +69,9 @@ export default async function InvitationResponsesPage(props: {
       <div className='mt-4 flex items-center justify-between gap-2 md:mt-8'>
         <h1 className='text-2xl font-semibold'>Invitation Responses</h1>
         <div className='w-100'>
-          <Search placeholder='Search responses...' />
+          <Suspense>
+            <Search placeholder='Search responses...' />
+          </Suspense>
         </div>
       </div>
       <Suspense key={query + currentPage} fallback={<TableSkeletons />}>

@@ -1,3 +1,4 @@
+import { Suspense } from 'react';
 import CheckboxCell from './CheckboxCell';
 import Pagination from './Pagination';
 
@@ -189,7 +190,9 @@ export default async function Table<T extends BaseRow>({
         </div>
       </div>
       <div className='mt-5 flex w-full justify-end'>
-        <Pagination totalPage={totalPage} />
+        <Suspense>
+          <Pagination totalPage={totalPage} />
+        </Suspense>
       </div>
     </div>
   );
