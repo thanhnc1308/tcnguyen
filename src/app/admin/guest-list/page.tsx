@@ -13,7 +13,12 @@ import {
   ViewInvitationAction,
 } from '@/features/guest-list/components/Table';
 
-import { Guest, GuestConfirmationStatus } from '@/types/guest';
+import {
+  Guest,
+  GuestConfirmationStatus,
+  GuestAgeComparison,
+  GuestGender,
+} from '@/types/guest';
 import { PlusIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 import { Suspense } from 'react';
@@ -76,6 +81,24 @@ export default async function GuestListPage(props: {
         GuestConfirmationStatus.Pending,
         GuestConfirmationStatus.Accepted,
       ],
+    },
+    {
+      key: 'ageComparison',
+      label: 'Age',
+      dataType: TableColumnDataType.String,
+      filterable: true,
+      filterOptions: [
+        GuestAgeComparison.Older,
+        GuestAgeComparison.Younger,
+        GuestAgeComparison.Same,
+      ],
+    },
+    {
+      key: 'gender',
+      label: 'Gender',
+      dataType: TableColumnDataType.String,
+      filterable: true,
+      filterOptions: [GuestGender.Male, GuestGender.Female],
     },
   ];
 

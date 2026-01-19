@@ -1,4 +1,9 @@
-import { GuestConfirmationStatus, GuestSource } from '@/types/guest';
+import {
+  GuestConfirmationStatus,
+  GuestSource,
+  GuestAgeComparison,
+  GuestGender,
+} from '@/types/guest';
 import mongoose from 'mongoose';
 import '../mongodb'; // Auto-connect to MongoDB
 
@@ -9,6 +14,8 @@ export interface Guest extends mongoose.Document {
   status: string;
   invited: boolean;
   guestSource: string;
+  ageComparison: string;
+  gender?: string;
 }
 
 const GuestSchema = new mongoose.Schema<Guest>({
@@ -44,6 +51,20 @@ const GuestSchema = new mongoose.Schema<Guest>({
     type: String,
     enum: [GuestSource.Groom, GuestSource.Bride],
     default: GuestSource.Groom,
+  },
+  ageComparison: {
+    type: String,
+    enum: [
+      GuestAgeComparison.Older,
+      GuestAgeComparison.Younger,
+      GuestAgeComparison.Same,
+    ],
+    default: GuestAgeComparison.Same,
+  },
+  gender: {
+    type: String,
+    enum: [GuestGender.Male, GuestGender.Female],
+    required: false,
   },
 });
 

@@ -6,6 +6,8 @@ import {
   GuestListPaginationResponse,
   GuestConfirmationStatus,
   GuestSource,
+  GuestAgeComparison,
+  GuestGender,
 } from '@/types/guest';
 import { PaginationRequest } from '@/types/pagination';
 import { hash } from '@/utils';
@@ -33,6 +35,17 @@ const _buildSort = (sort?: string) => {
   return undefined;
 };
 
+interface LeanGuest {
+  _id: string;
+  name: string;
+  status: string;
+  memberCount: number;
+  invited: boolean;
+  guestSource: string;
+  ageComparison: string;
+  gender?: string;
+}
+
 const paginateGuestList = async ({
   queryString,
   sortString,
@@ -43,22 +56,35 @@ const paginateGuestList = async ({
     const filter = _buildFilter(queryString);
     const sort = _buildSort(sortString);
     const skip = (currentPage - 1) * rowsPerPage;
-    const fetchGuestsPromise = guestModel
-      .find(filter)
-      .sort(sort)
-      .skip(skip)
-      .limit(rowsPerPage)
-      .exec();
-    const countTotalGuestPromise = guestModel.countDocuments(filter).exec();
 
     const [guests, total] = await Promise.all([
-      fetchGuestsPromise,
-      countTotalGuestPromise,
+      guestModel
+        .find(filter)
+        .sort(sort)
+        .skip(skip)
+        .limit(rowsPerPage)
+        .lean<LeanGuest[]>(),
+      guestModel.countDocuments(filter).exec(),
     ]);
+
+    // Convert to plain objects for client components with defaults for missing fields
+    const data: Guest[] = guests.map((g) => ({
+      _id: g._id,
+      name: g.name,
+      status:
+        (g.status as GuestConfirmationStatus) ||
+        GuestConfirmationStatus.Pending,
+      memberCount: g.memberCount || 1,
+      invited: g.invited ?? false,
+      guestSource: (g.guestSource as GuestSource) || GuestSource.Groom,
+      ageComparison:
+        (g.ageComparison as GuestAgeComparison) || GuestAgeComparison.Same,
+      gender: g.gender as GuestGender | undefined,
+    }));
 
     return {
       total,
-      data: guests,
+      data,
     };
   } catch (error) {
     console.error('paginateGuestList', error);
@@ -70,13 +96,29 @@ const paginateGuestList = async ({
 };
 
 const fetchGuestById = async (guestId: string): Promise<Guest | null> => {
-  const _guest = await guestModel.findById(guestId).exec();
+  const _guest = await guestModel
+    .findById(guestId)
+    .lean<Partial<LeanGuest>>()
+    .exec();
 
   if (!_guest) {
     return null;
   }
 
-  return _guest;
+  // Convert to plain object for client components with defaults for missing fields
+  return {
+    _id: _guest._id || '',
+    name: _guest.name || '',
+    status:
+      (_guest.status as GuestConfirmationStatus) ||
+      GuestConfirmationStatus.Pending,
+    memberCount: _guest.memberCount || 1,
+    invited: _guest.invited ?? false,
+    guestSource: (_guest.guestSource as GuestSource) || GuestSource.Groom,
+    ageComparison:
+      (_guest.ageComparison as GuestAgeComparison) || GuestAgeComparison.Same,
+    gender: _guest.gender as GuestGender | undefined,
+  };
 };
 
 export type GuestState = {
@@ -86,6 +128,8 @@ export type GuestState = {
     status?: string[];
     invited?: string[];
     guestSource?: string[];
+    ageComparison?: string[];
+    gender?: string[];
   };
   message?: string | null;
 };
@@ -107,6 +151,15 @@ const GuestSchema = z.object({
   ]),
   invited: z.boolean(),
   guestSource: z.enum([GuestSource.Groom, GuestSource.Bride]),
+  ageComparison: z.enum([
+    GuestAgeComparison.Older,
+    GuestAgeComparison.Younger,
+    GuestAgeComparison.Same,
+  ]),
+  gender: z
+    .enum([GuestGender.Male, GuestGender.Female])
+    .optional()
+    .or(z.literal('')),
 });
 const CreateGuestSchema = GuestSchema.omit({ _id: true });
 const UpdateGuestSchema = GuestSchema.omit({ _id: true });
@@ -124,6 +177,8 @@ const createGuest = async (prevState: GuestState, formData: FormData) => {
     status: formData.get('status'),
     invited: !!formData.get('invited'),
     guestSource: formData.get('guestSource'),
+    ageComparison: formData.get('ageComparison'),
+    gender: formData.get('gender') || undefined,
   });
 
   if (!validatedFields.success) {
@@ -160,6 +215,8 @@ const updateGuestById = async (
     status: formData.get('status'),
     invited: !!formData.get('invited'),
     guestSource: formData.get('guestSource'),
+    ageComparison: formData.get('ageComparison'),
+    gender: formData.get('gender') || undefined,
   });
 
   if (!validatedFields.success) {

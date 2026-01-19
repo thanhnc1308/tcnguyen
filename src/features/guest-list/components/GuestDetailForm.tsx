@@ -2,7 +2,13 @@
 
 import Link from 'next/link';
 import { CheckIcon, ClockIcon, MinusIcon } from '@heroicons/react/24/outline';
-import { Guest, GuestConfirmationStatus, GuestSource } from '@/types/guest';
+import {
+  Guest,
+  GuestConfirmationStatus,
+  GuestSource,
+  GuestAgeComparison,
+  GuestGender,
+} from '@/types/guest';
 import { Button } from '@headlessui/react';
 import { ActionType } from '@/types/common';
 import {
@@ -185,6 +191,128 @@ export default function Form({
                   className='ml-2 flex cursor-pointer items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium'
                 >
                   Bride
+                </label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        {/* Age Comparison */}
+        <fieldset>
+          <legend className='mb-2 block text-sm font-medium'>
+            Age comparison
+          </legend>
+          <div className='rounded-md border border-gray-200 bg-white px-[14px] py-3'>
+            <div className='flex gap-4'>
+              <div className='flex items-center'>
+                <input
+                  id={GuestAgeComparison.Older}
+                  name='ageComparison'
+                  type='radio'
+                  value={GuestAgeComparison.Older}
+                  defaultChecked={
+                    guest.ageComparison === GuestAgeComparison.Older
+                  }
+                  className='h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2'
+                />
+                <label
+                  htmlFor={GuestAgeComparison.Older}
+                  className='ml-2 flex cursor-pointer items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium'
+                >
+                  Older
+                </label>
+              </div>
+              <div className='flex items-center'>
+                <input
+                  id={GuestAgeComparison.Same}
+                  name='ageComparison'
+                  type='radio'
+                  value={GuestAgeComparison.Same}
+                  defaultChecked={
+                    guest.ageComparison === GuestAgeComparison.Same
+                  }
+                  className='h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2'
+                />
+                <label
+                  htmlFor={GuestAgeComparison.Same}
+                  className='ml-2 flex cursor-pointer items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium'
+                >
+                  Same
+                </label>
+              </div>
+              <div className='flex items-center'>
+                <input
+                  id={GuestAgeComparison.Younger}
+                  name='ageComparison'
+                  type='radio'
+                  value={GuestAgeComparison.Younger}
+                  defaultChecked={
+                    guest.ageComparison === GuestAgeComparison.Younger
+                  }
+                  className='h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2'
+                />
+                <label
+                  htmlFor={GuestAgeComparison.Younger}
+                  className='ml-2 flex cursor-pointer items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium'
+                >
+                  Younger
+                </label>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+
+        {/* Gender */}
+        <fieldset>
+          <legend className='mb-2 block text-sm font-medium'>Gender</legend>
+          <div className='rounded-md border border-gray-200 bg-white px-[14px] py-3'>
+            <div className='flex gap-4'>
+              <div className='flex items-center'>
+                <input
+                  id='gender-none'
+                  name='gender'
+                  type='radio'
+                  value=''
+                  defaultChecked={!guest.gender}
+                  className='h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2'
+                />
+                <label
+                  htmlFor='gender-none'
+                  className='ml-2 flex cursor-pointer items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium'
+                >
+                  Not specified
+                </label>
+              </div>
+              <div className='flex items-center'>
+                <input
+                  id={GuestGender.Male}
+                  name='gender'
+                  type='radio'
+                  value={GuestGender.Male}
+                  defaultChecked={guest.gender === GuestGender.Male}
+                  className='h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2'
+                />
+                <label
+                  htmlFor={GuestGender.Male}
+                  className='ml-2 flex cursor-pointer items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium'
+                >
+                  Male
+                </label>
+              </div>
+              <div className='flex items-center'>
+                <input
+                  id={GuestGender.Female}
+                  name='gender'
+                  type='radio'
+                  value={GuestGender.Female}
+                  defaultChecked={guest.gender === GuestGender.Female}
+                  className='h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2'
+                />
+                <label
+                  htmlFor={GuestGender.Female}
+                  className='ml-2 flex cursor-pointer items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium'
+                >
+                  Female
                 </label>
               </div>
             </div>
