@@ -51,23 +51,23 @@ export default function Navigation({
         zIndex: 50,
         display: 'flex',
         justifyContent: 'center',
-        paddingTop: isSticky ? '0' : '2rem',
-        backgroundColor: isSticky ? `${COLORS.bgCream}EB` : 'transparent',
-        backdropFilter: isSticky ? 'blur(16px)' : 'none',
-        boxShadow: isSticky ? '0 1px 12px rgba(0,0,0,0.04)' : 'none',
-        transition: `background-color ${TRANSITIONS.normal} ease, box-shadow ${TRANSITIONS.normal} ease, padding ${TRANSITIONS.normal} ease`,
+        backgroundColor: isSticky ? `${COLORS.bgWhite}F0` : 'transparent',
+        backdropFilter: isSticky ? 'blur(20px)' : 'none',
+        borderBottom: isSticky ? `1px solid ${COLORS.borderGold}` : 'none',
+        transition: `background-color ${TRANSITIONS.normal} ease, border-color ${TRANSITIONS.normal} ease`,
         padding: isSticky ? '0.75rem 0' : '2rem 0 0',
       }}
     >
       <div
         style={{
           display: 'flex',
-          gap: '2rem',
-          fontFamily: FONTS.serif,
-          fontWeight: 500,
-          fontSize: '0.95rem',
-          letterSpacing: '0.08em',
-          color: COLORS.textPrimary,
+          gap: '2.5rem',
+          fontFamily: FONTS.body,
+          fontWeight: 400,
+          fontSize: '0.8rem',
+          letterSpacing: '0.15em',
+          textTransform: 'uppercase',
+          color: COLORS.textSecondary,
         }}
       >
         {links.map((link, index) => (
@@ -76,23 +76,19 @@ export default function Navigation({
             href={link.href}
             onClick={(e) => handleClick(e, link.href)}
             style={{
-              color: COLORS.textPrimary,
+              color: COLORS.textSecondary,
               textDecoration: 'none',
-              transition: `color ${TRANSITIONS.normal} ease, border-color ${TRANSITIONS.normal} ease`,
+              transition: `color ${TRANSITIONS.normal} ease`,
               cursor: 'pointer',
-              borderBottom: '1px solid transparent',
-              paddingBottom: '4px',
               minHeight: '44px',
               display: 'flex',
               alignItems: 'center',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.color = COLORS.accent;
-              e.currentTarget.style.borderBottomColor = COLORS.accent;
+              e.currentTarget.style.color = COLORS.textPrimary;
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.color = COLORS.textPrimary;
-              e.currentTarget.style.borderBottomColor = 'transparent';
+              e.currentTarget.style.color = COLORS.textSecondary;
             }}
           >
             {link.label}

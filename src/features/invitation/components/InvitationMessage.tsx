@@ -10,23 +10,25 @@ export default function InvitationMessage() {
     <Box
       sx={{
         textAlign: 'center',
-        py: { xs: 8, md: 10 },
+        py: { xs: 10, md: 14 },
         px: 3,
-        backgroundColor: COLORS.bgCream,
+        backgroundColor: COLORS.bgWhite,
       }}
     >
       <ScrollReveal>
         <OrnamentalDivider />
         <Typography
           sx={{
-            fontFamily: FONTS.script,
-            fontSize: { xs: '1.6rem', sm: '2rem' },
-            color: COLORS.primary,
-            lineHeight: 1.6,
-            maxWidth: 600,
+            fontFamily: FONTS.serif,
+            fontSize: { xs: '1.3rem', sm: '1.6rem' },
+            color: COLORS.textPrimary,
+            lineHeight: 1.8,
+            maxWidth: 520,
             mx: 'auto',
-            mt: 3,
-            mb: 2,
+            mt: 4,
+            mb: 4,
+            fontWeight: 300,
+            fontStyle: 'italic',
           }}
         >
           Trân trọng kính mời bạn đến tham dự lễ cưới và bữa tiệc thân mật cùng

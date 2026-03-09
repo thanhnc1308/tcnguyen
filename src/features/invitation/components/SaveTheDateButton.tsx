@@ -77,29 +77,30 @@ export default function SaveTheDateButton({
   return (
     <Menu as='div' className='relative inline-block text-left'>
       <MenuButton
-        className='inline-flex items-center gap-2 px-8 py-3 rounded-full font-medium tracking-wider transition-all duration-300 cursor-pointer'
+        className='inline-flex items-center gap-2 px-6 py-2.5 font-normal tracking-wider transition-all duration-300 cursor-pointer'
         style={{
-          backgroundColor: `${COLORS.bgWhite}CC`,
-          border: `1px solid ${COLORS.borderGold}`,
+          backgroundColor: 'transparent',
+          border: `1px solid ${COLORS.textSecondary}`,
           color: COLORS.textPrimary,
-          fontFamily: FONTS.serif,
+          fontFamily: FONTS.body,
+          fontSize: '0.8rem',
+          letterSpacing: '0.1em',
+          textTransform: 'uppercase',
         }}
         onMouseEnter={(e) => {
-          e.currentTarget.style.backgroundColor = COLORS.bgWhite;
-          e.currentTarget.style.boxShadow = '0 4px 16px rgba(0,0,0,0.08)';
+          e.currentTarget.style.borderColor = COLORS.textPrimary;
         }}
         onMouseLeave={(e) => {
-          e.currentTarget.style.backgroundColor = `${COLORS.bgWhite}CC`;
-          e.currentTarget.style.boxShadow = 'none';
+          e.currentTarget.style.borderColor = COLORS.textSecondary;
         }}
       >
         Thêm vào lịch
-        <ChevronDownIcon className='h-5 w-5' />
+        <ChevronDownIcon className='h-4 w-4' />
       </MenuButton>
 
       <MenuItems
         transition
-        className='absolute right-0 mt-2 w-56 origin-top-right rounded-md shadow-lg ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in z-10'
+        className='absolute right-0 mt-2 w-52 shadow-sm ring-1 ring-black ring-opacity-5 transition focus:outline-none data-[closed]:scale-95 data-[closed]:transform data-[closed]:opacity-0 data-[enter]:duration-100 data-[leave]:duration-75 data-[enter]:ease-out data-[leave]:ease-in z-10'
         style={{ backgroundColor: COLORS.bgWhite }}
       >
         <div className='py-1'>
@@ -107,14 +108,15 @@ export default function SaveTheDateButton({
             {({ focus }) => (
               <button
                 onClick={handleGoogleCalendar}
-                className='group flex w-full items-center px-4 py-2 text-sm cursor-pointer'
+                className='group flex w-full items-center px-4 py-2.5 text-sm cursor-pointer'
                 style={{
                   backgroundColor: focus ? COLORS.bgCream : 'transparent',
                   color: COLORS.textPrimary,
-                  fontFamily: FONTS.serif,
+                  fontFamily: FONTS.body,
+                  fontSize: '0.8rem',
                 }}
               >
-                <svg className='mr-3 h-5 w-5' viewBox='0 0 24 24' fill='none'>
+                <svg className='mr-3 h-4 w-4' viewBox='0 0 24 24' fill='none'>
                   <path
                     d='M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z'
                     fill='#4285F4'
@@ -140,15 +142,16 @@ export default function SaveTheDateButton({
             {({ focus }) => (
               <button
                 onClick={handleAppleCalendar}
-                className='group flex w-full items-center px-4 py-2 text-sm cursor-pointer'
+                className='group flex w-full items-center px-4 py-2.5 text-sm cursor-pointer'
                 style={{
                   backgroundColor: focus ? COLORS.bgCream : 'transparent',
                   color: COLORS.textPrimary,
-                  fontFamily: FONTS.serif,
+                  fontFamily: FONTS.body,
+                  fontSize: '0.8rem',
                 }}
               >
                 <svg
-                  className='mr-3 h-5 w-5'
+                  className='mr-3 h-4 w-4'
                   fill={COLORS.textSecondary}
                   viewBox='0 0 24 24'
                 >

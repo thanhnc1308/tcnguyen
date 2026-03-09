@@ -1,8 +1,8 @@
 @import 'tailwindcss';
 
 :root {
-  --background: #FAF7F2;
-  --foreground: #3B2E26;
+  --background: #FFFFFF;
+  --foreground: #2D2D2D;
 }
 
 html {
@@ -12,7 +12,7 @@ html {
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'DM Sans', 'Cormorant Garamond', serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -29,8 +29,8 @@ body {
   }
 }
 
-/* Selection color matching wedding palette */
+/* Selection color matching minimalist palette */
 ::selection {
-  background-color: rgba(184, 150, 59, 0.2);
-  color: #3B2E26;
+  background-color: rgba(135, 168, 120, 0.2);
+  color: #2D2D2D;
 }

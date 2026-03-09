@@ -6,7 +6,7 @@ import { ContentCopy } from '@mui/icons-material';
 import Image from 'next/image';
 import { BANK_ACCOUNTS } from '@/constants/wedding';
 import toast from 'react-hot-toast';
-import { COLORS, FONTS, TRANSITIONS, cardStyle } from '../constants/design';
+import { COLORS, FONTS } from '../constants/design';
 import ScrollReveal from './ScrollReveal';
 
 interface WeddingMonetaryGiftProps {
@@ -23,31 +23,30 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
   };
 
   return (
-    <Box sx={{ p: 3, backgroundColor: COLORS.bgWarm }}>
+    <Box sx={{ px: 3, pb: { xs: 8, md: 10 }, backgroundColor: COLORS.bgCream }}>
       {!showContent ? (
         <Box sx={{ textAlign: 'center' }}>
           <Button
-            variant='contained'
+            variant='outlined'
             onClick={() => setShowContent(true)}
             sx={{
-              backgroundColor: COLORS.primary,
-              color: COLORS.textOnPrimary,
-              fontFamily: FONTS.script,
-              fontSize: '1.2rem',
-              py: 2,
+              borderColor: COLORS.textSecondary,
+              color: COLORS.textPrimary,
+              fontFamily: FONTS.body,
+              fontSize: '0.85rem',
+              py: 1.5,
               px: 4,
-              borderRadius: 3,
+              borderRadius: 0,
               textTransform: 'none',
-              boxShadow: '0 4px 12px rgba(107, 76, 59, 0.25)',
+              letterSpacing: '0.05em',
+              boxShadow: 'none',
               '&:hover': {
-                backgroundColor: COLORS.primaryDark,
-                boxShadow: '0 6px 16px rgba(107, 76, 59, 0.35)',
-                transform: 'translateY(-2px)',
+                borderColor: COLORS.textPrimary,
+                backgroundColor: 'transparent',
               },
-              transition: `all ${TRANSITIONS.normal} ease`,
             }}
           >
-            Nếu bạn muốn gửi quà mừng ...
+            Xem thông tin chuyển khoản
           </Button>
         </Box>
       ) : (
@@ -56,7 +55,7 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
             sx={{
               display: 'flex',
               gap: 3,
-              maxWidth: 900,
+              maxWidth: 700,
               mx: 'auto',
               flexDirection: { xs: 'column', md: 'row' },
             }}
@@ -66,11 +65,11 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                 key={account.id}
                 sx={{
                   flex: 1,
-                  ...cardStyle,
+                  backgroundColor: COLORS.bgWhite,
+                  borderRadius: 0,
+                  boxShadow: 'none',
+                  border: `1px solid ${COLORS.borderGold}`,
                   p: 3,
-                  '&:hover': {
-                    ...cardStyle['&:hover'],
-                  },
                 }}
               >
                 {/* Title */}
@@ -78,10 +77,12 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                   sx={{
                     textAlign: 'center',
                     color: COLORS.textSecondary,
-                    fontSize: '0.9rem',
+                    fontSize: '0.7rem',
                     mb: 1,
                     fontWeight: 500,
-                    fontFamily: FONTS.serif,
+                    fontFamily: FONTS.body,
+                    letterSpacing: '0.15em',
+                    textTransform: 'uppercase',
                   }}
                 >
                   {account.title}
@@ -91,9 +92,9 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                 <Typography
                   sx={{
                     textAlign: 'center',
-                    fontWeight: 700,
-                    fontSize: '1.3rem',
-                    mb: 0.5,
+                    fontWeight: 400,
+                    fontSize: '1.2rem',
+                    mb: 2,
                     color: COLORS.textPrimary,
                     fontFamily: FONTS.serif,
                   }}
@@ -111,12 +112,9 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                 >
                   <Box
                     sx={{
-                      width: 200,
-                      height: 200,
+                      width: 160,
+                      height: 160,
                       position: 'relative',
-                      border: `1px solid ${COLORS.borderGold}`,
-                      borderRadius: 2,
-                      overflow: 'hidden',
                     }}
                   >
                     <Image
@@ -145,21 +143,20 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                     >
                       <Typography
                         sx={{
-                          fontSize: '0.85rem',
+                          fontSize: '0.8rem',
                           color: COLORS.textSecondary,
-                          fontWeight: 500,
-                          fontFamily: FONTS.serif,
+                          fontFamily: FONTS.body,
                         }}
                       >
                         {item.label}
                       </Typography>
                       <Typography
                         sx={{
-                          fontSize: '0.85rem',
+                          fontSize: '0.8rem',
                           color: COLORS.textPrimary,
-                          fontWeight: 600,
+                          fontWeight: 500,
                           textAlign: 'right',
-                          fontFamily: FONTS.serif,
+                          fontFamily: FONTS.body,
                         }}
                       >
                         {item.value}
@@ -168,48 +165,25 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                   ))}
                 </Box>
 
-                {/* Large Account Number Display */}
-                <Box
-                  sx={{
-                    backgroundColor: COLORS.bgCream,
-                    borderRadius: 2,
-                    py: 2,
-                    mb: 2,
-                    textAlign: 'center',
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      fontSize: '1.5rem',
-                      fontWeight: 700,
-                      color: COLORS.textPrimary,
-                      letterSpacing: '2px',
-                      fontFamily: 'monospace',
-                    }}
-                  >
-                    {account.accountNumber}
-                  </Typography>
-                </Box>
-
                 {/* Copy Button */}
                 <Button
                   fullWidth
                   variant='outlined'
-                  startIcon={<ContentCopy sx={{ fontSize: 18 }} />}
+                  startIcon={<ContentCopy sx={{ fontSize: 16 }} />}
                   onClick={() => handleCopyAccount(account)}
                   sx={{
-                    borderColor: COLORS.accent,
-                    color: COLORS.accent,
+                    borderColor: COLORS.textSecondary,
+                    color: COLORS.textPrimary,
                     textTransform: 'none',
-                    fontWeight: 600,
-                    fontSize: '0.9rem',
-                    py: 1.2,
-                    borderRadius: 2,
-                    fontFamily: FONTS.serif,
-                    transition: `all ${TRANSITIONS.normal} ease`,
+                    fontWeight: 400,
+                    fontSize: '0.8rem',
+                    py: 1,
+                    borderRadius: 0,
+                    fontFamily: FONTS.body,
+                    letterSpacing: '0.05em',
                     '&:hover': {
-                      borderColor: COLORS.accentDark,
-                      backgroundColor: `${COLORS.accent}0A`,
+                      borderColor: COLORS.textPrimary,
+                      backgroundColor: 'transparent',
                     },
                   }}
                 >

@@ -1,8 +1,9 @@
 import {
   Geist,
   Geist_Mono,
-  Allison,
   Cormorant_Garamond,
+  DM_Sans,
+  Pinyon_Script,
 } from 'next/font/google';
 import './globals.css';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
@@ -21,10 +22,11 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-const allison = Allison({
-  weight: '400',
-  subsets: ['latin'],
+const dmSans = DM_Sans({
+  variable: '--font-dm-sans',
+  subsets: ['latin', 'latin-ext'],
   display: 'swap',
+  weight: ['300', '400', '500', '600', '700'],
 });
 
 const cormorantGaramond = Cormorant_Garamond({
@@ -35,6 +37,13 @@ const cormorantGaramond = Cormorant_Garamond({
   style: ['normal', 'italic'],
 });
 
+const pinyonScript = Pinyon_Script({
+  variable: '--font-pinyon-script',
+  subsets: ['latin', 'latin-ext'],
+  display: 'swap',
+  weight: '400',
+});
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -43,7 +52,7 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${allison} ${cormorantGaramond.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${dmSans.variable} ${cormorantGaramond.variable} ${pinyonScript.variable} antialiased`}
         suppressHydrationWarning
       >
         <AppRouterCacheProvider>

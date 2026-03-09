@@ -7,40 +7,28 @@ import {
   Card,
   CardContent,
   Grid,
-  Divider,
   Button,
-  Chip,
 } from '@mui/material';
-import {
-  LocationOn,
-  AccessTime,
-  Directions,
-  Event,
-  Restaurant,
-} from '@mui/icons-material';
+import { Directions } from '@mui/icons-material';
 import { months, weekdays } from '../constants';
 import {
   COLORS,
   FONTS,
-  cardStyle,
-  primaryButtonStyle,
   sectionHeadingStyle,
 } from '../constants/design';
 import { getEventsForSide } from '../constants/events';
 import ScrollReveal from './ScrollReveal';
+import OrnamentalDivider from './OrnamentalDivider';
 import { GuestSource } from '@/types/guest';
 
 interface EventInfoProps {
   side?: GuestSource;
   title?: string;
-  subtitle?: string;
-  backgroundImage?: string;
 }
 
 export default function EventInfo({
   side = GuestSource.Groom,
   title = 'Thông Tin Sự Kiện',
-  backgroundImage = '/images/wedding-bg.JPG',
 }: EventInfoProps) {
   const events = getEventsForSide(side);
   const handleDirections = (address: string, mapUrl?: string) => {
@@ -75,187 +63,127 @@ export default function EventInfo({
     <Box
       id='event'
       sx={{
-        position: 'relative',
-        backgroundImage: `url('${backgroundImage}')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        display: 'flex',
-        alignItems: 'center',
-        py: { xs: 8, md: 12 },
+        py: { xs: 10, md: 14 },
+        backgroundColor: COLORS.bgCream,
       }}
     >
-      {/* Background Overlay */}
-      <Box
-        sx={{
-          position: 'absolute',
-          inset: 0,
-          backgroundColor: COLORS.overlayLight,
-          backdropFilter: 'blur(2px)',
-        }}
-      />
-
-      <Container maxWidth='lg' sx={{ position: 'relative', zIndex: 1 }}>
+      <Container maxWidth='md'>
         {/* Header */}
         <ScrollReveal>
-          <Box sx={{ textAlign: 'center', mb: 6 }}>
+          <Box sx={{ textAlign: 'center', mb: 8 }}>
             <Typography variant='h2' component='h2' sx={sectionHeadingStyle}>
               {title}
             </Typography>
+            <OrnamentalDivider />
           </Box>
         </ScrollReveal>
 
-        {/* Events Grid */}
+        {/* Events */}
         <Grid container spacing={4}>
           {events.map((event, index) => (
             <Grid size={{ xs: 12, md: 6 }} key={event.id}>
-              <ScrollReveal delay={index * 0.2}>
+              <ScrollReveal delay={index * 0.15}>
                 <Card
                   sx={{
                     height: '100%',
-                    ...cardStyle,
+                    backgroundColor: COLORS.bgWhite,
+                    borderRadius: 0,
+                    boxShadow: 'none',
+                    border: `1px solid ${COLORS.borderGold}`,
                   }}
                 >
-                  <CardContent sx={{ p: 4 }}>
-                    {/* Event Type Badge */}
-                    <Box
+                  <CardContent sx={{ p: { xs: 3, md: 4 } }}>
+                    {/* Event type label */}
+                    <Typography
                       sx={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'flex-start',
-                        mb: 3,
+                        fontFamily: FONTS.body,
+                        fontSize: '0.7rem',
+                        letterSpacing: '0.2em',
+                        textTransform: 'uppercase',
+                        color: COLORS.accent,
+                        mb: 2,
+                        fontWeight: 500,
                       }}
                     >
-                      <Chip
-                        icon={
-                          event.type === 'ceremony' ? <Event /> : <Restaurant />
-                        }
-                        label={
-                          event.type === 'ceremony'
-                            ? 'LỄ THÀNH HÔN'
-                            : 'TIỆC CƯỚI'
-                        }
-                        sx={{
-                          backgroundColor:
-                            event.type === 'ceremony'
-                              ? `${COLORS.primary}14`
-                              : `${COLORS.accent}1A`,
-                          color:
-                            event.type === 'ceremony'
-                              ? COLORS.primary
-                              : COLORS.accentDark,
-                          fontWeight: 600,
-                          fontSize: '0.75rem',
-                          fontFamily: FONTS.serif,
-                        }}
-                      />
-                    </Box>
+                      {event.type === 'ceremony' ? 'Lễ thành hôn' : 'Tiệc cưới'}
+                    </Typography>
 
                     {/* Event Title */}
                     <Typography
                       variant='h4'
                       component='h3'
                       sx={{
-                        fontFamily: FONTS.script,
-                        color: COLORS.primary,
-                        fontWeight: 700,
-                        mb: 2,
-                        fontSize: { xs: '1.8rem', md: '2.2rem' },
+                        fontFamily: FONTS.serif,
+                        color: COLORS.textPrimary,
+                        fontWeight: 400,
+                        mb: 3,
+                        fontSize: { xs: '1.5rem', md: '1.8rem' },
                       }}
                     >
                       {event.title}
                     </Typography>
 
-                    {/* Date and Time */}
-                    <Box sx={{ mb: 3 }}>
-                      <Box
-                        sx={{ display: 'flex', alignItems: 'center', mb: 1 }}
+                    {/* Date */}
+                    <Box sx={{ mb: 1 }}>
+                      <Typography
+                        sx={{
+                          color: COLORS.textPrimary,
+                          fontFamily: FONTS.body,
+                          fontSize: '0.9rem',
+                          fontWeight: 500,
+                        }}
                       >
-                        <Event
-                          sx={{ color: COLORS.primary, mr: 1, fontSize: 20 }}
-                        />
-                        <Typography
-                          variant='body1'
-                          sx={{
-                            color: COLORS.textPrimary,
-                            fontWeight: 600,
-                            fontFamily: FONTS.serif,
-                          }}
-                        >
-                          {formatDate(event.date)}
-                        </Typography>
-                      </Box>
-                      <Box
-                        sx={{ display: 'flex', alignItems: 'center', ml: 3 }}
-                      >
-                        <AccessTime
-                          sx={{ color: COLORS.primary, mr: 1, fontSize: 18 }}
-                        />
-                        <Typography
-                          variant='body2'
-                          sx={{
-                            color: COLORS.textSecondary,
-                            fontFamily: FONTS.serif,
-                          }}
-                        >
-                          {event.time}
-                        </Typography>
-                      </Box>
+                        {formatDate(event.date)}
+                      </Typography>
                     </Box>
 
-                    <Divider sx={{ my: 2, borderColor: COLORS.borderGold }} />
-
-                    {/* Venue Information */}
+                    {/* Time */}
                     <Box sx={{ mb: 3 }}>
                       <Typography
-                        variant='h6'
                         sx={{
-                          color: COLORS.primary,
-                          fontWeight: 600,
-                          mb: 1,
-                          fontSize: '1.1rem',
-                          fontFamily: FONTS.serif,
+                          color: COLORS.textSecondary,
+                          fontFamily: FONTS.body,
+                          fontSize: '0.85rem',
                         }}
                       >
-                        {event.venue}
+                        {event.time}
                       </Typography>
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          alignItems: 'flex-start',
-                          mb: 2,
-                        }}
-                      >
-                        <LocationOn
-                          sx={{
-                            color: COLORS.primary,
-                            mr: 1,
-                            fontSize: 20,
-                            mt: 0.2,
-                          }}
-                        />
-                        <Typography
-                          variant='body2'
-                          sx={{
-                            color: COLORS.textSecondary,
-                            lineHeight: 1.5,
-                            flex: 1,
-                            fontFamily: FONTS.serif,
-                          }}
-                        >
-                          {event.address}
-                        </Typography>
-                      </Box>
                     </Box>
 
-                    {/* Responsive Map */}
+                    {/* Thin rule */}
+                    <Box sx={{ width: 40, height: '1px', backgroundColor: COLORS.accent, opacity: 0.3, mb: 3 }} />
+
+                    {/* Venue */}
+                    <Typography
+                      sx={{
+                        color: COLORS.textPrimary,
+                        fontWeight: 500,
+                        mb: 0.5,
+                        fontSize: '0.95rem',
+                        fontFamily: FONTS.body,
+                      }}
+                    >
+                      {event.venue}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        color: COLORS.textSecondary,
+                        lineHeight: 1.6,
+                        fontFamily: FONTS.body,
+                        fontSize: '0.85rem',
+                        mb: 3,
+                      }}
+                    >
+                      {event.address}
+                    </Typography>
+
+                    {/* Map */}
                     <Box
                       sx={{
                         width: '100%',
                         aspectRatio: '4 / 3',
-                        borderRadius: 2,
                         overflow: 'hidden',
-                        mb: 2,
+                        mb: 3,
                         border: `1px solid ${COLORS.borderGold}`,
                       }}
                     >
@@ -264,13 +192,28 @@ export default function EventInfo({
 
                     {/* Directions Button */}
                     <Button
-                      variant='contained'
-                      startIcon={<Directions />}
+                      variant='outlined'
+                      startIcon={<Directions sx={{ fontSize: 18 }} />}
                       onClick={() =>
                         handleDirections(event.address, event.mapUrl)
                       }
                       fullWidth
-                      sx={primaryButtonStyle}
+                      sx={{
+                        borderColor: COLORS.textSecondary,
+                        color: COLORS.textPrimary,
+                        borderRadius: 0,
+                        py: 1.2,
+                        fontWeight: 400,
+                        textTransform: 'none',
+                        fontSize: '0.85rem',
+                        fontFamily: FONTS.body,
+                        letterSpacing: '0.05em',
+                        boxShadow: 'none',
+                        '&:hover': {
+                          borderColor: COLORS.textPrimary,
+                          backgroundColor: 'transparent',
+                        },
+                      }}
                     >
                       Xem đường đi
                     </Button>

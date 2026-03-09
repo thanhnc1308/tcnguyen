@@ -1,49 +1,55 @@
-// Consolidated wedding invitation design tokens
-// Palette: Refined warm brown + antique gold — elegant Vietnamese wedding
-export const COLORS = {
-  // Primary - rich walnut brown
-  primary: '#6B4C3B',
-  primaryLight: '#8D6E5D',
-  primaryDark: '#4E3629',
+// Minimalist wedding invitation design tokens
+// Palette: Pure white, charcoal, sage green, dusty rose — elegant & timeless
 
-  // Accent - antique gold
-  accent: '#B8963B',
-  accentLight: '#D4B262',
-  accentDark: '#967726',
+export const COLORS = {
+  // Primary - charcoal
+  primary: '#2D2D2D',
+  primaryLight: '#5A5A5A',
+  primaryDark: '#1A1A1A',
+
+  // Accent - sage green
+  accent: '#87A878',
+  accentLight: '#A8C49A',
+  accentDark: '#6B8C5E',
+
+  // Secondary accent - dusty rose
+  rose: '#C9A9A6',
+  roseLight: '#DCC4C2',
+  roseDark: '#B08E8B',
 
   // Text
-  textPrimary: '#3B2E26',
-  textSecondary: '#857468',
-  textOnPrimary: '#FFFDF9',
+  textPrimary: '#2D2D2D',
+  textSecondary: '#7A7A7A',
+  textOnPrimary: '#FFFFFF',
 
   // Backgrounds
-  bgCream: '#FAF7F2',
-  bgWarm: '#F0EAE0',
-  bgWhite: '#FEFDFB',
+  bgCream: '#FAFAF8',
+  bgWarm: '#F5F4F0',
+  bgWhite: '#FFFFFF',
 
-  // Envelope
-  envelopeGradientStart: '#B44040',
-  envelopeGradientMid: '#C85050',
-  envelopeGradientEnd: '#A63636',
+  // Envelope - muted sage
+  envelopeGradientStart: '#87A878',
+  envelopeGradientMid: '#A8C49A',
+  envelopeGradientEnd: '#6B8C5E',
 
   // Decorative
-  gold: '#C9A84C',
-  goldLight: '#E0C878',
-  heartRed: '#D45B68',
+  gold: '#87A878',
+  goldLight: '#A8C49A',
+  heartRed: '#C9A9A6',
 
   // Borders & overlays
-  borderGold: 'rgba(184, 150, 59, 0.15)',
-  borderGoldHover: 'rgba(184, 150, 59, 0.3)',
-  overlayLight: 'rgba(250, 247, 242, 0.88)',
-  overlayDark: 'rgba(59, 46, 38, 0.06)',
+  borderGold: 'rgba(135, 168, 120, 0.15)',
+  borderGoldHover: 'rgba(135, 168, 120, 0.3)',
+  overlayLight: 'rgba(250, 250, 248, 0.92)',
+  overlayDark: 'rgba(45, 45, 45, 0.04)',
 } as const;
 
 export const FONTS = {
-  script: "'Dancing Script', cursive",
+  script: "'Pinyon Script', cursive",
   serif: "'Cormorant Garamond', serif",
-  body: "'Cormorant Garamond', serif",
-  handwritten: "'Kalam', cursive",
-  display: "'Allison', cursive",
+  body: "'DM Sans', sans-serif",
+  handwritten: "'Cormorant Garamond', serif",
+  display: "'Pinyon Script', cursive",
 } as const;
 
 // Shared animation durations
@@ -54,54 +60,53 @@ export const TRANSITIONS = {
   reveal: '800ms',
 } as const;
 
-// Shared section styles
-export const sectionStyle = (bg: string = COLORS.bgCream) =>
+// Shared section styles — generous whitespace, single-column feel
+export const sectionStyle = (bg: string = COLORS.bgWhite) =>
   ({
-    py: { xs: 8, md: 12 },
+    py: { xs: 10, md: 14 },
     px: 3,
     backgroundColor: bg,
     position: 'relative' as const,
   }) as const;
 
-// Shared card styles
+// Shared card styles — minimal, no hover effects
 export const cardStyle = {
-  backgroundColor: 'rgba(255, 255, 255, 0.95)',
-  backdropFilter: 'blur(10px)',
-  borderRadius: 3,
-  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.06)',
+  backgroundColor: COLORS.bgWhite,
+  borderRadius: 2,
+  boxShadow: 'none',
   border: `1px solid ${COLORS.borderGold}`,
   transition: `all ${TRANSITIONS.normal} ease`,
   '&:hover': {
-    transform: 'translateY(-4px)',
-    boxShadow: '0 16px 48px rgba(0, 0, 0, 0.1)',
     borderColor: COLORS.borderGoldHover,
   },
 } as const;
 
-// Shared button styles
+// Shared button styles — minimal outline
 export const primaryButtonStyle = {
   backgroundColor: COLORS.primary,
   color: COLORS.textOnPrimary,
-  borderRadius: 2,
+  borderRadius: 0,
   py: 1.5,
-  fontWeight: 600,
+  fontWeight: 500,
   textTransform: 'none' as const,
   fontSize: '0.9rem',
-  fontFamily: FONTS.serif,
-  boxShadow: '0 4px 12px rgba(107, 76, 59, 0.25)',
+  fontFamily: FONTS.body,
+  letterSpacing: '0.05em',
+  boxShadow: 'none',
   '&:hover': {
     backgroundColor: COLORS.primaryDark,
-    transform: 'translateY(-2px)',
-    boxShadow: '0 6px 20px rgba(107, 76, 59, 0.35)',
+    boxShadow: 'none',
   },
   transition: `all ${TRANSITIONS.normal} ease`,
 } as const;
 
-// Section heading style
+// Section heading style — large serif, understated
 export const sectionHeadingStyle = {
-  fontFamily: FONTS.script,
-  color: COLORS.primary,
-  fontWeight: 700,
+  fontFamily: FONTS.serif,
+  color: COLORS.textPrimary,
+  fontWeight: 300,
   mb: 2,
-  fontSize: { xs: '2.5rem', md: '3.5rem' },
+  fontSize: { xs: '2rem', md: '2.5rem' },
+  letterSpacing: '0.02em',
+  textTransform: 'uppercase' as const,
 } as const;

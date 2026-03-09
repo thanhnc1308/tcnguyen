@@ -15,23 +15,23 @@ import { getGuestPronoun } from '../helpers/guest';
 import { capitalizeFirstLetter } from '@/utils';
 import { trpc } from '@/utils/trpc';
 import toast from 'react-hot-toast';
-import { COLORS, FONTS, TRANSITIONS } from '../constants/design';
+import { COLORS, FONTS } from '../constants/design';
 import OrnamentalDivider from './OrnamentalDivider';
 import ScrollReveal from './ScrollReveal';
 
 const FormContainer = styled(Box)(() => ({
-  backgroundColor: COLORS.bgCream,
-  padding: '40px 32px',
-  maxWidth: '600px',
+  backgroundColor: COLORS.bgWhite,
+  padding: '48px 32px',
+  maxWidth: '520px',
   margin: '0 auto',
-  borderRadius: '16px',
 }));
 
 const StyledTextField = styled(TextField)(() => ({
   '& .MuiOutlinedInput-root': {
     backgroundColor: COLORS.bgWhite,
-    borderRadius: '8px',
-    fontFamily: FONTS.serif,
+    borderRadius: 0,
+    fontFamily: FONTS.body,
+    fontSize: '0.9rem',
     '& fieldset': {
       borderColor: COLORS.borderGold,
       borderWidth: '1px',
@@ -40,40 +40,38 @@ const StyledTextField = styled(TextField)(() => ({
       borderColor: COLORS.borderGoldHover,
     },
     '&.Mui-focused fieldset': {
-      borderColor: COLORS.accent,
-      borderWidth: '2px',
+      borderColor: COLORS.textPrimary,
+      borderWidth: '1px',
     },
   },
   '& .MuiInputBase-input': {
     color: COLORS.textPrimary,
-    fontFamily: FONTS.serif,
+    fontFamily: FONTS.body,
     '&::placeholder': {
       color: COLORS.textSecondary,
       opacity: 1,
     },
   },
   '& .MuiInputLabel-root': {
-    fontFamily: FONTS.serif,
+    fontFamily: FONTS.body,
   },
 }));
 
 const SubmitButton = styled(Button)(() => ({
-  backgroundColor: COLORS.accent,
+  backgroundColor: COLORS.primary,
   color: COLORS.textOnPrimary,
-  fontWeight: 600,
-  fontSize: '14px',
+  fontWeight: 400,
+  fontSize: '0.8rem',
   padding: '14px 24px',
-  borderRadius: '8px',
+  borderRadius: 0,
   textTransform: 'uppercase',
-  letterSpacing: '2px',
-  fontFamily: FONTS.serif,
-  boxShadow: '0 4px 12px rgba(184, 150, 59, 0.25)',
+  letterSpacing: '0.15em',
+  fontFamily: FONTS.body,
+  boxShadow: 'none',
   '&:hover': {
-    backgroundColor: COLORS.accentDark,
-    boxShadow: '0 6px 16px rgba(184, 150, 59, 0.35)',
-    transform: 'translateY(-1px)',
+    backgroundColor: COLORS.primaryDark,
+    boxShadow: 'none',
   },
-  transition: `all ${TRANSITIONS.normal} ease`,
 }));
 
 interface InvitationResponseProps {
@@ -121,53 +119,35 @@ export default function InvitationResponse({
 
   if (isSubmitted) {
     return (
-      <Box id='rsvp'>
+      <Box id='rsvp' sx={{ py: { xs: 10, md: 14 }, backgroundColor: COLORS.bgWhite }}>
         <FormContainer>
           <ScrollReveal>
             <Box sx={{ textAlign: 'center', py: 4 }}>
-              <Box
-                sx={{
-                  width: 60,
-                  height: 60,
-                  borderRadius: '50%',
-                  backgroundColor: `${COLORS.accent}1A`,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  mx: 'auto',
-                  mb: 2,
-                }}
-              >
-                <svg width='28' height='28' viewBox='0 0 24 24' fill='none'>
-                  <path
-                    d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'
-                    fill={COLORS.heartRed}
-                  />
-                </svg>
-              </Box>
+              <OrnamentalDivider />
               <Typography
                 sx={{
-                  fontFamily: FONTS.script,
-                  fontSize: '2rem',
-                  color: COLORS.accent,
-                  fontWeight: 600,
+                  fontFamily: FONTS.serif,
+                  fontSize: '1.8rem',
+                  color: COLORS.textPrimary,
+                  fontWeight: 300,
+                  mt: 3,
                   mb: 2,
                   lineHeight: 1.4,
                 }}
               >
-                Cảm ơn bạn đã phản hồi!
+                Cảm ơn bạn!
               </Typography>
               <Typography
                 sx={{
                   color: COLORS.textSecondary,
-                  fontSize: '1rem',
+                  fontSize: '0.9rem',
                   lineHeight: 1.6,
-                  fontFamily: FONTS.serif,
+                  fontFamily: FONTS.body,
                 }}
               >
                 Chúng mình rất vui khi nhận được phản hồi của bạn.
                 <br />
-                Hẹn gặp bạn trong ngày vui của chúng mình nhé!
+                Hẹn gặp bạn trong ngày vui nhé!
               </Typography>
             </Box>
           </ScrollReveal>
@@ -177,112 +157,26 @@ export default function InvitationResponse({
   }
 
   return (
-    <Box id='rsvp'>
+    <Box id='rsvp' sx={{ py: { xs: 10, md: 14 }, backgroundColor: COLORS.bgWhite }}>
       <FormContainer>
         <ScrollReveal>
-          {/* Decorative header */}
-          <Box sx={{ textAlign: 'center', mb: 3 }}>
-            <svg
-              width='60'
-              height='40'
-              viewBox='0 0 60 40'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
-            >
-              <path
-                d='M5 20 Q15 5, 25 15 Q28 18, 30 20 Q32 18, 35 15 Q45 5, 55 20'
-                stroke={COLORS.accent}
-                strokeWidth='1'
-                fill='none'
-                opacity='0.5'
-              />
-              <path
-                d='M5 20 Q15 35, 25 25 Q28 22, 30 20 Q32 22, 35 25 Q45 35, 55 20'
-                stroke={COLORS.accent}
-                strokeWidth='1'
-                fill='none'
-                opacity='0.5'
-              />
-              <ellipse
-                cx='12'
-                cy='14'
-                rx='4'
-                ry='2'
-                transform='rotate(-20 12 14)'
-                fill={COLORS.accent}
-                opacity='0.2'
-              />
-              <ellipse
-                cx='48'
-                cy='14'
-                rx='4'
-                ry='2'
-                transform='rotate(20 48 14)'
-                fill={COLORS.accent}
-                opacity='0.2'
-              />
-              <ellipse
-                cx='12'
-                cy='26'
-                rx='4'
-                ry='2'
-                transform='rotate(20 12 26)'
-                fill={COLORS.accent}
-                opacity='0.2'
-              />
-              <ellipse
-                cx='48'
-                cy='26'
-                rx='4'
-                ry='2'
-                transform='rotate(-20 48 26)'
-                fill={COLORS.accent}
-                opacity='0.2'
-              />
-            </svg>
-          </Box>
-
           {/* Header */}
-          {!isKnownGuest && (
+          <Box sx={{ textAlign: 'center', mb: 5 }}>
             <Typography
               sx={{
-                textAlign: 'center',
-                fontFamily: FONTS.script,
-                fontSize: '2rem',
-                color: COLORS.accent,
-                fontWeight: 600,
-                mb: 1,
+                fontFamily: FONTS.serif,
+                fontSize: '1.8rem',
+                color: COLORS.textPrimary,
+                fontWeight: 300,
+                mb: 2,
                 lineHeight: 1.3,
               }}
             >
-              Cho chúng mình biết bạn có tham
-              <br />
-              dự được không nha.
+              {isKnownGuest
+                ? `${capitalizeFirstLetter(guestPronoun)} ${name}, cho chúng mình biết bạn có tham dự được không nha.`
+                : 'Cho chúng mình biết bạn có tham dự được không nha.'}
             </Typography>
-          )}
-
-          {isKnownGuest && (
-            <Typography
-              sx={{
-                textAlign: 'center',
-                fontFamily: FONTS.script,
-                fontSize: '2rem',
-                color: COLORS.accent,
-                fontWeight: 600,
-                mb: 1,
-                lineHeight: 1.3,
-              }}
-            >
-              {capitalizeFirstLetter(guestPronoun)} {name} cho chúng mình biết
-              bạn có tham
-              <br />
-              dự được không nha.
-            </Typography>
-          )}
-
-          {/* Divider */}
-          <Box sx={{ mb: 4 }}>
-            <OrnamentalDivider width={180} />
+            <OrnamentalDivider width={80} />
           </Box>
 
           <Box component='form' onSubmit={handleSubmit}>
@@ -292,13 +186,14 @@ export default function InvitationResponse({
                 <Typography
                   sx={{
                     mb: 1,
-                    fontWeight: 500,
-                    color: COLORS.textPrimary,
-                    fontSize: '14px',
-                    fontFamily: FONTS.serif,
+                    fontWeight: 400,
+                    color: COLORS.textSecondary,
+                    fontSize: '0.8rem',
+                    fontFamily: FONTS.body,
+                    letterSpacing: '0.05em',
                   }}
                 >
-                  Cho chúng mình xin tên của bạn nhé?*
+                  Tên của bạn *
                 </Typography>
                 <StyledTextField
                   fullWidth
@@ -317,20 +212,21 @@ export default function InvitationResponse({
               <Typography
                 sx={{
                   mb: 1,
-                  fontWeight: 500,
-                  color: COLORS.textPrimary,
-                  fontSize: '14px',
-                  fontFamily: FONTS.serif,
+                  fontWeight: 400,
+                  color: COLORS.textSecondary,
+                  fontSize: '0.8rem',
+                  fontFamily: FONTS.body,
+                  letterSpacing: '0.05em',
                 }}
               >
-                Số lượng người tham gia?*
+                Số lượng người tham gia *
               </Typography>
               <StyledTextField
                 fullWidth
                 variant='outlined'
                 value={numberOfGuests}
                 onChange={(e) => setNumberOfGuests(e.target.value)}
-                placeholder='Ví dụ: 1'
+                placeholder='1'
                 size='medium'
                 type='number'
                 required
@@ -343,20 +239,20 @@ export default function InvitationResponse({
               <Typography
                 sx={{
                   mb: 1,
-                  fontWeight: 500,
-                  color: COLORS.textPrimary,
-                  fontSize: '14px',
-                  fontFamily: FONTS.serif,
+                  fontWeight: 400,
+                  color: COLORS.textSecondary,
+                  fontSize: '0.8rem',
+                  fontFamily: FONTS.body,
+                  letterSpacing: '0.05em',
                 }}
               >
-                Bạn có muốn để lại lời nhắn, hay lời chúc gì cho tụi mình không
-                ^^?
+                Lời nhắn cho chúng mình
               </Typography>
               <StyledTextField
                 fullWidth
                 variant='outlined'
                 multiline
-                rows={4}
+                rows={3}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder='Lời chúc...'
@@ -374,7 +270,7 @@ export default function InvitationResponse({
               >
                 {submitMutation.isPending ? (
                   <CircularProgress
-                    size={24}
+                    size={20}
                     sx={{ color: COLORS.textOnPrimary }}
                   />
                 ) : (

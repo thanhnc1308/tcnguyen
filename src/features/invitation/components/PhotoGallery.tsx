@@ -13,11 +13,10 @@ import { Close, ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import Image from 'next/image';
 import {
   COLORS,
-  FONTS,
-  TRANSITIONS,
   sectionHeadingStyle,
 } from '../constants/design';
 import ScrollReveal from './ScrollReveal';
+import OrnamentalDivider from './OrnamentalDivider';
 
 interface WeddingPhoto {
   id: string;
@@ -88,26 +87,27 @@ export default function PhotoGallery({
     <Box
       id='gallery'
       sx={{
-        py: { xs: 8, md: 12 },
+        py: { xs: 10, md: 14 },
         backgroundColor: COLORS.bgWhite,
       }}
     >
-      <Container maxWidth='lg'>
+      <Container maxWidth='md'>
         {/* Header */}
         <ScrollReveal>
-          <Box sx={{ textAlign: 'center', mb: 6 }}>
+          <Box sx={{ textAlign: 'center', mb: 8 }}>
             <Typography variant='h2' component='h2' sx={sectionHeadingStyle}>
-              Một số khoảnh khắc của chúng mình
+              Khoảnh Khắc
             </Typography>
+            <OrnamentalDivider />
           </Box>
         </ScrollReveal>
 
-        {/* Masonry Grid */}
+        {/* Clean Grid */}
         <ScrollReveal delay={0.2}>
           <Box
             sx={{
               columnCount: { xs: 1, sm: 2, md: 3 },
-              columnGap: '16px',
+              columnGap: '12px',
             }}
           >
             {photos.map((photo, index) => (
@@ -115,18 +115,13 @@ export default function PhotoGallery({
                 key={photo.id}
                 sx={{
                   breakInside: 'avoid',
-                  mb: 2,
-                  borderRadius: 2,
+                  mb: 1.5,
                   overflow: 'hidden',
                   cursor: 'pointer',
                   position: 'relative',
-                  transition: `all ${TRANSITIONS.normal} ease`,
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.06)',
+                  opacity: 0.95,
+                  transition: 'opacity 0.3s ease',
                   '&:hover': {
-                    transform: 'translateY(-4px)',
-                    boxShadow: '0 12px 28px rgba(0,0,0,0.1)',
-                  },
-                  '&:hover .photo-overlay': {
                     opacity: 1,
                   },
                 }}
@@ -144,38 +139,6 @@ export default function PhotoGallery({
                     display: 'block',
                   }}
                 />
-
-                {/* Overlay */}
-                <Box
-                  className='photo-overlay'
-                  sx={{
-                    position: 'absolute',
-                    top: 0,
-                    left: 0,
-                    right: 0,
-                    bottom: 0,
-                    background:
-                      'linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 50%)',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    justifyContent: 'flex-end',
-                    p: 2.5,
-                    opacity: 0,
-                    transition: `opacity ${TRANSITIONS.normal} ease`,
-                  }}
-                >
-                  <Typography
-                    variant='h6'
-                    sx={{
-                      color: 'white',
-                      fontWeight: 600,
-                      fontFamily: FONTS.serif,
-                      mb: 0.5,
-                    }}
-                  >
-                    {photo.title}
-                  </Typography>
-                </Box>
               </Box>
             ))}
           </Box>
@@ -190,7 +153,6 @@ export default function PhotoGallery({
           sx={{
             '& .MuiDialog-paper': {
               backgroundColor: 'rgba(0,0,0,0.95)',
-              backdropFilter: 'blur(10px)',
               margin: 0,
               maxHeight: '100vh',
               maxWidth: '100vw',
@@ -280,45 +242,10 @@ export default function PhotoGallery({
                     height={800}
                     style={{
                       maxWidth: '90vw',
-                      maxHeight: '80vh',
+                      maxHeight: '85vh',
                       objectFit: 'contain',
-                      borderRadius: '8px',
                     }}
                   />
-
-                  <Box
-                    sx={{
-                      mt: 2,
-                      textAlign: 'center',
-                      color: 'white',
-                      maxWidth: 600,
-                      px: 3,
-                    }}
-                  >
-                    <Typography
-                      variant='h5'
-                      sx={{
-                        fontFamily: FONTS.script,
-                        fontWeight: 600,
-                        mb: 1,
-                      }}
-                    >
-                      {selectedPhoto.title}
-                    </Typography>
-                    {selectedPhoto.description && (
-                      <Typography
-                        variant='body1'
-                        sx={{
-                          color: 'rgba(255,255,255,0.8)',
-                          mb: 2,
-                          lineHeight: 1.6,
-                          fontFamily: FONTS.serif,
-                        }}
-                      >
-                        {selectedPhoto.description}
-                      </Typography>
-                    )}
-                  </Box>
                 </Box>
               </>
             )}
