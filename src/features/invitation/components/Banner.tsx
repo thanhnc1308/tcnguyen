@@ -1,17 +1,8 @@
-import { Dancing_Script } from 'next/font/google';
 import CountdownTimer from './CountdownTimer';
 import { formatDisplayDate } from '@/utils/date';
 import SaveTheDateButton from './SaveTheDateButton';
 import { BRIDE_NAME, GROOM_NAME, WEDDING_DATE } from '@/constants/wedding';
 import { COLORS, FONTS } from '../constants/design';
-
-const dancingScript = Dancing_Script({
-  variable: '--font-dancing-script',
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['400', '500', '600', '700'],
-  style: ['normal'],
-});
 
 interface WeddingBannerProps {
   quote?: string;
@@ -24,98 +15,99 @@ export default function WeddingBanner({
   backgroundImage = '/images/wedding-bg.JPG',
 }: WeddingBannerProps) {
   return (
-    <div className='relative min-h-screen overflow-hidden'>
-      {/* Background Image */}
+    <div className='relative min-h-screen overflow-hidden' style={{ backgroundColor: COLORS.bgBlack }}>
+      {/* Background Photo with Ken Burns effect */}
       <div
         className='absolute inset-0 bg-cover bg-center bg-no-repeat'
         style={{
           backgroundImage: `url('${backgroundImage}')`,
+          filter: 'brightness(0.35) contrast(1.1)',
         }}
-      >
-        <div
-          className='absolute inset-0'
-          style={{
-            background: `linear-gradient(to bottom, ${COLORS.bgCream}33 0%, ${COLORS.bgCream}4D 50%, ${COLORS.bgCream}80 100%)`,
-          }}
-        />
-      </div>
+      />
+
+      {/* Gold gradient overlay from bottom */}
+      <div
+        className='absolute inset-0'
+        style={{
+          background: `linear-gradient(to top, ${COLORS.bgBlack} 0%, transparent 40%, transparent 60%, ${COLORS.bgBlack}CC 100%)`,
+        }}
+      />
 
       {/* Main Content */}
       <div className='relative z-10 flex flex-col items-center justify-center min-h-screen px-4'>
+        {/* Thin gold line */}
+        <div
+          className='w-px h-16 mb-8'
+          style={{ backgroundColor: COLORS.accent, opacity: 0.4 }}
+        />
+
         {/* Subtitle */}
         <p
-          className='text-sm tracking-[0.3em] uppercase mb-6'
+          className='text-xs tracking-[0.4em] uppercase mb-6'
           style={{
-            fontFamily: FONTS.serif,
-            color: COLORS.textSecondary,
+            fontFamily: FONTS.body,
+            color: COLORS.accent,
             fontWeight: 500,
           }}
         >
-          Dám cưới
+          The Wedding of
         </p>
 
-        {/* Names */}
-        <div className='text-center mb-6'>
+        {/* Names — oversized Great Vibes */}
+        <div className='text-center mb-4'>
           <h1
-            className='text-6xl md:text-7xl lg:text-8xl mb-4'
+            className='text-6xl md:text-8xl lg:text-9xl'
             style={{
-              fontFamily: dancingScript.style.fontFamily,
-              color: COLORS.primary,
+              fontFamily: FONTS.script,
+              color: COLORS.textPrimary,
+              fontWeight: 400,
+              lineHeight: 1.1,
             }}
           >
             {GROOM_NAME}
             <span
+              className='block md:inline'
               style={{
                 color: COLORS.accent,
-                margin: '0 0.3em',
-                fontSize: '0.6em',
-                fontWeight: 400,
+                margin: '0 0.2em',
+                fontSize: '0.5em',
+                fontFamily: FONTS.serif,
+                fontStyle: 'italic',
+                fontWeight: 300,
               }}
             >
               &amp;
             </span>
             {BRIDE_NAME}
           </h1>
+        </div>
 
-          {/* Ornamental line */}
-          <div className='flex items-center justify-center gap-3 mb-4'>
-            <div
-              className='h-px w-16'
-              style={{
-                background: `linear-gradient(to right, transparent, ${COLORS.accent})`,
-              }}
-            />
-            <svg
-              width='12'
-              height='12'
-              viewBox='0 0 16 16'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
-            >
-              <path
-                d='M8 0L9.8 6.2L16 8L9.8 9.8L8 16L6.2 9.8L0 8L6.2 6.2L8 0Z'
-                fill={COLORS.accent}
-                opacity='0.7'
-              />
-            </svg>
-            <div
-              className='h-px w-16'
-              style={{
-                background: `linear-gradient(to left, transparent, ${COLORS.accent})`,
-              }}
-            />
-          </div>
+        {/* Thin gold line */}
+        <div className='flex items-center gap-4 mb-6'>
+          <div
+            className='h-px w-12'
+            style={{ backgroundColor: COLORS.accent, opacity: 0.4 }}
+          />
+          <div
+            className='w-1.5 h-1.5 rotate-45'
+            style={{ backgroundColor: COLORS.accent, opacity: 0.6 }}
+          />
+          <div
+            className='h-px w-12'
+            style={{ backgroundColor: COLORS.accent, opacity: 0.4 }}
+          />
         </div>
 
         {/* Date */}
         <div className='text-center mb-8'>
           <p
             style={{
-              fontFamily: FONTS.serif,
+              fontFamily: FONTS.body,
               color: COLORS.textPrimary,
-              fontWeight: 500,
-              letterSpacing: '0.2em',
-              fontSize: '1.15rem',
+              fontWeight: 300,
+              letterSpacing: '0.3em',
+              fontSize: '0.95rem',
+              textTransform: 'uppercase',
             }}
           >
             {formatDisplayDate(WEDDING_DATE)}
@@ -124,14 +116,15 @@ export default function WeddingBanner({
 
         {/* Quote */}
         {quote && (
-          <div className='text-center mb-12 max-w-md'>
+          <div className='text-center mb-12 max-w-lg'>
             <p
               style={{
                 fontFamily: FONTS.serif,
                 color: COLORS.textSecondary,
                 fontStyle: 'italic',
-                fontSize: '1.05rem',
-                lineHeight: 1.7,
+                fontSize: '1.1rem',
+                lineHeight: 1.8,
+                fontWeight: 300,
               }}
             >
               &quot;{quote}&quot;

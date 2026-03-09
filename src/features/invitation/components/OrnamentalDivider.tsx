@@ -18,7 +18,7 @@ export default function OrnamentalDivider({
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        gap: 1.5,
+        gap: 2,
         width,
         mx: 'auto',
         my: 2,
@@ -29,20 +29,24 @@ export default function OrnamentalDivider({
           flex: 1,
           height: '1px',
           background: `linear-gradient(to right, transparent, ${color})`,
+          opacity: 0.4,
         }}
       />
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <path
-          d="M8 0L9.8 6.2L16 8L9.8 9.8L8 16L6.2 9.8L0 8L6.2 6.2L8 0Z"
-          fill={color}
-          opacity="0.8"
-        />
-      </svg>
+      <Box
+        sx={{
+          width: 6,
+          height: 6,
+          transform: 'rotate(45deg)',
+          backgroundColor: color,
+          opacity: 0.6,
+        }}
+      />
       <Box
         sx={{
           flex: 1,
           height: '1px',
           background: `linear-gradient(to left, transparent, ${color})`,
+          opacity: 0.4,
         }}
       />
     </Box>

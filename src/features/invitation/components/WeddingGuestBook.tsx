@@ -7,9 +7,6 @@ import {
   Box,
   Typography,
   Container,
-  Paper,
-  Avatar,
-  Divider,
   Pagination,
   CircularProgress,
 } from '@mui/material';
@@ -17,6 +14,7 @@ import { months } from '../constants';
 import { trpc } from '@/utils/trpc';
 import { COLORS, FONTS, sectionHeadingStyle } from '../constants/design';
 import ScrollReveal from './ScrollReveal';
+import OrnamentalDivider from './OrnamentalDivider';
 
 interface WeddingGuestBookProps {
   itemsPerPage?: number;
@@ -54,293 +52,169 @@ export default function WeddingGuestBook({
     <Box
       id='guestbook'
       sx={{
-        py: { xs: 8, md: 12 },
-        background: `linear-gradient(135deg, ${COLORS.bgWarm} 0%, #E6DDD2 100%)`,
+        py: { xs: 10, md: 16 },
+        backgroundColor: COLORS.bgDark,
         position: 'relative',
-        '&::before': {
-          content: '""',
-          position: 'absolute',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundImage: `
-            radial-gradient(circle at 20% 50%, ${COLORS.primary}08 0%, transparent 50%),
-            radial-gradient(circle at 80% 20%, ${COLORS.primaryLight}08 0%, transparent 50%),
-            radial-gradient(circle at 40% 80%, ${COLORS.primaryDark}08 0%, transparent 50%)
-          `,
-          pointerEvents: 'none',
-        },
       }}
     >
       <Container maxWidth='md'>
-        {/* Notebook Header */}
+        {/* Header */}
         <ScrollReveal>
           <Box
-            sx={{ textAlign: 'center', mb: 6, position: 'relative', zIndex: 1 }}
+            sx={{ textAlign: 'center', mb: 8, position: 'relative', zIndex: 1 }}
           >
-            <Typography variant='h2' component='h2' sx={sectionHeadingStyle}>
-              Lời chúc
+            <Typography
+              sx={{
+                fontFamily: FONTS.body,
+                fontSize: '0.75rem',
+                letterSpacing: '0.3em',
+                textTransform: 'uppercase',
+                color: COLORS.accent,
+                mb: 2,
+                fontWeight: 500,
+              }}
+            >
+              Guest Book
             </Typography>
+            <Typography variant='h2' component='h2' sx={sectionHeadingStyle}>
+              Lời Chúc
+            </Typography>
+            <OrnamentalDivider />
           </Box>
         </ScrollReveal>
 
-        {/* Notebook Pages */}
+        {/* Wishes */}
         <ScrollReveal delay={0.2}>
-          <Paper
-            elevation={8}
-            sx={{
-              position: 'relative',
-              backgroundColor: '#FEFCF7',
-              borderRadius: 2,
-              overflow: 'hidden',
-              boxShadow: '0 10px 30px rgba(0,0,0,0.12)',
-              minHeight: 200,
-              '&::before': {
-                content: '""',
-                position: 'absolute',
-                left: 60,
-                top: 0,
-                bottom: 0,
-                width: '2px',
-                backgroundColor: COLORS.heartRed,
-                opacity: 0.4,
-                zIndex: 1,
-              },
-              '&::after': {
-                content: '""',
-                position: 'absolute',
-                left: 0,
-                top: 0,
-                bottom: 0,
-                width: 50,
-                backgroundColor: COLORS.bgCream,
-                borderRight: `1px solid ${COLORS.bgWarm}`,
-                zIndex: 0,
-              },
-            }}
-          >
-            {/* Spiral Binding */}
-            <Box
-              sx={{
-                position: 'absolute',
-                left: 15,
-                top: 20,
-                bottom: 20,
-                width: 20,
-                zIndex: 2,
-              }}
-            >
-              {Array.from({ length: 12 }).map((_, index) => (
-                <Box
-                  key={index}
-                  sx={{
-                    position: 'absolute',
-                    top: `${(index * 100) / 11}%`,
-                    left: '50%',
-                    transform: 'translateX(-50%)',
-                    width: { xs: 10, md: 12 },
-                    height: { xs: 10, md: 12 },
-                    borderRadius: '50%',
-                    backgroundColor: COLORS.gold,
-                    border: `1px solid ${COLORS.accentDark}`,
-                    boxShadow: 'inset 0 1px 2px rgba(0,0,0,0.15)',
-                  }}
-                />
-              ))}
-            </Box>
+          <Box sx={{ minHeight: 200 }}>
+            {isLoading && (
+              <Box
+                sx={{
+                  display: 'flex',
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  py: 8,
+                }}
+              >
+                <CircularProgress sx={{ color: COLORS.accent }} />
+              </Box>
+            )}
 
-            {/* Notebook Lines Background */}
-            <Box
-              sx={{
-                position: 'absolute',
-                left: 80,
-                right: 20,
-                top: 0,
-                bottom: 0,
-                backgroundImage: `repeating-linear-gradient(
-                  transparent,
-                  transparent 31px,
-                  ${COLORS.bgWarm} 31px,
-                  ${COLORS.bgWarm} 32px
-                )`,
-                opacity: 0.6,
-                zIndex: 0,
-              }}
-            />
-
-            {/* Content */}
-            <Box sx={{ pl: 10, pr: 4, py: 4, position: 'relative', zIndex: 2 }}>
-              {isLoading && (
-                <Box
+            {!isLoading && wishes.length === 0 && (
+              <Box sx={{ textAlign: 'center', py: 8 }}>
+                <Typography
                   sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    py: 8,
+                    fontFamily: FONTS.body,
+                    color: COLORS.textSecondary,
+                    fontSize: '0.9rem',
                   }}
                 >
-                  <CircularProgress sx={{ color: COLORS.primary }} />
-                </Box>
-              )}
+                  ...
+                </Typography>
+              </Box>
+            )}
 
-              {!isLoading && wishes.length === 0 && (
-                <Box sx={{ textAlign: 'center', py: 8 }}>
-                  <Typography
-                    sx={{
-                      fontFamily: FONTS.handwritten,
-                      color: COLORS.primaryLight,
-                      fontSize: '1.1rem',
-                    }}
-                  >
-                    ...
-                  </Typography>
-                </Box>
-              )}
-
-              {wishes.map((wish, index) => (
+            <Box
+              sx={{
+                display: 'grid',
+                gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' },
+                gap: 3,
+              }}
+            >
+              {wishes.map((wish) => (
                 <Box
                   key={wish.id}
                   sx={{
-                    mb: 4,
-                    animation: `slideInLeft 0.5s ease ${index * 0.1}s both`,
-                    '@keyframes slideInLeft': {
-                      '0%': { opacity: 0, transform: 'translateX(-20px)' },
-                      '100%': { opacity: 1, transform: 'translateX(0)' },
+                    backgroundColor: COLORS.bgCard,
+                    border: `1px solid ${COLORS.borderGold}`,
+                    p: 4,
+                    transition: 'all 0.3s ease',
+                    '&:hover': {
+                      borderColor: COLORS.borderGoldHover,
+                      transform: 'translateY(-2px)',
                     },
                   }}
                 >
-                  {/* Wish Header */}
-                  <Box
-                    sx={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      mb: 2,
-                      gap: 2,
-                    }}
-                  >
-                    <Avatar
-                      sx={{
-                        width: 40,
-                        height: 40,
-                        backgroundColor: COLORS.primary,
-                        color: COLORS.textOnPrimary,
-                        fontWeight: 600,
-                        fontFamily: FONTS.serif,
-                      }}
-                    >
-                      {wish.name
-                        .split(' ')
-                        .map((n) => n[0])
-                        .join('')
-                        .slice(0, 2)
-                        .toUpperCase()}
-                    </Avatar>
-
-                    <Box sx={{ flex: 1 }}>
-                      <Typography
-                        variant='h6'
-                        sx={{
-                          fontFamily: FONTS.handwritten,
-                          color: COLORS.primaryDark,
-                          fontWeight: 600,
-                          fontSize: '1.1rem',
-                        }}
-                      >
-                        {wish.name}
-                      </Typography>
-                      <Typography
-                        variant='caption'
-                        sx={{
-                          color: COLORS.primaryLight,
-                          fontSize: '0.75rem',
-                          fontStyle: 'italic',
-                          fontFamily: FONTS.serif,
-                        }}
-                      >
-                        {formatDate(wish.createdAt)}
-                      </Typography>
-                    </Box>
-                  </Box>
-
                   {/* Wish Message */}
-                  <Box
+                  <Typography
                     sx={{
-                      ml: 6,
-                      p: 3,
-                      backgroundColor: `${COLORS.bgCream}80`,
-                      borderRadius: 2,
-                      border: `1px dotted ${COLORS.goldLight}`,
-                      position: 'relative',
-                      '&::before': {
-                        content: '""',
-                        position: 'absolute',
-                        left: -8,
-                        top: 20,
-                        width: 0,
-                        height: 0,
-                        borderTop: '8px solid transparent',
-                        borderBottom: '8px solid transparent',
-                        borderRight: `8px solid ${COLORS.bgCream}80`,
-                      },
+                      fontFamily: FONTS.serif,
+                      color: COLORS.textPrimary,
+                      lineHeight: 1.8,
+                      fontSize: '1rem',
+                      fontStyle: 'italic',
+                      fontWeight: 300,
+                      mb: 3,
                     }}
                   >
+                    &ldquo;{wish.message}&rdquo;
+                  </Typography>
+
+                  {/* Thin separator */}
+                  <Box
+                    sx={{
+                      width: 40,
+                      height: '1px',
+                      backgroundColor: COLORS.accent,
+                      opacity: 0.3,
+                      mb: 2,
+                    }}
+                  />
+
+                  {/* Author & Date */}
+                  <Box>
                     <Typography
-                      variant='body1'
                       sx={{
-                        fontFamily: FONTS.handwritten,
-                        color: COLORS.textPrimary,
-                        lineHeight: 1.8,
-                        fontSize: '1rem',
-                        textAlign: 'justify',
-                        letterSpacing: '0.3px',
+                        fontFamily: FONTS.body,
+                        color: COLORS.accent,
+                        fontWeight: 500,
+                        fontSize: '0.85rem',
+                        letterSpacing: '0.05em',
                       }}
                     >
-                      &quot;{wish.message}&quot;
+                      {wish.name}
+                    </Typography>
+                    <Typography
+                      sx={{
+                        color: COLORS.textSecondary,
+                        fontSize: '0.75rem',
+                        fontFamily: FONTS.body,
+                        fontWeight: 300,
+                      }}
+                    >
+                      {formatDate(wish.createdAt)}
                     </Typography>
                   </Box>
-
-                  {/* Divider */}
-                  {index < wishes.length - 1 && (
-                    <Divider
-                      sx={{
-                        mt: 3,
-                        borderColor: COLORS.bgWarm,
-                        borderStyle: 'dashed',
-                        opacity: 0.7,
-                      }}
-                    />
-                  )}
                 </Box>
               ))}
             </Box>
-          </Paper>
+          </Box>
         </ScrollReveal>
 
         {/* Pagination */}
         {totalPages > 1 && (
-          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 4 }}>
+          <Box sx={{ display: 'flex', justifyContent: 'center', mt: 6 }}>
             <Pagination
               count={totalPages}
               page={currentPage}
               onChange={handlePageChange}
-              color='primary'
               size='large'
               sx={{
                 '& .MuiPaginationItem-root': {
-                  backgroundColor: '#FEFCF7',
-                  border: `1px solid ${COLORS.bgWarm}`,
-                  color: COLORS.primary,
-                  fontWeight: 600,
-                  fontFamily: FONTS.serif,
+                  backgroundColor: 'transparent',
+                  border: `1px solid ${COLORS.borderGold}`,
+                  borderRadius: 0,
+                  color: COLORS.textSecondary,
+                  fontWeight: 400,
+                  fontFamily: FONTS.body,
+                  fontSize: '0.8rem',
                   '&:hover': {
-                    backgroundColor: COLORS.bgWarm,
+                    backgroundColor: 'rgba(198, 169, 97, 0.08)',
                   },
                   '&.Mui-selected': {
-                    backgroundColor: COLORS.primary,
+                    backgroundColor: COLORS.accent,
                     color: COLORS.textOnPrimary,
                     '&:hover': {
-                      backgroundColor: COLORS.primaryDark,
+                      backgroundColor: COLORS.accentDark,
                     },
                   },
                 },

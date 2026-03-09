@@ -39,8 +39,7 @@ interface EventInfoProps {
 
 export default function EventInfo({
   side = GuestSource.Groom,
-  title = 'Thông Tin Sự Kiện',
-  backgroundImage = '/images/wedding-bg.JPG',
+  title = 'Sự Kiện',
 }: EventInfoProps) {
   const events = getEventsForSide(side);
   const handleDirections = (address: string, mapUrl?: string) => {
@@ -76,29 +75,27 @@ export default function EventInfo({
       id='event'
       sx={{
         position: 'relative',
-        backgroundImage: `url('${backgroundImage}')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        display: 'flex',
-        alignItems: 'center',
-        py: { xs: 8, md: 12 },
+        backgroundColor: COLORS.bgBlack,
+        py: { xs: 10, md: 16 },
       }}
     >
-      {/* Background Overlay */}
-      <Box
-        sx={{
-          position: 'absolute',
-          inset: 0,
-          backgroundColor: COLORS.overlayLight,
-          backdropFilter: 'blur(2px)',
-        }}
-      />
-
       <Container maxWidth='lg' sx={{ position: 'relative', zIndex: 1 }}>
         {/* Header */}
         <ScrollReveal>
-          <Box sx={{ textAlign: 'center', mb: 6 }}>
+          <Box sx={{ textAlign: 'center', mb: 8 }}>
+            <Typography
+              sx={{
+                fontFamily: FONTS.body,
+                fontSize: '0.75rem',
+                letterSpacing: '0.3em',
+                textTransform: 'uppercase',
+                color: COLORS.accent,
+                mb: 2,
+                fontWeight: 500,
+              }}
+            >
+              Save the date
+            </Typography>
             <Typography variant='h2' component='h2' sx={sectionHeadingStyle}>
               {title}
             </Typography>
@@ -114,6 +111,7 @@ export default function EventInfo({
                   sx={{
                     height: '100%',
                     ...cardStyle,
+                    borderRadius: 1,
                   }}
                 >
                   <CardContent sx={{ p: 4 }}>
@@ -136,17 +134,16 @@ export default function EventInfo({
                             : 'TIỆC CƯỚI'
                         }
                         sx={{
-                          backgroundColor:
-                            event.type === 'ceremony'
-                              ? `${COLORS.primary}14`
-                              : `${COLORS.accent}1A`,
-                          color:
-                            event.type === 'ceremony'
-                              ? COLORS.primary
-                              : COLORS.accentDark,
+                          backgroundColor: 'rgba(198, 169, 97, 0.1)',
+                          color: COLORS.accent,
                           fontWeight: 600,
-                          fontSize: '0.75rem',
-                          fontFamily: FONTS.serif,
+                          fontSize: '0.7rem',
+                          fontFamily: FONTS.body,
+                          letterSpacing: '0.1em',
+                          borderRadius: 0,
+                          '& .MuiChip-icon': {
+                            color: COLORS.accent,
+                          },
                         }}
                       />
                     </Box>
@@ -156,9 +153,9 @@ export default function EventInfo({
                       variant='h4'
                       component='h3'
                       sx={{
-                        fontFamily: FONTS.script,
-                        color: COLORS.primary,
-                        fontWeight: 700,
+                        fontFamily: FONTS.serif,
+                        color: COLORS.textPrimary,
+                        fontWeight: 400,
                         mb: 2,
                         fontSize: { xs: '1.8rem', md: '2.2rem' },
                       }}
@@ -172,30 +169,32 @@ export default function EventInfo({
                         sx={{ display: 'flex', alignItems: 'center', mb: 1 }}
                       >
                         <Event
-                          sx={{ color: COLORS.primary, mr: 1, fontSize: 20 }}
+                          sx={{ color: COLORS.accent, mr: 1, fontSize: 18 }}
                         />
                         <Typography
                           variant='body1'
                           sx={{
                             color: COLORS.textPrimary,
-                            fontWeight: 600,
-                            fontFamily: FONTS.serif,
+                            fontWeight: 500,
+                            fontFamily: FONTS.body,
+                            fontSize: '0.9rem',
                           }}
                         >
                           {formatDate(event.date)}
                         </Typography>
                       </Box>
                       <Box
-                        sx={{ display: 'flex', alignItems: 'center', ml: 3 }}
+                        sx={{ display: 'flex', alignItems: 'center', ml: 3.5 }}
                       >
                         <AccessTime
-                          sx={{ color: COLORS.primary, mr: 1, fontSize: 18 }}
+                          sx={{ color: COLORS.accent, mr: 1, fontSize: 16 }}
                         />
                         <Typography
                           variant='body2'
                           sx={{
                             color: COLORS.textSecondary,
-                            fontFamily: FONTS.serif,
+                            fontFamily: FONTS.body,
+                            fontSize: '0.85rem',
                           }}
                         >
                           {event.time}
@@ -210,11 +209,11 @@ export default function EventInfo({
                       <Typography
                         variant='h6'
                         sx={{
-                          color: COLORS.primary,
+                          color: COLORS.textPrimary,
                           fontWeight: 600,
                           mb: 1,
-                          fontSize: '1.1rem',
-                          fontFamily: FONTS.serif,
+                          fontSize: '1rem',
+                          fontFamily: FONTS.body,
                         }}
                       >
                         {event.venue}
@@ -228,9 +227,9 @@ export default function EventInfo({
                       >
                         <LocationOn
                           sx={{
-                            color: COLORS.primary,
+                            color: COLORS.accent,
                             mr: 1,
-                            fontSize: 20,
+                            fontSize: 18,
                             mt: 0.2,
                           }}
                         />
@@ -238,9 +237,10 @@ export default function EventInfo({
                           variant='body2'
                           sx={{
                             color: COLORS.textSecondary,
-                            lineHeight: 1.5,
+                            lineHeight: 1.6,
                             flex: 1,
-                            fontFamily: FONTS.serif,
+                            fontFamily: FONTS.body,
+                            fontSize: '0.85rem',
                           }}
                         >
                           {event.address}
@@ -253,7 +253,7 @@ export default function EventInfo({
                       sx={{
                         width: '100%',
                         aspectRatio: '4 / 3',
-                        borderRadius: 2,
+                        borderRadius: 1,
                         overflow: 'hidden',
                         mb: 2,
                         border: `1px solid ${COLORS.borderGold}`,

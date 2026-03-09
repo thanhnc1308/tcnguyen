@@ -1,8 +1,9 @@
 import {
   Geist,
   Geist_Mono,
-  Allison,
-  Cormorant_Garamond,
+  Playfair_Display,
+  Inter,
+  Great_Vibes,
 } from 'next/font/google';
 import './globals.css';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
@@ -21,18 +22,26 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-const allison = Allison({
-  weight: '400',
-  subsets: ['latin'],
-  display: 'swap',
-});
-
-const cormorantGaramond = Cormorant_Garamond({
-  variable: '--font-cormorant',
+const playfairDisplay = Playfair_Display({
+  variable: '--font-playfair',
   subsets: ['latin', 'vietnamese'],
   display: 'swap',
-  weight: ['300', '400', '500', '600', '700'],
+  weight: ['400', '500', '600', '700', '800', '900'],
   style: ['normal', 'italic'],
+});
+
+const inter = Inter({
+  variable: '--font-inter',
+  subsets: ['latin', 'latin-ext', 'vietnamese'],
+  display: 'swap',
+  weight: ['300', '400', '500', '600', '700'],
+});
+
+const greatVibes = Great_Vibes({
+  variable: '--font-great-vibes',
+  subsets: ['latin', 'latin-ext'],
+  display: 'swap',
+  weight: '400',
 });
 
 export default function RootLayout({
@@ -43,7 +52,7 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${allison} ${cormorantGaramond.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${playfairDisplay.variable} ${inter.variable} ${greatVibes.variable} antialiased`}
         suppressHydrationWarning
       >
         <AppRouterCacheProvider>

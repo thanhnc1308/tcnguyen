@@ -88,16 +88,29 @@ export default function PhotoGallery({
     <Box
       id='gallery'
       sx={{
-        py: { xs: 8, md: 12 },
-        backgroundColor: COLORS.bgWhite,
+        py: { xs: 10, md: 16 },
+        backgroundColor: COLORS.bgDark,
       }}
     >
       <Container maxWidth='lg'>
         {/* Header */}
         <ScrollReveal>
-          <Box sx={{ textAlign: 'center', mb: 6 }}>
+          <Box sx={{ textAlign: 'center', mb: 8 }}>
+            <Typography
+              sx={{
+                fontFamily: FONTS.body,
+                fontSize: '0.75rem',
+                letterSpacing: '0.3em',
+                textTransform: 'uppercase',
+                color: COLORS.accent,
+                mb: 2,
+                fontWeight: 500,
+              }}
+            >
+              Our Moments
+            </Typography>
             <Typography variant='h2' component='h2' sx={sectionHeadingStyle}>
-              Một số khoảnh khắc của chúng mình
+              Khoảnh Khắc
             </Typography>
           </Box>
         </ScrollReveal>
@@ -107,7 +120,7 @@ export default function PhotoGallery({
           <Box
             sx={{
               columnCount: { xs: 1, sm: 2, md: 3 },
-              columnGap: '16px',
+              columnGap: '12px',
             }}
           >
             {photos.map((photo, index) => (
@@ -115,16 +128,13 @@ export default function PhotoGallery({
                 key={photo.id}
                 sx={{
                   breakInside: 'avoid',
-                  mb: 2,
-                  borderRadius: 2,
+                  mb: 1.5,
                   overflow: 'hidden',
                   cursor: 'pointer',
                   position: 'relative',
-                  transition: `all ${TRANSITIONS.normal} ease`,
-                  boxShadow: '0 4px 12px rgba(0,0,0,0.06)',
+                  transition: `all ${TRANSITIONS.slow} ease`,
                   '&:hover': {
-                    transform: 'translateY(-4px)',
-                    boxShadow: '0 12px 28px rgba(0,0,0,0.1)',
+                    transform: 'scale(1.02)',
                   },
                   '&:hover .photo-overlay': {
                     opacity: 1,
@@ -142,6 +152,7 @@ export default function PhotoGallery({
                     width: '100%',
                     height: 'auto',
                     display: 'block',
+                    filter: 'brightness(0.85) contrast(1.05)',
                   }}
                 />
 
@@ -155,11 +166,11 @@ export default function PhotoGallery({
                     right: 0,
                     bottom: 0,
                     background:
-                      'linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 50%)',
+                      'linear-gradient(to top, rgba(0,0,0,0.7) 0%, transparent 60%)',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'flex-end',
-                    p: 2.5,
+                    p: 3,
                     opacity: 0,
                     transition: `opacity ${TRANSITIONS.normal} ease`,
                   }}
@@ -167,10 +178,11 @@ export default function PhotoGallery({
                   <Typography
                     variant='h6'
                     sx={{
-                      color: 'white',
-                      fontWeight: 600,
+                      color: COLORS.textPrimary,
+                      fontWeight: 300,
                       fontFamily: FONTS.serif,
-                      mb: 0.5,
+                      fontSize: '1.2rem',
+                      letterSpacing: '0.02em',
                     }}
                   >
                     {photo.title}
@@ -189,8 +201,8 @@ export default function PhotoGallery({
           fullWidth
           sx={{
             '& .MuiDialog-paper': {
-              backgroundColor: 'rgba(0,0,0,0.95)',
-              backdropFilter: 'blur(10px)',
+              backgroundColor: 'rgba(0,0,0,0.97)',
+              backdropFilter: 'blur(20px)',
               margin: 0,
               maxHeight: '100vh',
               maxWidth: '100vw',
@@ -215,11 +227,11 @@ export default function PhotoGallery({
                     position: 'absolute',
                     top: 20,
                     right: 20,
-                    color: 'white',
-                    backgroundColor: 'rgba(255,255,255,0.1)',
+                    color: COLORS.textPrimary,
+                    backgroundColor: 'rgba(255,255,255,0.05)',
                     zIndex: 2,
                     '&:hover': {
-                      backgroundColor: 'rgba(255,255,255,0.2)',
+                      backgroundColor: 'rgba(255,255,255,0.1)',
                     },
                   }}
                 >
@@ -234,11 +246,11 @@ export default function PhotoGallery({
                     left: 20,
                     top: '50%',
                     transform: 'translateY(-50%)',
-                    color: 'white',
-                    backgroundColor: 'rgba(255,255,255,0.1)',
+                    color: COLORS.textPrimary,
+                    backgroundColor: 'rgba(255,255,255,0.05)',
                     zIndex: 2,
                     '&:hover': {
-                      backgroundColor: 'rgba(255,255,255,0.2)',
+                      backgroundColor: 'rgba(255,255,255,0.1)',
                     },
                   }}
                 >
@@ -253,11 +265,11 @@ export default function PhotoGallery({
                     right: 20,
                     top: '50%',
                     transform: 'translateY(-50%)',
-                    color: 'white',
-                    backgroundColor: 'rgba(255,255,255,0.1)',
+                    color: COLORS.textPrimary,
+                    backgroundColor: 'rgba(255,255,255,0.05)',
                     zIndex: 2,
                     '&:hover': {
-                      backgroundColor: 'rgba(255,255,255,0.2)',
+                      backgroundColor: 'rgba(255,255,255,0.1)',
                     },
                   }}
                 >
@@ -282,15 +294,14 @@ export default function PhotoGallery({
                       maxWidth: '90vw',
                       maxHeight: '80vh',
                       objectFit: 'contain',
-                      borderRadius: '8px',
                     }}
                   />
 
                   <Box
                     sx={{
-                      mt: 2,
+                      mt: 3,
                       textAlign: 'center',
-                      color: 'white',
+                      color: COLORS.textPrimary,
                       maxWidth: 600,
                       px: 3,
                     }}
@@ -298,9 +309,10 @@ export default function PhotoGallery({
                     <Typography
                       variant='h5'
                       sx={{
-                        fontFamily: FONTS.script,
-                        fontWeight: 600,
+                        fontFamily: FONTS.serif,
+                        fontWeight: 300,
                         mb: 1,
+                        fontSize: '1.4rem',
                       }}
                     >
                       {selectedPhoto.title}
@@ -309,10 +321,12 @@ export default function PhotoGallery({
                       <Typography
                         variant='body1'
                         sx={{
-                          color: 'rgba(255,255,255,0.8)',
+                          color: COLORS.textSecondary,
                           mb: 2,
                           lineHeight: 1.6,
-                          fontFamily: FONTS.serif,
+                          fontFamily: FONTS.body,
+                          fontSize: '0.9rem',
+                          fontWeight: 300,
                         }}
                       >
                         {selectedPhoto.description}

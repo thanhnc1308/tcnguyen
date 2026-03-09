@@ -23,26 +23,29 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
   };
 
   return (
-    <Box sx={{ p: 3, backgroundColor: COLORS.bgWarm }}>
+    <Box sx={{ p: 3, backgroundColor: COLORS.bgBlack }}>
       {!showContent ? (
         <Box sx={{ textAlign: 'center' }}>
           <Button
             variant='contained'
             onClick={() => setShowContent(true)}
             sx={{
-              backgroundColor: COLORS.primary,
-              color: COLORS.textOnPrimary,
-              fontFamily: FONTS.script,
-              fontSize: '1.2rem',
-              py: 2,
-              px: 4,
-              borderRadius: 3,
-              textTransform: 'none',
-              boxShadow: '0 4px 12px rgba(107, 76, 59, 0.25)',
+              backgroundColor: 'transparent',
+              color: COLORS.accent,
+              fontFamily: FONTS.body,
+              fontSize: '0.8rem',
+              py: 1.5,
+              px: 5,
+              borderRadius: 0,
+              textTransform: 'uppercase',
+              letterSpacing: '0.2em',
+              fontWeight: 500,
+              border: `1px solid ${COLORS.accent}`,
+              boxShadow: 'none',
               '&:hover': {
-                backgroundColor: COLORS.primaryDark,
-                boxShadow: '0 6px 16px rgba(107, 76, 59, 0.35)',
-                transform: 'translateY(-2px)',
+                backgroundColor: COLORS.accent,
+                color: COLORS.textOnPrimary,
+                boxShadow: '0 4px 20px rgba(198, 169, 97, 0.3)',
               },
               transition: `all ${TRANSITIONS.normal} ease`,
             }}
@@ -68,6 +71,7 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                   flex: 1,
                   ...cardStyle,
                   p: 3,
+                  borderRadius: 1,
                   '&:hover': {
                     ...cardStyle['&:hover'],
                   },
@@ -77,11 +81,13 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                 <Typography
                   sx={{
                     textAlign: 'center',
-                    color: COLORS.textSecondary,
-                    fontSize: '0.9rem',
+                    color: COLORS.accent,
+                    fontSize: '0.75rem',
                     mb: 1,
                     fontWeight: 500,
-                    fontFamily: FONTS.serif,
+                    fontFamily: FONTS.body,
+                    letterSpacing: '0.15em',
+                    textTransform: 'uppercase',
                   }}
                 >
                   {account.title}
@@ -91,8 +97,8 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                 <Typography
                   sx={{
                     textAlign: 'center',
-                    fontWeight: 700,
-                    fontSize: '1.3rem',
+                    fontWeight: 400,
+                    fontSize: '1.4rem',
                     mb: 0.5,
                     color: COLORS.textPrimary,
                     fontFamily: FONTS.serif,
@@ -115,8 +121,9 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                       height: 200,
                       position: 'relative',
                       border: `1px solid ${COLORS.borderGold}`,
-                      borderRadius: 2,
                       overflow: 'hidden',
+                      backgroundColor: '#fff',
+                      p: 1,
                     }}
                   >
                     <Image
@@ -145,21 +152,21 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                     >
                       <Typography
                         sx={{
-                          fontSize: '0.85rem',
+                          fontSize: '0.8rem',
                           color: COLORS.textSecondary,
-                          fontWeight: 500,
-                          fontFamily: FONTS.serif,
+                          fontWeight: 400,
+                          fontFamily: FONTS.body,
                         }}
                       >
                         {item.label}
                       </Typography>
                       <Typography
                         sx={{
-                          fontSize: '0.85rem',
+                          fontSize: '0.8rem',
                           color: COLORS.textPrimary,
-                          fontWeight: 600,
+                          fontWeight: 500,
                           textAlign: 'right',
-                          fontFamily: FONTS.serif,
+                          fontFamily: FONTS.body,
                         }}
                       >
                         {item.value}
@@ -171,8 +178,8 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                 {/* Large Account Number Display */}
                 <Box
                   sx={{
-                    backgroundColor: COLORS.bgCream,
-                    borderRadius: 2,
+                    backgroundColor: 'rgba(198, 169, 97, 0.08)',
+                    border: `1px solid ${COLORS.borderGold}`,
                     py: 2,
                     mb: 2,
                     textAlign: 'center',
@@ -180,11 +187,11 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                 >
                   <Typography
                     sx={{
-                      fontSize: '1.5rem',
-                      fontWeight: 700,
-                      color: COLORS.textPrimary,
-                      letterSpacing: '2px',
-                      fontFamily: 'monospace',
+                      fontSize: '1.4rem',
+                      fontWeight: 300,
+                      color: COLORS.accent,
+                      letterSpacing: '3px',
+                      fontFamily: FONTS.serif,
                     }}
                   >
                     {account.accountNumber}
@@ -195,21 +202,22 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                 <Button
                   fullWidth
                   variant='outlined'
-                  startIcon={<ContentCopy sx={{ fontSize: 18 }} />}
+                  startIcon={<ContentCopy sx={{ fontSize: 16 }} />}
                   onClick={() => handleCopyAccount(account)}
                   sx={{
-                    borderColor: COLORS.accent,
+                    borderColor: COLORS.borderGold,
                     color: COLORS.accent,
-                    textTransform: 'none',
-                    fontWeight: 600,
-                    fontSize: '0.9rem',
+                    textTransform: 'uppercase',
+                    fontWeight: 500,
+                    fontSize: '0.75rem',
                     py: 1.2,
-                    borderRadius: 2,
-                    fontFamily: FONTS.serif,
+                    borderRadius: 0,
+                    fontFamily: FONTS.body,
+                    letterSpacing: '0.1em',
                     transition: `all ${TRANSITIONS.normal} ease`,
                     '&:hover': {
-                      borderColor: COLORS.accentDark,
-                      backgroundColor: `${COLORS.accent}0A`,
+                      borderColor: COLORS.accent,
+                      backgroundColor: 'rgba(198, 169, 97, 0.08)',
                     },
                   }}
                 >

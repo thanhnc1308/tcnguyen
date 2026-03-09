@@ -1,6 +1,6 @@
 'use client';
 import { useState, useEffect } from 'react';
-import { COLORS, FONTS, TRANSITIONS } from '../constants/design';
+import { COLORS, FONTS } from '../constants/design';
 
 const formatNumber = (num: number) => {
   return num.toString().padStart(2, '0');
@@ -43,46 +43,43 @@ export default function CountdownTimer({
   }, [weddingDate]);
 
   const items = [
-    { label: 'Ngày', value: timeLeft.days },
-    { label: 'Giờ', value: timeLeft.hours },
-    { label: 'Phút', value: timeLeft.minutes },
-    { label: 'Giây', value: timeLeft.seconds },
+    { label: 'Days', value: timeLeft.days },
+    { label: 'Hours', value: timeLeft.hours },
+    { label: 'Minutes', value: timeLeft.minutes },
+    { label: 'Seconds', value: timeLeft.seconds },
   ];
 
   return (
     <div className='mb-12'>
-      <div className='flex items-center justify-center space-x-2 mb-4'>
+      <div className='flex items-center justify-center gap-6 md:gap-8'>
         {items.map((item, index) => (
-          <div key={item.label} className='flex items-center'>
+          <div key={item.label} className='flex items-center gap-6 md:gap-8'>
             <div className='text-center'>
               <p
-                className='text-xs mb-2 tracking-wider'
+                className='text-4xl md:text-5xl font-light mb-1'
                 style={{
                   fontFamily: FONTS.serif,
-                  color: COLORS.textSecondary,
-                  letterSpacing: '0.15em',
+                  color: COLORS.textPrimary,
+                  letterSpacing: '-0.02em',
+                }}
+              >
+                {formatNumber(item.value)}
+              </p>
+              <p
+                className='text-[10px] tracking-[0.3em] uppercase'
+                style={{
+                  fontFamily: FONTS.body,
+                  color: COLORS.accent,
                   fontWeight: 500,
                 }}
               >
                 {item.label}
               </p>
-              <div
-                className='text-3xl font-bold px-4 py-3 rounded-xl min-w-[60px]'
-                style={{
-                  backgroundColor: COLORS.primary,
-                  color: COLORS.textOnPrimary,
-                  fontFamily: FONTS.serif,
-                  boxShadow: '0 4px 16px rgba(107, 76, 59, 0.3)',
-                  transition: `transform ${TRANSITIONS.fast} ease`,
-                }}
-              >
-                {formatNumber(item.value)}
-              </div>
             </div>
             {index < items.length - 1 && (
               <span
-                className='text-2xl font-bold ml-2'
-                style={{ color: COLORS.accent }}
+                className='text-xl font-light self-start mt-2'
+                style={{ color: COLORS.accent, opacity: 0.4 }}
               >
                 :
               </span>

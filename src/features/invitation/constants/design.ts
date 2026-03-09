@@ -1,107 +1,118 @@
-// Consolidated wedding invitation design tokens
-// Palette: Refined warm brown + antique gold — elegant Vietnamese wedding
+// Sài Gòn Nights — Modern Vietnamese Luxury
+// Palette: Jet black + champagne gold + off-white + blush
 export const COLORS = {
-  // Primary - rich walnut brown
-  primary: '#6B4C3B',
-  primaryLight: '#8D6E5D',
-  primaryDark: '#4E3629',
+  // Primary - jet black
+  primary: '#0A0A0A',
+  primaryLight: '#1A1A1A',
+  primaryDark: '#000000',
 
-  // Accent - antique gold
-  accent: '#B8963B',
-  accentLight: '#D4B262',
-  accentDark: '#967726',
+  // Accent - champagne gold
+  accent: '#C6A961',
+  accentLight: '#D4BD7E',
+  accentDark: '#A88B42',
+
+  // Secondary - blush
+  blush: '#E8D5C4',
+  blushLight: '#F2E6DA',
+  blushDark: '#D4B9A3',
 
   // Text
-  textPrimary: '#3B2E26',
-  textSecondary: '#857468',
-  textOnPrimary: '#FFFDF9',
+  textPrimary: '#FAFAFA',
+  textSecondary: 'rgba(250, 250, 250, 0.6)',
+  textOnPrimary: '#0A0A0A',
+  textOnLight: '#1A1A1A',
 
   // Backgrounds
-  bgCream: '#FAF7F2',
-  bgWarm: '#F0EAE0',
-  bgWhite: '#FEFDFB',
+  bgBlack: '#0A0A0A',
+  bgDark: '#111111',
+  bgCard: '#161616',
+  bgOffWhite: '#FAFAFA',
+  bgCream: '#F5F0E8',
+  bgWarm: '#F5F0E8',
+  bgWhite: '#FAFAFA',
 
   // Envelope
-  envelopeGradientStart: '#B44040',
-  envelopeGradientMid: '#C85050',
-  envelopeGradientEnd: '#A63636',
+  envelopeGradientStart: '#0A0A0A',
+  envelopeGradientMid: '#1A1A1A',
+  envelopeGradientEnd: '#0A0A0A',
 
   // Decorative
-  gold: '#C9A84C',
-  goldLight: '#E0C878',
-  heartRed: '#D45B68',
+  gold: '#C6A961',
+  goldLight: '#D4BD7E',
+  heartRed: '#C6A961',
 
   // Borders & overlays
-  borderGold: 'rgba(184, 150, 59, 0.15)',
-  borderGoldHover: 'rgba(184, 150, 59, 0.3)',
-  overlayLight: 'rgba(250, 247, 242, 0.88)',
-  overlayDark: 'rgba(59, 46, 38, 0.06)',
+  borderGold: 'rgba(198, 169, 97, 0.2)',
+  borderGoldHover: 'rgba(198, 169, 97, 0.4)',
+  overlayLight: 'rgba(10, 10, 10, 0.85)',
+  overlayDark: 'rgba(10, 10, 10, 0.95)',
 } as const;
 
 export const FONTS = {
-  script: "'Dancing Script', cursive",
-  serif: "'Cormorant Garamond', serif",
-  body: "'Cormorant Garamond', serif",
-  handwritten: "'Kalam', cursive",
-  display: "'Allison', cursive",
+  script: "'Great Vibes', cursive",
+  serif: "'Playfair Display', serif",
+  body: "'Inter', sans-serif",
+  handwritten: "'Great Vibes', cursive",
+  display: "'Playfair Display', serif",
 } as const;
 
 // Shared animation durations
 export const TRANSITIONS = {
   fast: '150ms',
-  normal: '250ms',
-  slow: '500ms',
+  normal: '300ms',
+  slow: '600ms',
   reveal: '800ms',
 } as const;
 
 // Shared section styles
-export const sectionStyle = (bg: string = COLORS.bgCream) =>
+export const sectionStyle = (bg: string = COLORS.bgBlack) =>
   ({
-    py: { xs: 8, md: 12 },
+    py: { xs: 10, md: 16 },
     px: 3,
     backgroundColor: bg,
     position: 'relative' as const,
   }) as const;
 
-// Shared card styles
+// Shared card styles — sleek dark glass
 export const cardStyle = {
-  backgroundColor: 'rgba(255, 255, 255, 0.95)',
-  backdropFilter: 'blur(10px)',
-  borderRadius: 3,
-  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.06)',
+  backgroundColor: COLORS.bgCard,
+  borderRadius: 2,
+  boxShadow: '0 2px 24px rgba(0, 0, 0, 0.4)',
   border: `1px solid ${COLORS.borderGold}`,
   transition: `all ${TRANSITIONS.normal} ease`,
   '&:hover': {
     transform: 'translateY(-4px)',
-    boxShadow: '0 16px 48px rgba(0, 0, 0, 0.1)',
+    boxShadow: '0 12px 40px rgba(0, 0, 0, 0.6)',
     borderColor: COLORS.borderGoldHover,
   },
 } as const;
 
 // Shared button styles
 export const primaryButtonStyle = {
-  backgroundColor: COLORS.primary,
+  backgroundColor: COLORS.accent,
   color: COLORS.textOnPrimary,
-  borderRadius: 2,
+  borderRadius: 0,
   py: 1.5,
   fontWeight: 600,
-  textTransform: 'none' as const,
-  fontSize: '0.9rem',
-  fontFamily: FONTS.serif,
-  boxShadow: '0 4px 12px rgba(107, 76, 59, 0.25)',
+  textTransform: 'uppercase' as const,
+  fontSize: '0.8rem',
+  fontFamily: FONTS.body,
+  letterSpacing: '0.15em',
+  boxShadow: 'none',
   '&:hover': {
-    backgroundColor: COLORS.primaryDark,
-    transform: 'translateY(-2px)',
-    boxShadow: '0 6px 20px rgba(107, 76, 59, 0.35)',
+    backgroundColor: COLORS.accentDark,
+    boxShadow: '0 4px 20px rgba(198, 169, 97, 0.3)',
   },
   transition: `all ${TRANSITIONS.normal} ease`,
 } as const;
 
-// Section heading style
+// Section heading style — oversized editorial serif
 export const sectionHeadingStyle = {
-  fontFamily: FONTS.script,
-  color: COLORS.primary,
-  fontWeight: 700,
+  fontFamily: FONTS.serif,
+  color: COLORS.accent,
+  fontWeight: 400,
   mb: 2,
-  fontSize: { xs: '2.5rem', md: '3.5rem' },
+  fontSize: { xs: '2.5rem', md: '3.5rem', lg: '4rem' },
+  letterSpacing: '-0.02em',
+  lineHeight: 1.1,
 } as const;

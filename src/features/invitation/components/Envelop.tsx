@@ -7,50 +7,6 @@ import { BRIDE_NAME, GROOM_NAME } from '@/constants/wedding';
 import { getGuestPronoun } from '../helpers/guest';
 import { COLORS, FONTS } from '../constants/design';
 
-function FloatingParticles() {
-  const particles = Array.from({ length: 8 });
-  return (
-    <Box
-      sx={{
-        position: 'absolute',
-        inset: 0,
-        overflow: 'hidden',
-        pointerEvents: 'none',
-      }}
-    >
-      {particles.map((_, i) => (
-        <Box
-          key={i}
-          sx={{
-            position: 'absolute',
-            left: `${10 + ((i * 11) % 80)}%`,
-            bottom: '-10%',
-            fontSize: i % 2 === 0 ? '0.9rem' : '0.6rem',
-            opacity: 0,
-            color: 'rgba(255,255,255,0.4)',
-            animation: `floatUp ${10 + (i % 3) * 2}s ease-in-out infinite`,
-            animationDelay: `${(i * 1.2) % 10}s`,
-            '@keyframes floatUp': {
-              '0%': {
-                transform: 'translateY(0) rotate(0deg)',
-                opacity: 0,
-              },
-              '15%': { opacity: 0.18 },
-              '85%': { opacity: 0.08 },
-              '100%': {
-                transform: `translateY(-110vh) rotate(${120 + ((i * 45) % 180)}deg)`,
-                opacity: 0,
-              },
-            },
-          }}
-        >
-          {i % 4 === 0 ? '♥' : i % 4 === 1 ? '✿' : i % 4 === 2 ? '❀' : '♥'}
-        </Box>
-      ))}
-    </Box>
-  );
-}
-
 export default function Envelop({ guest }: { guest: Guest | null }) {
   const { handleOpenInvitation } = useWeddingInvitation();
   const guestPronoun = getGuestPronoun(guest);
@@ -59,7 +15,7 @@ export default function Envelop({ guest }: { guest: Guest | null }) {
     <Box
       sx={{
         minHeight: '100vh',
-        background: `linear-gradient(135deg, ${COLORS.envelopeGradientStart} 0%, ${COLORS.envelopeGradientMid} 50%, ${COLORS.envelopeGradientEnd} 100%)`,
+        background: COLORS.bgBlack,
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -68,31 +24,34 @@ export default function Envelop({ guest }: { guest: Guest | null }) {
         overflow: 'hidden',
       }}
     >
-      <FloatingParticles />
-
       <Container maxWidth='sm' sx={{ position: 'relative', zIndex: 1 }}>
         <Box
           sx={{
-            background: 'rgba(255, 255, 255, 0.08)',
-            backdropFilter: 'blur(12px)',
-            borderRadius: '24px',
-            padding: { xs: 4, sm: 6 },
-            paddingBottom: 0,
             textAlign: 'center',
-            boxShadow: '0 8px 40px rgba(0, 0, 0, 0.12)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            overflow: 'hidden',
+            px: { xs: 3, sm: 6 },
           }}
         >
+          {/* Thin gold line */}
+          <Box
+            sx={{
+              width: '1px',
+              height: 60,
+              backgroundColor: COLORS.accent,
+              opacity: 0.4,
+              mx: 'auto',
+              mb: 4,
+            }}
+          />
+
           {/* Header Text */}
           <Typography
             sx={{
-              fontSize: { xs: '0.875rem', sm: '1rem' },
-              fontFamily: FONTS.serif,
+              fontSize: { xs: '0.7rem', sm: '0.75rem' },
+              fontFamily: FONTS.body,
               fontWeight: 400,
               letterSpacing: '0.3em',
-              color: 'rgba(255, 255, 255, 0.92)',
-              mb: 4,
+              color: COLORS.textSecondary,
+              mb: 5,
               textTransform: 'uppercase',
             }}
           >
@@ -102,73 +61,47 @@ export default function Envelop({ guest }: { guest: Guest | null }) {
           {/* Couple Names */}
           <Typography
             sx={{
-              fontSize: { xs: '3rem', sm: '4rem', md: '5rem' },
-              fontFamily: FONTS.display,
-              color: COLORS.goldLight,
+              fontSize: { xs: '3.5rem', sm: '4.5rem', md: '5.5rem' },
+              fontFamily: FONTS.script,
+              color: COLORS.textPrimary,
               mb: 6,
-              textShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+              lineHeight: 1.1,
             }}
           >
             {GROOM_NAME} & {BRIDE_NAME}
           </Typography>
 
-          {/* Envelope with Open Text */}
+          {/* Diamond separator */}
+          <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 2, mb: 6 }}>
+            <Box sx={{ width: 40, height: '1px', backgroundColor: COLORS.accent, opacity: 0.3 }} />
+            <Box sx={{ width: 6, height: 6, transform: 'rotate(45deg)', backgroundColor: COLORS.accent, opacity: 0.5 }} />
+            <Box sx={{ width: 40, height: '1px', backgroundColor: COLORS.accent, opacity: 0.3 }} />
+          </Box>
+
+          {/* Open Envelope Button */}
           <Box
             sx={{
-              position: 'relative',
-              maxWidth: '400px',
-              margin: '0 auto',
               cursor: 'pointer',
-              transition: 'transform 0.3s ease',
-              marginTop: { xs: 2, sm: 3 },
-              animation: 'envelopePulse 3s ease-in-out infinite',
-              '@keyframes envelopePulse': {
-                '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(-5px)' },
-              },
+              display: 'inline-block',
+              border: `1px solid ${COLORS.accent}`,
+              color: COLORS.accent,
+              px: 5,
+              py: 1.5,
+              fontFamily: FONTS.body,
+              fontWeight: 500,
+              fontSize: '0.8rem',
+              letterSpacing: '0.2em',
+              textTransform: 'uppercase',
+              transition: 'all 0.3s ease',
               '&:hover': {
-                animationPlayState: 'paused',
-                transform: 'translateY(-6px) scale(1.01)',
+                backgroundColor: COLORS.accent,
+                color: COLORS.textOnPrimary,
+                boxShadow: '0 4px 20px rgba(198, 169, 97, 0.3)',
               },
             }}
             onClick={handleOpenInvitation}
           >
-            {/* Envelope Image */}
-            <Box
-              component='img'
-              src='/images/envelop.png'
-              alt='Wedding Invitation Envelope'
-              sx={{
-                width: '100%',
-                height: 'auto',
-                display: 'block',
-              }}
-            />
-
-            {/* Open Envelop Text */}
-            <Box
-              sx={{
-                position: 'absolute',
-                bottom: '65%',
-                left: '53%',
-                transform: 'translateX(-50%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}
-            >
-              <Typography
-                sx={{
-                  fontSize: { xs: '1rem', sm: '1.25rem' },
-                  fontWeight: 600,
-                  color: COLORS.textPrimary,
-                  textTransform: 'none',
-                  fontFamily: FONTS.serif,
-                }}
-              >
-                Mở thư
-              </Typography>
-            </Box>
+            Mở thư mời
           </Box>
         </Box>
       </Container>
