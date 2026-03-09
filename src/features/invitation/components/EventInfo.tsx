@@ -139,14 +139,20 @@ export default function EventInfo({
                           backgroundColor:
                             event.type === 'ceremony'
                               ? `${COLORS.primary}14`
-                              : `${COLORS.accent}1A`,
+                              : `${COLORS.indigo}14`,
                           color:
                             event.type === 'ceremony'
                               ? COLORS.primary
-                              : COLORS.accentDark,
-                          fontWeight: 600,
+                              : COLORS.indigo,
+                          fontWeight: 700,
                           fontSize: '0.75rem',
                           fontFamily: FONTS.serif,
+                          borderRadius: 0.5,
+                          '& .MuiChip-icon': {
+                            color: event.type === 'ceremony'
+                              ? COLORS.primary
+                              : COLORS.indigo,
+                          },
                         }}
                       />
                     </Box>
@@ -157,7 +163,7 @@ export default function EventInfo({
                       component='h3'
                       sx={{
                         fontFamily: FONTS.script,
-                        color: COLORS.primary,
+                        color: COLORS.indigo,
                         fontWeight: 700,
                         mb: 2,
                         fontSize: { xs: '1.8rem', md: '2.2rem' },
@@ -203,15 +209,15 @@ export default function EventInfo({
                       </Box>
                     </Box>
 
-                    <Divider sx={{ my: 2, borderColor: COLORS.borderGold }} />
+                    <Divider sx={{ my: 2, borderColor: COLORS.borderWoodblock }} />
 
                     {/* Venue Information */}
                     <Box sx={{ mb: 3 }}>
                       <Typography
                         variant='h6'
                         sx={{
-                          color: COLORS.primary,
-                          fontWeight: 600,
+                          color: COLORS.indigo,
+                          fontWeight: 700,
                           mb: 1,
                           fontSize: '1.1rem',
                           fontFamily: FONTS.serif,
@@ -253,10 +259,10 @@ export default function EventInfo({
                       sx={{
                         width: '100%',
                         aspectRatio: '4 / 3',
-                        borderRadius: 2,
+                        borderRadius: 0.5,
                         overflow: 'hidden',
                         mb: 2,
-                        border: `1px solid ${COLORS.borderGold}`,
+                        border: `2px solid ${COLORS.borderWoodblock}`,
                       }}
                     >
                       {event.embededIframe}

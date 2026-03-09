@@ -52,10 +52,10 @@ export default function Navigation({
         display: 'flex',
         justifyContent: 'center',
         paddingTop: isSticky ? '0' : '2rem',
-        backgroundColor: isSticky ? `${COLORS.bgCream}EB` : 'transparent',
+        backgroundColor: isSticky ? `${COLORS.bgCream}F0` : 'transparent',
         backdropFilter: isSticky ? 'blur(16px)' : 'none',
-        boxShadow: isSticky ? '0 1px 12px rgba(0,0,0,0.04)' : 'none',
-        transition: `background-color ${TRANSITIONS.normal} ease, box-shadow ${TRANSITIONS.normal} ease, padding ${TRANSITIONS.normal} ease`,
+        borderBottom: isSticky ? `2px solid ${COLORS.borderWoodblock}` : 'none',
+        transition: `all ${TRANSITIONS.normal} ease`,
         padding: isSticky ? '0.75rem 0' : '2rem 0 0',
       }}
     >
@@ -64,10 +64,9 @@ export default function Navigation({
           display: 'flex',
           gap: '2rem',
           fontFamily: FONTS.serif,
-          fontWeight: 500,
+          fontWeight: 600,
           fontSize: '0.95rem',
-          letterSpacing: '0.08em',
-          color: COLORS.textPrimary,
+          letterSpacing: '0.05em',
         }}
       >
         {links.map((link, index) => (
@@ -76,22 +75,22 @@ export default function Navigation({
             href={link.href}
             onClick={(e) => handleClick(e, link.href)}
             style={{
-              color: COLORS.textPrimary,
+              color: COLORS.indigo,
               textDecoration: 'none',
               transition: `color ${TRANSITIONS.normal} ease, border-color ${TRANSITIONS.normal} ease`,
               cursor: 'pointer',
-              borderBottom: '1px solid transparent',
+              borderBottom: '2px solid transparent',
               paddingBottom: '4px',
               minHeight: '44px',
               display: 'flex',
               alignItems: 'center',
             }}
             onMouseEnter={(e) => {
-              e.currentTarget.style.color = COLORS.accent;
-              e.currentTarget.style.borderBottomColor = COLORS.accent;
+              e.currentTarget.style.color = COLORS.primary;
+              e.currentTarget.style.borderBottomColor = COLORS.primary;
             }}
             onMouseLeave={(e) => {
-              e.currentTarget.style.color = COLORS.textPrimary;
+              e.currentTarget.style.color = COLORS.indigo;
               e.currentTarget.style.borderBottomColor = 'transparent';
             }}
           >

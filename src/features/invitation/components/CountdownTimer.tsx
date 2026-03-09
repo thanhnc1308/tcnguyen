@@ -59,20 +59,22 @@ export default function CountdownTimer({
                 className='text-xs mb-2 tracking-wider'
                 style={{
                   fontFamily: FONTS.serif,
-                  color: COLORS.textSecondary,
+                  color: COLORS.indigo,
                   letterSpacing: '0.15em',
-                  fontWeight: 500,
+                  fontWeight: 600,
                 }}
               >
                 {item.label}
               </p>
               <div
-                className='text-3xl font-bold px-4 py-3 rounded-xl min-w-[60px]'
+                className='text-3xl font-bold px-4 py-3 min-w-[60px]'
                 style={{
-                  backgroundColor: COLORS.primary,
-                  color: COLORS.textOnPrimary,
+                  backgroundColor: COLORS.bgWhite,
+                  color: COLORS.indigo,
                   fontFamily: FONTS.serif,
-                  boxShadow: '0 4px 16px rgba(107, 76, 59, 0.3)',
+                  border: `2px solid ${COLORS.borderWoodblock}`,
+                  borderRadius: '2px',
+                  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.06)',
                   transition: `transform ${TRANSITIONS.fast} ease`,
                 }}
               >
@@ -82,7 +84,7 @@ export default function CountdownTimer({
             {index < items.length - 1 && (
               <span
                 className='text-2xl font-bold ml-2'
-                style={{ color: COLORS.accent }}
+                style={{ color: COLORS.primary }}
               >
                 :
               </span>

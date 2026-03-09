@@ -44,7 +44,7 @@ function FloatingParticles() {
             },
           }}
         >
-          {i % 4 === 0 ? '♥' : i % 4 === 1 ? '✿' : i % 4 === 2 ? '❀' : '♥'}
+          {i % 4 === 0 ? '❀' : i % 4 === 1 ? '✿' : i % 4 === 2 ? '❀' : '✿'}
         </Box>
       ))}
     </Box>
@@ -75,12 +75,12 @@ export default function Envelop({ guest }: { guest: Guest | null }) {
           sx={{
             background: 'rgba(255, 255, 255, 0.08)',
             backdropFilter: 'blur(12px)',
-            borderRadius: '24px',
+            borderRadius: '4px',
             padding: { xs: 4, sm: 6 },
             paddingBottom: 0,
             textAlign: 'center',
             boxShadow: '0 8px 40px rgba(0, 0, 0, 0.12)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
+            border: '2px solid rgba(255, 255, 255, 0.15)',
             overflow: 'hidden',
           }}
         >
@@ -89,7 +89,7 @@ export default function Envelop({ guest }: { guest: Guest | null }) {
             sx={{
               fontSize: { xs: '0.875rem', sm: '1rem' },
               fontFamily: FONTS.serif,
-              fontWeight: 400,
+              fontWeight: 500,
               letterSpacing: '0.3em',
               color: 'rgba(255, 255, 255, 0.92)',
               mb: 4,
@@ -103,7 +103,7 @@ export default function Envelop({ guest }: { guest: Guest | null }) {
           <Typography
             sx={{
               fontSize: { xs: '3rem', sm: '4rem', md: '5rem' },
-              fontFamily: FONTS.display,
+              fontFamily: FONTS.script,
               color: COLORS.goldLight,
               mb: 6,
               textShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
@@ -160,7 +160,7 @@ export default function Envelop({ guest }: { guest: Guest | null }) {
               <Typography
                 sx={{
                   fontSize: { xs: '1rem', sm: '1.25rem' },
-                  fontWeight: 600,
+                  fontWeight: 700,
                   color: COLORS.textPrimary,
                   textTransform: 'none',
                   fontFamily: FONTS.serif,

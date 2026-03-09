@@ -9,7 +9,7 @@ interface OrnamentalDividerProps {
 }
 
 export default function OrnamentalDivider({
-  color = COLORS.accent,
+  color = COLORS.indigo,
   width = 200,
 }: OrnamentalDividerProps) {
   return (
@@ -27,22 +27,24 @@ export default function OrnamentalDivider({
       <Box
         sx={{
           flex: 1,
-          height: '1px',
+          height: '1.5px',
           background: `linear-gradient(to right, transparent, ${color})`,
+          opacity: 0.3,
         }}
       />
-      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-        <path
-          d="M8 0L9.8 6.2L16 8L9.8 9.8L8 16L6.2 9.8L0 8L6.2 6.2L8 0Z"
-          fill={color}
-          opacity="0.8"
-        />
+      {/* Lotus mini icon */}
+      <svg width='20' height='20' viewBox='0 0 100 100' fill='none'>
+        <path d='M50 15 C50 15, 32 38, 50 58 C68 38, 50 15, 50 15Z' fill={COLORS.primary} opacity='0.5' />
+        <path d='M30 32 C30 32, 38 48, 50 58 C38 48, 30 32, 30 32Z' fill={COLORS.primary} opacity='0.3' />
+        <path d='M70 32 C70 32, 62 48, 50 58 C62 48, 70 32, 70 32Z' fill={COLORS.primary} opacity='0.3' />
+        <ellipse cx='50' cy='62' rx='10' ry='3' fill={COLORS.primary} opacity='0.2' />
       </svg>
       <Box
         sx={{
           flex: 1,
-          height: '1px',
+          height: '1.5px',
           background: `linear-gradient(to left, transparent, ${color})`,
+          opacity: 0.3,
         }}
       />
     </Box>

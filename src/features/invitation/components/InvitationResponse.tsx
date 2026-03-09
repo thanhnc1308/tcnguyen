@@ -24,23 +24,24 @@ const FormContainer = styled(Box)(() => ({
   padding: '40px 32px',
   maxWidth: '600px',
   margin: '0 auto',
-  borderRadius: '16px',
+  borderRadius: '4px',
+  border: `2px solid ${COLORS.borderWoodblock}`,
 }));
 
 const StyledTextField = styled(TextField)(() => ({
   '& .MuiOutlinedInput-root': {
     backgroundColor: COLORS.bgWhite,
-    borderRadius: '8px',
+    borderRadius: '4px',
     fontFamily: FONTS.serif,
     '& fieldset': {
-      borderColor: COLORS.borderGold,
-      borderWidth: '1px',
+      borderColor: COLORS.borderWoodblock,
+      borderWidth: '1.5px',
     },
     '&:hover fieldset': {
-      borderColor: COLORS.borderGoldHover,
+      borderColor: 'rgba(44, 62, 107, 0.3)',
     },
     '&.Mui-focused fieldset': {
-      borderColor: COLORS.accent,
+      borderColor: COLORS.indigo,
       borderWidth: '2px',
     },
   },
@@ -58,19 +59,19 @@ const StyledTextField = styled(TextField)(() => ({
 }));
 
 const SubmitButton = styled(Button)(() => ({
-  backgroundColor: COLORS.accent,
+  backgroundColor: COLORS.primary,
   color: COLORS.textOnPrimary,
-  fontWeight: 600,
+  fontWeight: 700,
   fontSize: '14px',
   padding: '14px 24px',
-  borderRadius: '8px',
+  borderRadius: '4px',
   textTransform: 'uppercase',
   letterSpacing: '2px',
   fontFamily: FONTS.serif,
-  boxShadow: '0 4px 12px rgba(184, 150, 59, 0.25)',
+  boxShadow: '0 4px 12px rgba(192, 57, 43, 0.25)',
   '&:hover': {
-    backgroundColor: COLORS.accentDark,
-    boxShadow: '0 6px 16px rgba(184, 150, 59, 0.35)',
+    backgroundColor: COLORS.primaryDark,
+    boxShadow: '0 6px 16px rgba(192, 57, 43, 0.35)',
     transform: 'translateY(-1px)',
   },
   transition: `all ${TRANSITIONS.normal} ease`,
@@ -130,7 +131,7 @@ export default function InvitationResponse({
                   width: 60,
                   height: 60,
                   borderRadius: '50%',
-                  backgroundColor: `${COLORS.accent}1A`,
+                  backgroundColor: `${COLORS.primary}14`,
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
@@ -141,7 +142,7 @@ export default function InvitationResponse({
                 <svg width='28' height='28' viewBox='0 0 24 24' fill='none'>
                   <path
                     d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'
-                    fill={COLORS.heartRed}
+                    fill={COLORS.primary}
                   />
                 </svg>
               </Box>
@@ -149,7 +150,7 @@ export default function InvitationResponse({
                 sx={{
                   fontFamily: FONTS.script,
                   fontSize: '2rem',
-                  color: COLORS.accent,
+                  color: COLORS.indigo,
                   fontWeight: 600,
                   mb: 2,
                   lineHeight: 1.4,
@@ -180,68 +181,6 @@ export default function InvitationResponse({
     <Box id='rsvp'>
       <FormContainer>
         <ScrollReveal>
-          {/* Decorative header */}
-          <Box sx={{ textAlign: 'center', mb: 3 }}>
-            <svg
-              width='60'
-              height='40'
-              viewBox='0 0 60 40'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
-            >
-              <path
-                d='M5 20 Q15 5, 25 15 Q28 18, 30 20 Q32 18, 35 15 Q45 5, 55 20'
-                stroke={COLORS.accent}
-                strokeWidth='1'
-                fill='none'
-                opacity='0.5'
-              />
-              <path
-                d='M5 20 Q15 35, 25 25 Q28 22, 30 20 Q32 22, 35 25 Q45 35, 55 20'
-                stroke={COLORS.accent}
-                strokeWidth='1'
-                fill='none'
-                opacity='0.5'
-              />
-              <ellipse
-                cx='12'
-                cy='14'
-                rx='4'
-                ry='2'
-                transform='rotate(-20 12 14)'
-                fill={COLORS.accent}
-                opacity='0.2'
-              />
-              <ellipse
-                cx='48'
-                cy='14'
-                rx='4'
-                ry='2'
-                transform='rotate(20 48 14)'
-                fill={COLORS.accent}
-                opacity='0.2'
-              />
-              <ellipse
-                cx='12'
-                cy='26'
-                rx='4'
-                ry='2'
-                transform='rotate(20 12 26)'
-                fill={COLORS.accent}
-                opacity='0.2'
-              />
-              <ellipse
-                cx='48'
-                cy='26'
-                rx='4'
-                ry='2'
-                transform='rotate(-20 48 26)'
-                fill={COLORS.accent}
-                opacity='0.2'
-              />
-            </svg>
-          </Box>
-
           {/* Header */}
           {!isKnownGuest && (
             <Typography
@@ -249,7 +188,7 @@ export default function InvitationResponse({
                 textAlign: 'center',
                 fontFamily: FONTS.script,
                 fontSize: '2rem',
-                color: COLORS.accent,
+                color: COLORS.indigo,
                 fontWeight: 600,
                 mb: 1,
                 lineHeight: 1.3,
@@ -267,7 +206,7 @@ export default function InvitationResponse({
                 textAlign: 'center',
                 fontFamily: FONTS.script,
                 fontSize: '2rem',
-                color: COLORS.accent,
+                color: COLORS.indigo,
                 fontWeight: 600,
                 mb: 1,
                 lineHeight: 1.3,
@@ -292,7 +231,7 @@ export default function InvitationResponse({
                 <Typography
                   sx={{
                     mb: 1,
-                    fontWeight: 500,
+                    fontWeight: 600,
                     color: COLORS.textPrimary,
                     fontSize: '14px',
                     fontFamily: FONTS.serif,
@@ -317,7 +256,7 @@ export default function InvitationResponse({
               <Typography
                 sx={{
                   mb: 1,
-                  fontWeight: 500,
+                  fontWeight: 600,
                   color: COLORS.textPrimary,
                   fontSize: '14px',
                   fontFamily: FONTS.serif,
@@ -343,7 +282,7 @@ export default function InvitationResponse({
               <Typography
                 sx={{
                   mb: 1,
-                  fontWeight: 500,
+                  fontWeight: 600,
                   color: COLORS.textPrimary,
                   fontSize: '14px',
                   fontFamily: FONTS.serif,

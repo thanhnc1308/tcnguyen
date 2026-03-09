@@ -11,9 +11,20 @@ export default function Footer() {
       sx={{
         py: 4,
         mt: 0,
-        backgroundColor: COLORS.bgCream,
-        borderTop: `1px solid ${COLORS.borderGold}`,
+        backgroundColor: COLORS.bgWarm,
+        borderTop: `2px solid ${COLORS.borderWoodblock}`,
         position: 'relative',
+        // Woodblock pattern top
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '3px',
+          background: `repeating-linear-gradient(90deg, ${COLORS.indigo}, ${COLORS.indigo} 6px, transparent 6px, transparent 10px)`,
+          opacity: 0.15,
+        },
       }}
     >
       <Container maxWidth='lg'>
@@ -24,7 +35,7 @@ export default function Footer() {
             component='p'
             sx={{
               fontFamily: FONTS.script,
-              color: COLORS.primary,
+              color: COLORS.indigo,
               fontWeight: 600,
               mb: 3,
               fontSize: { xs: '1.5rem', md: '2rem' },
@@ -56,16 +67,16 @@ export default function Footer() {
               <Box
                 component='span'
                 sx={{
-                  fontWeight: 600,
-                  color: COLORS.textSecondary,
+                  fontWeight: 700,
+                  color: COLORS.indigo,
                   cursor: 'help',
                   textDecoration: 'underline',
                   textDecorationStyle: 'dotted',
                   textUnderlineOffset: '3px',
                   transition: 'all 0.25s ease',
                   '&:hover': {
-                    color: COLORS.heartRed,
-                    textDecorationColor: COLORS.heartRed,
+                    color: COLORS.primary,
+                    textDecorationColor: COLORS.primary,
                   },
                 }}
               >
@@ -75,54 +86,45 @@ export default function Footer() {
             with lots of{' '}
             <Favorite
               sx={{
-                color: COLORS.heartRed,
+                color: COLORS.primary,
                 fontSize: '1.2rem',
-                animation: 'heartbeat 3s ease-in-out infinite',
-                '@keyframes heartbeat': {
-                  '0%': { transform: 'scale(1)' },
-                  '14%': { transform: 'scale(1.08)' },
-                  '28%': { transform: 'scale(1)' },
-                  '42%': { transform: 'scale(1.08)' },
-                  '70%': { transform: 'scale(1)' },
-                },
+                animation: 'gentleFloat 3s ease-in-out infinite',
               }}
             />{' '}
             for{' '}
             <Box
               component='span'
               sx={{
-                fontWeight: 600,
-                color: COLORS.heartRed,
+                fontWeight: 700,
+                color: COLORS.primary,
                 fontFamily: FONTS.script,
-                fontSize: '1.1em',
+                fontSize: '1.2em',
               }}
             >
               Mến
             </Box>
           </Typography>
 
-          {/* Decorative Hearts */}
+          {/* Decorative lotus dots */}
           <Box
             sx={{
               mt: 3,
               display: 'flex',
               justifyContent: 'center',
               gap: 2,
-              opacity: 0.5,
+              opacity: 0.4,
             }}
           >
-            {[...Array(3)].map((_, index) => (
-              <Favorite
+            {[COLORS.primary, COLORS.indigo, COLORS.accent, COLORS.indigo, COLORS.primary].map((color, index) => (
+              <Box
                 key={index}
                 sx={{
-                  color: COLORS.heartRed,
-                  fontSize: '0.8rem',
-                  animation: `float ${3 + index * 0.8}s ease-in-out infinite`,
-                  animationDelay: `${index * 0.5}s`,
-                  '@keyframes float': {
-                    '0%, 100%': { transform: 'translateY(0px)' },
-                    '50%': { transform: 'translateY(-4px)' },
-                  },
+                  width: 6,
+                  height: 6,
+                  borderRadius: '50%',
+                  backgroundColor: color,
+                  animation: `gentleFloat ${3 + index * 0.5}s ease-in-out infinite`,
+                  animationDelay: `${index * 0.3}s`,
                 }}
               />
             ))}

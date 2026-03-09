@@ -89,7 +89,19 @@ export default function PhotoGallery({
       id='gallery'
       sx={{
         py: { xs: 8, md: 12 },
-        backgroundColor: COLORS.bgWhite,
+        backgroundColor: COLORS.bgCream,
+        position: 'relative',
+        // Woodblock border
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '3px',
+          background: `repeating-linear-gradient(90deg, ${COLORS.primary}, ${COLORS.primary} 6px, transparent 6px, transparent 10px)`,
+          opacity: 0.15,
+        },
       }}
     >
       <Container maxWidth='lg'>
@@ -116,15 +128,17 @@ export default function PhotoGallery({
                 sx={{
                   breakInside: 'avoid',
                   mb: 2,
-                  borderRadius: 2,
+                  borderRadius: 0.5,
                   overflow: 'hidden',
                   cursor: 'pointer',
                   position: 'relative',
                   transition: `all ${TRANSITIONS.normal} ease`,
+                  border: `2px solid ${COLORS.borderWoodblock}`,
                   boxShadow: '0 4px 12px rgba(0,0,0,0.06)',
                   '&:hover': {
                     transform: 'translateY(-4px)',
-                    boxShadow: '0 12px 28px rgba(0,0,0,0.1)',
+                    boxShadow: '0 12px 28px rgba(0,0,0,0.12)',
+                    borderColor: 'rgba(44, 62, 107, 0.3)',
                   },
                   '&:hover .photo-overlay': {
                     opacity: 1,
@@ -155,7 +169,7 @@ export default function PhotoGallery({
                     right: 0,
                     bottom: 0,
                     background:
-                      'linear-gradient(to top, rgba(0,0,0,0.5) 0%, transparent 50%)',
+                      'linear-gradient(to top, rgba(44, 62, 107, 0.7) 0%, transparent 50%)',
                     display: 'flex',
                     flexDirection: 'column',
                     justifyContent: 'flex-end',
@@ -167,7 +181,7 @@ export default function PhotoGallery({
                   <Typography
                     variant='h6'
                     sx={{
-                      color: 'white',
+                      color: COLORS.bgCream,
                       fontWeight: 600,
                       fontFamily: FONTS.serif,
                       mb: 0.5,
@@ -189,7 +203,7 @@ export default function PhotoGallery({
           fullWidth
           sx={{
             '& .MuiDialog-paper': {
-              backgroundColor: 'rgba(0,0,0,0.95)',
+              backgroundColor: 'rgba(30, 43, 74, 0.97)',
               backdropFilter: 'blur(10px)',
               margin: 0,
               maxHeight: '100vh',
@@ -215,7 +229,7 @@ export default function PhotoGallery({
                     position: 'absolute',
                     top: 20,
                     right: 20,
-                    color: 'white',
+                    color: COLORS.bgCream,
                     backgroundColor: 'rgba(255,255,255,0.1)',
                     zIndex: 2,
                     '&:hover': {
@@ -234,7 +248,7 @@ export default function PhotoGallery({
                     left: 20,
                     top: '50%',
                     transform: 'translateY(-50%)',
-                    color: 'white',
+                    color: COLORS.bgCream,
                     backgroundColor: 'rgba(255,255,255,0.1)',
                     zIndex: 2,
                     '&:hover': {
@@ -253,7 +267,7 @@ export default function PhotoGallery({
                     right: 20,
                     top: '50%',
                     transform: 'translateY(-50%)',
-                    color: 'white',
+                    color: COLORS.bgCream,
                     backgroundColor: 'rgba(255,255,255,0.1)',
                     zIndex: 2,
                     '&:hover': {
@@ -282,7 +296,7 @@ export default function PhotoGallery({
                       maxWidth: '90vw',
                       maxHeight: '80vh',
                       objectFit: 'contain',
-                      borderRadius: '8px',
+                      borderRadius: '4px',
                     }}
                   />
 
@@ -290,7 +304,7 @@ export default function PhotoGallery({
                     sx={{
                       mt: 2,
                       textAlign: 'center',
-                      color: 'white',
+                      color: COLORS.bgCream,
                       maxWidth: 600,
                       px: 3,
                     }}
@@ -309,7 +323,7 @@ export default function PhotoGallery({
                       <Typography
                         variant='body1'
                         sx={{
-                          color: 'rgba(255,255,255,0.8)',
+                          color: 'rgba(245, 240, 225, 0.8)',
                           mb: 2,
                           lineHeight: 1.6,
                           fontFamily: FONTS.serif,

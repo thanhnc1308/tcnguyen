@@ -1,8 +1,9 @@
 import {
   Geist,
   Geist_Mono,
-  Allison,
-  Cormorant_Garamond,
+  EB_Garamond,
+  Dancing_Script,
+  Kalam,
 } from 'next/font/google';
 import './globals.css';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
@@ -21,18 +22,26 @@ const geistMono = Geist_Mono({
   subsets: ['latin'],
 });
 
-const allison = Allison({
-  weight: '400',
-  subsets: ['latin'],
+const ebGaramond = EB_Garamond({
+  variable: '--font-eb-garamond',
+  subsets: ['latin', 'latin-ext', 'vietnamese'],
   display: 'swap',
+  weight: ['400', '500', '600', '700', '800'],
+  style: ['normal', 'italic'],
 });
 
-const cormorantGaramond = Cormorant_Garamond({
-  variable: '--font-cormorant',
-  subsets: ['latin', 'vietnamese'],
+const dancingScript = Dancing_Script({
+  variable: '--font-dancing-script',
+  subsets: ['latin', 'latin-ext', 'vietnamese'],
   display: 'swap',
-  weight: ['300', '400', '500', '600', '700'],
-  style: ['normal', 'italic'],
+  weight: ['400', '500', '600', '700'],
+});
+
+const kalam = Kalam({
+  variable: '--font-kalam',
+  subsets: ['latin', 'latin-ext'],
+  display: 'swap',
+  weight: ['300', '400', '700'],
 });
 
 export default function RootLayout({
@@ -43,7 +52,7 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${allison} ${cormorantGaramond.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${ebGaramond.variable} ${dancingScript.variable} ${kalam.variable} antialiased`}
         suppressHydrationWarning
       >
         <AppRouterCacheProvider>

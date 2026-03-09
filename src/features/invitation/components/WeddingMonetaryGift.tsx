@@ -30,18 +30,18 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
             variant='contained'
             onClick={() => setShowContent(true)}
             sx={{
-              backgroundColor: COLORS.primary,
+              backgroundColor: COLORS.indigo,
               color: COLORS.textOnPrimary,
               fontFamily: FONTS.script,
               fontSize: '1.2rem',
               py: 2,
               px: 4,
-              borderRadius: 3,
+              borderRadius: 1,
               textTransform: 'none',
-              boxShadow: '0 4px 12px rgba(107, 76, 59, 0.25)',
+              boxShadow: '0 4px 12px rgba(44, 62, 107, 0.25)',
               '&:hover': {
-                backgroundColor: COLORS.primaryDark,
-                boxShadow: '0 6px 16px rgba(107, 76, 59, 0.35)',
+                backgroundColor: COLORS.indigoDark,
+                boxShadow: '0 6px 16px rgba(44, 62, 107, 0.35)',
                 transform: 'translateY(-2px)',
               },
               transition: `all ${TRANSITIONS.normal} ease`,
@@ -80,7 +80,7 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                     color: COLORS.textSecondary,
                     fontSize: '0.9rem',
                     mb: 1,
-                    fontWeight: 500,
+                    fontWeight: 600,
                     fontFamily: FONTS.serif,
                   }}
                 >
@@ -94,7 +94,7 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                     fontWeight: 700,
                     fontSize: '1.3rem',
                     mb: 0.5,
-                    color: COLORS.textPrimary,
+                    color: COLORS.indigo,
                     fontFamily: FONTS.serif,
                   }}
                 >
@@ -114,8 +114,8 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                       width: 200,
                       height: 200,
                       position: 'relative',
-                      border: `1px solid ${COLORS.borderGold}`,
-                      borderRadius: 2,
+                      border: `2px solid ${COLORS.borderWoodblock}`,
+                      borderRadius: 0.5,
                       overflow: 'hidden',
                     }}
                   >
@@ -157,7 +157,7 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                         sx={{
                           fontSize: '0.85rem',
                           color: COLORS.textPrimary,
-                          fontWeight: 600,
+                          fontWeight: 700,
                           textAlign: 'right',
                           fontFamily: FONTS.serif,
                         }}
@@ -171,18 +171,19 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                 {/* Large Account Number Display */}
                 <Box
                   sx={{
-                    backgroundColor: COLORS.bgCream,
-                    borderRadius: 2,
+                    backgroundColor: COLORS.bgRicePaper,
+                    borderRadius: 0.5,
                     py: 2,
                     mb: 2,
                     textAlign: 'center',
+                    border: `1px solid ${COLORS.borderWoodblock}`,
                   }}
                 >
                   <Typography
                     sx={{
                       fontSize: '1.5rem',
                       fontWeight: 700,
-                      color: COLORS.textPrimary,
+                      color: COLORS.indigo,
                       letterSpacing: '2px',
                       fontFamily: 'monospace',
                     }}
@@ -198,18 +199,18 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                   startIcon={<ContentCopy sx={{ fontSize: 18 }} />}
                   onClick={() => handleCopyAccount(account)}
                   sx={{
-                    borderColor: COLORS.accent,
-                    color: COLORS.accent,
+                    borderColor: COLORS.primary,
+                    color: COLORS.primary,
                     textTransform: 'none',
-                    fontWeight: 600,
+                    fontWeight: 700,
                     fontSize: '0.9rem',
                     py: 1.2,
-                    borderRadius: 2,
+                    borderRadius: 1,
                     fontFamily: FONTS.serif,
                     transition: `all ${TRANSITIONS.normal} ease`,
                     '&:hover': {
-                      borderColor: COLORS.accentDark,
-                      backgroundColor: `${COLORS.accent}0A`,
+                      borderColor: COLORS.primaryDark,
+                      backgroundColor: `${COLORS.primary}0A`,
                     },
                   }}
                 >
