@@ -1,177 +1,308 @@
 'use client';
 
-import { Box, Typography, Container } from '@mui/material';
+import { Avatar, Box, Typography } from '@mui/material';
 import { useWeddingInvitation } from '@/features/invitation/context/WeddingInvitationContext';
 import { Guest } from '@/types/guest';
 import { BRIDE_NAME, GROOM_NAME } from '@/constants/wedding';
-import { getGuestPronoun } from '../helpers/guest';
 import { COLORS, FONTS } from '../constants/design';
-
-function FloatingParticles() {
-  const particles = Array.from({ length: 8 });
-  return (
-    <Box
-      sx={{
-        position: 'absolute',
-        inset: 0,
-        overflow: 'hidden',
-        pointerEvents: 'none',
-      }}
-    >
-      {particles.map((_, i) => (
-        <Box
-          key={i}
-          sx={{
-            position: 'absolute',
-            left: `${10 + ((i * 11) % 80)}%`,
-            bottom: '-10%',
-            fontSize: i % 2 === 0 ? '0.9rem' : '0.6rem',
-            opacity: 0,
-            color: 'rgba(255,255,255,0.4)',
-            animation: `floatUp ${10 + (i % 3) * 2}s ease-in-out infinite`,
-            animationDelay: `${(i * 1.2) % 10}s`,
-            '@keyframes floatUp': {
-              '0%': {
-                transform: 'translateY(0) rotate(0deg)',
-                opacity: 0,
-              },
-              '15%': { opacity: 0.18 },
-              '85%': { opacity: 0.08 },
-              '100%': {
-                transform: `translateY(-110vh) rotate(${120 + ((i * 45) % 180)}deg)`,
-                opacity: 0,
-              },
-            },
-          }}
-        >
-          {i % 4 === 0 ? '♥' : i % 4 === 1 ? '✿' : i % 4 === 2 ? '❀' : '♥'}
-        </Box>
-      ))}
-    </Box>
-  );
-}
 
 export default function Envelop({ guest }: { guest: Guest | null }) {
   const { handleOpenInvitation } = useWeddingInvitation();
-  const guestPronoun = getGuestPronoun(guest);
 
   return (
     <Box
       sx={{
-        minHeight: '100vh',
-        background: `linear-gradient(135deg, ${COLORS.envelopeGradientStart} 0%, ${COLORS.envelopeGradientMid} 50%, ${COLORS.envelopeGradientEnd} 100%)`,
+        minHeight: '100dvh',
+        backgroundImage: 'url(/images/bg-envelop-page.webp)',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
         display: 'flex',
+        flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
-        py: 4,
         position: 'relative',
         overflow: 'hidden',
+        px: 3,
       }}
     >
-      <FloatingParticles />
+      <Box
+        sx={{
+          position: 'relative',
+          width: '480px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+        }}
+      >
+        {/* Guest greeting */}
+        {guest?.name && (
+          <>
+            <Typography
+              sx={{
+                fontSize: { xs: '0.85rem', sm: '0.95rem' },
+                fontFamily: FONTS.serif,
+                fontWeight: 500,
+                letterSpacing: '0.15em',
+                color: COLORS.textSecondary,
+                mb: 2,
+                textAlign: 'center',
+                opacity: 0,
+                animation: 'fadeInDown 1s ease forwards',
+                animationDelay: '0.2s',
+                '@keyframes fadeInDown': {
+                  from: {
+                    opacity: 0,
+                    transform: 'translateY(-16px)',
+                  },
+                  to: {
+                    opacity: 1,
+                    transform: 'translateY(0)',
+                  },
+                },
+              }}
+            >
+              Trân trọng kính mời
+            </Typography>
+            <Avatar
+              sx={{
+                width: { xs: 64, sm: 80 },
+                height: { xs: 64, sm: 80 },
+                mb: 1.5,
+                bgcolor: COLORS.primary,
+                color: '#fff',
+                fontSize: { xs: '1.5rem', sm: '1.8rem' },
+                fontFamily: FONTS.display,
+                opacity: 0,
+                animation: 'fadeInDown 1s ease forwards',
+                animationDelay: '0.2s',
+                '@keyframes fadeInDown': {
+                  from: {
+                    opacity: 0,
+                    transform: 'translateY(-16px)',
+                  },
+                  to: {
+                    opacity: 1,
+                    transform: 'translateY(0)',
+                  },
+                },
+              }}
+              alt={guest?.name || ''}
+              src='/images/wax-seal.webp'
+            >
+              {guest?.name?.charAt(0)?.toUpperCase()}
+            </Avatar>
+            <Typography
+              sx={{
+                fontSize: { xs: '0.85rem', sm: '0.95rem' },
+                fontFamily: FONTS.serif,
+                fontWeight: 500,
+                letterSpacing: '0.15em',
+                color: COLORS.textSecondary,
+                mb: 2,
+                textAlign: 'center',
+                opacity: 0,
+                animation: 'fadeInDown 1s ease forwards',
+                animationDelay: '0.2s',
+              }}
+            >
+              {guest?.name}
+            </Typography>
+            <Typography
+              sx={{
+                fontSize: { xs: '0.85rem', sm: '0.95rem' },
+                fontFamily: FONTS.serif,
+                fontWeight: 500,
+                letterSpacing: '0.15em',
+                color: COLORS.textSecondary,
+                mb: 2,
+                textAlign: 'center',
+                opacity: 0,
+                animation: 'fadeInDown 1s ease forwards',
+                animationDelay: '0.2s',
+                '@keyframes fadeInDown': {
+                  from: {
+                    opacity: 0,
+                    transform: 'translateY(-16px)',
+                  },
+                  to: {
+                    opacity: 1,
+                    transform: 'translateY(0)',
+                  },
+                },
+              }}
+            >
+              đến dự lễ thành hôn của
+            </Typography>
+          </>
+        )}
 
-      <Container maxWidth='sm' sx={{ position: 'relative', zIndex: 1 }}>
+        {/* Couple names */}
         <Box
           sx={{
-            background: 'rgba(255, 255, 255, 0.08)',
-            backdropFilter: 'blur(12px)',
-            borderRadius: '24px',
-            padding: { xs: 4, sm: 6 },
-            paddingBottom: 0,
             textAlign: 'center',
-            boxShadow: '0 8px 40px rgba(0, 0, 0, 0.12)',
-            border: '1px solid rgba(255, 255, 255, 0.1)',
-            overflow: 'hidden',
+            mb: 0,
+            opacity: 0,
+            animation: 'fadeIn 1.2s ease forwards',
+            animationDelay: '0.5s',
+            '@keyframes fadeIn': {
+              from: { opacity: 0 },
+              to: { opacity: 1 },
+            },
           }}
         >
-          {/* Header Text */}
           <Typography
             sx={{
-              fontSize: { xs: '0.875rem', sm: '1rem' },
-              fontFamily: FONTS.serif,
-              fontWeight: 400,
-              letterSpacing: '0.3em',
-              color: 'rgba(255, 255, 255, 0.92)',
-              mb: 4,
-              textTransform: 'uppercase',
-            }}
-          >
-            {guest?.name || ''}, {guestPronoun} nhận được thư của
-          </Typography>
-
-          {/* Couple Names */}
-          <Typography
-            sx={{
-              fontSize: { xs: '3rem', sm: '4rem', md: '5rem' },
+              fontSize: { xs: '2.8rem', sm: '3.5rem', md: '4rem' },
               fontFamily: FONTS.display,
-              color: COLORS.goldLight,
-              mb: 6,
-              textShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+              color: COLORS.primary,
+              lineHeight: 1.1,
             }}
           >
-            {GROOM_NAME} & {BRIDE_NAME}
+            {GROOM_NAME}
           </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: '1.8rem', sm: '2.2rem' },
+              fontFamily: FONTS.display,
+              color: COLORS.accent,
+              lineHeight: 1,
+              my: { xs: -0.5, sm: 0 },
+            }}
+          >
+            &
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: '2.8rem', sm: '3.5rem', md: '4rem' },
+              fontFamily: FONTS.display,
+              color: COLORS.primary,
+              lineHeight: 1.1,
+            }}
+          >
+            {BRIDE_NAME}
+          </Typography>
+        </Box>
 
-          {/* Envelope with Open Text */}
+        <Box
+          sx={{
+            position: 'relative',
+            mt: { xs: '-20%', sm: '-30%' },
+            width: { xs: '450px', sm: '600px' },
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          {/* Envelope with wax seal */}
           <Box
+            onClick={handleOpenInvitation}
             sx={{
               position: 'relative',
-              maxWidth: '400px',
-              margin: '0 auto',
+              width: '100%',
               cursor: 'pointer',
-              transition: 'transform 0.3s ease',
-              marginTop: { xs: 2, sm: 3 },
-              animation: 'envelopePulse 3s ease-in-out infinite',
-              '@keyframes envelopePulse': {
-                '0%, 100%': { transform: 'translateY(0)' },
-                '50%': { transform: 'translateY(-5px)' },
+              opacity: 0,
+              animation: 'envelopeReveal 1s ease forwards',
+              animationDelay: '1s',
+              '@keyframes envelopeReveal': {
+                from: {
+                  opacity: 0,
+                  transform: 'translateY(24px) scale(0.95)',
+                },
+                to: {
+                  opacity: 1,
+                  transform: 'translateY(0) scale(1)',
+                },
               },
-              '&:hover': {
-                animationPlayState: 'paused',
-                transform: 'translateY(-6px) scale(1.01)',
+              '&:hover .envelope-img': {
+                filter:
+                  'drop-shadow(0 12px 28px rgba(78, 54, 41, 0.25)) brightness(1.03)',
+                transform: 'translateY(-3px)',
+              },
+              '&:hover .pointer-icon': {
+                opacity: 1,
               },
             }}
-            onClick={handleOpenInvitation}
           >
-            {/* Envelope Image */}
+            {/* Envelope image */}
             <Box
+              className='envelope-img'
               component='img'
-              src='/images/envelop.png'
+              src='/images/envelop.webp'
               alt='Wedding Invitation Envelope'
               sx={{
                 width: '100%',
                 height: 'auto',
                 display: 'block',
+                filter: 'drop-shadow(0 8px 24px rgba(78, 54, 41, 0.18))',
+                transition: 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
               }}
             />
 
-            {/* Open Envelop Text */}
+            {/* Wax seal overlay */}
             <Box
+              className='wax-seal'
+              component='img'
+              src='/images/wax-seal.webp'
+              alt='Wax Seal'
               sx={{
                 position: 'absolute',
-                bottom: '65%',
-                left: '53%',
-                transform: 'translateX(-50%)',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
+                zIndex: 2,
+                top: '60%',
+                left: '50%',
+                transform: 'translate(-50%, -50%)',
+                width: { xs: '21%', sm: '20%' },
+                height: 'auto',
+                pointerEvents: 'none',
               }}
-            >
-              <Typography
-                sx={{
-                  fontSize: { xs: '1rem', sm: '1.25rem' },
-                  fontWeight: 600,
-                  color: COLORS.textPrimary,
-                  textTransform: 'none',
-                  fontFamily: FONTS.serif,
-                }}
-              >
-                Mở thư
-              </Typography>
-            </Box>
+            />
+
+            {/* Pointer click icon on the seal */}
+            <Box
+              component='img'
+              src='/images/pointer.webp'
+              alt=''
+              sx={{
+                position: 'absolute',
+                zIndex: 3,
+                top: '66%',
+                left: '58%',
+                transform: 'translate(-50%, -50%)',
+                width: '40px',
+                height: '40px',
+                pointerEvents: 'none',
+                filter:
+                  'drop-shadow(0 0 1px rgba(80,60,40,0.6)) drop-shadow(0 0 0.5px rgba(80,60,40,0.4))',
+                animation: 'pointerBounce 2s ease-in-out 2s infinite',
+                '@keyframes pointerBounce': {
+                  '0%, 100%': { transform: 'translate(-50%, -50%)' },
+                  '50%': { transform: 'translate(-50%, calc(-50% - 6px))' },
+                },
+              }}
+            />
           </Box>
+
+          {/* Call to action */}
+          <Typography
+            sx={{
+              position: 'absolute',
+              bottom: '10%',
+              mt: 2,
+              whiteSpace: 'nowrap',
+              fontSize: { xs: '1.3rem', sm: '1.5rem' },
+              fontFamily: FONTS.display,
+              fontStyle: 'italic',
+              color: COLORS.textSecondary,
+              letterSpacing: '0.05em',
+              opacity: 0,
+              animation: 'fadeIn 1s ease forwards',
+              animationDelay: '1.3s',
+            }}
+          >
+            Nhấn vào đây để mở phong bì
+          </Typography>
         </Box>
-      </Container>
+      </Box>
     </Box>
   );
 }
