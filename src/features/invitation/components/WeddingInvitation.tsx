@@ -12,9 +12,11 @@ import EventInfo from '@/features/invitation/components/EventInfo';
 import Envelop from '@/features/invitation/components/Envelop';
 import InvitationMessage from '@/features/invitation/components/InvitationMessage';
 import GiftMessage from '@/features/invitation/components/GiftMessage';
+import MusicToggle from '@/features/invitation/components/MusicToggle';
 import { Box, Fade, Grow } from '@mui/material';
 import { Guest, GuestSource } from '@/types/guest';
 import { WeddingInvitationContext } from '@/features/invitation/context/WeddingInvitationContext';
+import { useBackgroundMusic } from '@/features/invitation/hooks/useBackgroundMusic';
 
 export default function WeddingInvitation({
   guest,
@@ -25,9 +27,11 @@ export default function WeddingInvitation({
 }) {
   const resolvedSide = side ?? guest?.guestSource ?? GuestSource.Groom;
   const [isInvitationOpened, setIsInvitationOpened] = useState(false);
+  const { play, isPlaying, isMuted, toggleMute } = useBackgroundMusic('/audio/bg-music.mp3');
 
   const handleOpenInvitation = () => {
     setIsInvitationOpened(true);
+    play();
   };
 
   const shouldShowEnvelop = guest !== null && !isInvitationOpened;
@@ -62,6 +66,9 @@ export default function WeddingInvitation({
           <Footer />
         </Box>
       </Grow>
+      {(isPlaying || guest === null) && (
+        <MusicToggle isPlaying={isPlaying} isMuted={isMuted} onPlay={play} onToggle={toggleMute} />
+      )}
     </WeddingInvitationContext.Provider>
   );
 }
