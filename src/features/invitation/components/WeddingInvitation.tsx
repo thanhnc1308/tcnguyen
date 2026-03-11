@@ -1,17 +1,17 @@
 'use client';
 
 import { useState } from 'react';
-import Navigation from '@/features/invitation/components/Navigation';
 import Banner from '@/features/invitation/components/Banner';
-import PhotoGallery from '@/features/invitation/components/PhotoGallery';
-import WeddingMonetaryGift from '@/features/invitation/components/WeddingMonetaryGift';
 import InvitationResponse from '@/features/invitation/components/InvitationResponse';
-import WeddingGuestBook from '@/features/invitation/components/WeddingGuestBook';
 import Footer from '@/features/invitation/components/Footer';
 import EventInfo from '@/features/invitation/components/EventInfo';
 import Envelop from '@/features/invitation/components/Envelop';
-import InvitationMessage from '@/features/invitation/components/InvitationMessage';
+import Timeline from '@/features/invitation/components/Timeline';
+import PhotoGallery from '@/features/invitation/components/PhotoGallery';
 import GiftMessage from '@/features/invitation/components/GiftMessage';
+import WeddingMonetaryGift from '@/features/invitation/components/WeddingMonetaryGift';
+import WeddingGuestBook from '@/features/invitation/components/WeddingGuestBook';
+import InvitationHeading from '@/features/invitation/components/InvitationHeading';
 import MusicToggle from '@/features/invitation/components/MusicToggle';
 import { Box, Fade, Grow } from '@mui/material';
 import { Guest, GuestSource } from '@/types/guest';
@@ -27,7 +27,9 @@ export default function WeddingInvitation({
 }) {
   const resolvedSide = side ?? guest?.guestSource ?? GuestSource.Groom;
   const [isInvitationOpened, setIsInvitationOpened] = useState(false);
-  const { play, isPlaying, isMuted, toggleMute } = useBackgroundMusic('/audio/bg-music.mp3');
+  const { play, isPlaying, isMuted, toggleMute } = useBackgroundMusic(
+    '/audio/bg-music.mp3',
+  );
 
   const handleOpenInvitation = () => {
     setIsInvitationOpened(true);
@@ -54,10 +56,10 @@ export default function WeddingInvitation({
         unmountOnExit
       >
         <Box>
-          <Navigation />
           <Banner />
-          <InvitationMessage />
+          <InvitationHeading />
           <EventInfo side={resolvedSide} />
+          <Timeline />
           <PhotoGallery />
           <GiftMessage />
           <WeddingMonetaryGift />
@@ -67,7 +69,12 @@ export default function WeddingInvitation({
         </Box>
       </Grow>
       {(isPlaying || guest === null) && (
-        <MusicToggle isPlaying={isPlaying} isMuted={isMuted} onPlay={play} onToggle={toggleMute} />
+        <MusicToggle
+          isPlaying={isPlaying}
+          isMuted={isMuted}
+          onPlay={play}
+          onToggle={toggleMute}
+        />
       )}
     </WeddingInvitationContext.Provider>
   );

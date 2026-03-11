@@ -1,150 +1,195 @@
-import { Dancing_Script } from 'next/font/google';
-import CountdownTimer from './CountdownTimer';
-import { formatDisplayDate } from '@/utils/date';
-import SaveTheDateButton from './SaveTheDateButton';
-import { BRIDE_NAME, GROOM_NAME, WEDDING_DATE } from '@/constants/wedding';
-import { COLORS, FONTS } from '../constants/design';
+'use client';
 
-const dancingScript = Dancing_Script({
-  variable: '--font-dancing-script',
-  subsets: ['latin'],
-  display: 'swap',
-  weight: ['400', '500', '600', '700'],
-  style: ['normal'],
-});
+import { Box, Typography } from '@mui/material';
+import { BRIDE_NAME, GROOM_NAME, CEREMONY_DATE } from '@/constants/wedding';
+import { FONTS } from '../constants/design';
+import CountdownTimer from './CountdownTimer';
+import SaveTheDateButton from './SaveTheDateButton';
 
 interface WeddingBannerProps {
-  quote?: string;
   backgroundImage?: string;
-  showCountdown?: boolean;
+  groomPhoto?: string;
+  bridePhoto?: string;
 }
 
 export default function WeddingBanner({
-  quote = '',
   backgroundImage = '/images/wedding-bg.JPG',
+  groomPhoto = '/images/wedding-bg.JPG',
+  bridePhoto = '/images/wedding-bg.JPG',
 }: WeddingBannerProps) {
   return (
-    <div className='relative min-h-screen overflow-hidden'>
-      {/* Background Image */}
-      <div
-        className='absolute inset-0 bg-cover bg-center bg-no-repeat'
-        style={{
+    <Box sx={{ position: 'relative', overflow: 'hidden' }}>
+      {/* Dark background section with photo */}
+      <Box
+        sx={{
+          position: 'relative',
           backgroundImage: `url('${backgroundImage}')`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+          pb: 12,
+          pt: 6,
         }}
       >
-        <div
-          className='absolute inset-0'
-          style={{
-            background: `linear-gradient(to bottom, ${COLORS.bgCream}33 0%, ${COLORS.bgCream}4D 50%, ${COLORS.bgCream}80 100%)`,
+        <Box
+          sx={{
+            position: 'absolute',
+            inset: 0,
+            backgroundColor: 'rgba(0, 0, 0, 0.45)',
           }}
         />
-      </div>
 
-      {/* Main Content */}
-      <div className='relative z-10 flex flex-col items-center justify-center min-h-screen px-4'>
-        {/* Script Title */}
-        <p
-          className='text-3xl md:text-4xl mb-8'
-          style={{
-            fontFamily: dancingScript.style.fontFamily,
-            color: COLORS.textSecondary,
-            fontWeight: 400,
-          }}
-        >
-          Dám cưới
-        </p>
-
-        {/* Names */}
-        <div className='text-center mb-6'>
-          <h1
-            className='text-6xl md:text-7xl lg:text-8xl mb-4'
-            style={{
-              fontFamily: dancingScript.style.fontFamily,
-              color: COLORS.primary,
+        <Box sx={{ position: 'relative', zIndex: 1, textAlign: 'center' }}>
+          {/* "Wedding" script title */}
+          <Typography
+            sx={{
+              fontFamily: FONTS.script,
+              color: '#FAFAF8',
+              fontSize: { xs: '2.5rem', sm: '3rem' },
+              fontWeight: 400,
+              mb: 6,
             }}
           >
-            {GROOM_NAME}
-            <span
-              style={{
-                color: COLORS.accent,
-                margin: '0 0.3em',
-                fontSize: '0.6em',
+            Lễ thành hôn
+          </Typography>
+
+          {/* Couple photos */}
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: { xs: 3, sm: 5 },
+              mb: 4,
+              px: 2,
+            }}
+          >
+            {/* Groom photo */}
+            <Box
+              sx={{
+                width: { xs: 130, sm: 160 },
+                height: { xs: 170, sm: 210 },
+                borderRadius: '50% 50% 50% 50% / 55% 55% 45% 45%',
+                overflow: 'hidden',
+                border: '3px solid rgba(255, 255, 255, 0.6)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+              }}
+            >
+              <Box
+                component='img'
+                src={groomPhoto}
+                alt={GROOM_NAME}
+                sx={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  objectPosition: '30% center',
+                }}
+              />
+            </Box>
+
+            {/* Bride photo */}
+            <Box
+              sx={{
+                width: { xs: 130, sm: 160 },
+                height: { xs: 170, sm: 210 },
+                borderRadius: '50% 50% 50% 50% / 55% 55% 45% 45%',
+                overflow: 'hidden',
+                border: '3px solid rgba(255, 255, 255, 0.6)',
+                boxShadow: '0 8px 32px rgba(0, 0, 0, 0.3)',
+              }}
+            >
+              <Box
+                component='img'
+                src={bridePhoto}
+                alt={BRIDE_NAME}
+                sx={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  objectPosition: '70% center',
+                }}
+              />
+            </Box>
+          </Box>
+
+          {/* Names */}
+          <Box
+            sx={{
+              display: 'flex',
+              justifyContent: 'center',
+              gap: { xs: 6, sm: 6 },
+              px: 2,
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: FONTS.script,
+                color: '#FAFAF8',
+                fontSize: { xs: '1.5rem', sm: '3.5rem' },
+                fontWeight: 500,
+              }}
+            >
+              {GROOM_NAME}
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: FONTS.script,
+                color: 'rgba(250, 250, 248, 0.6)',
+                fontSize: { xs: '1.5rem', sm: '3.5rem' },
                 fontWeight: 400,
+                alignSelf: 'center',
               }}
             >
               &amp;
-            </span>
-            {BRIDE_NAME}
-          </h1>
-
-          {/* Ornamental line */}
-          <div className='flex items-center justify-center gap-3 mb-4'>
-            <div
-              className='h-px w-16'
-              style={{
-                background: `linear-gradient(to right, transparent, ${COLORS.accent})`,
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: FONTS.script,
+                color: '#FAFAF8',
+                fontSize: { xs: '1.5rem', sm: '3.5rem' },
+                fontWeight: 500,
               }}
-            />
-            <svg
-              width='12'
-              height='12'
-              viewBox='0 0 16 16'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
             >
-              <path
-                d='M8 0L9.8 6.2L16 8L9.8 9.8L8 16L6.2 9.8L0 8L6.2 6.2L8 0Z'
-                fill={COLORS.accent}
-                opacity='0.7'
-              />
-            </svg>
-            <div
-              className='h-px w-16'
-              style={{
-                background: `linear-gradient(to left, transparent, ${COLORS.accent})`,
-              }}
-            />
-          </div>
-        </div>
+              {BRIDE_NAME}
+            </Typography>
+          </Box>
 
-        {/* Date */}
-        <div className='text-center mb-8'>
-          <p
-            style={{
-              fontFamily: FONTS.serif,
-              color: COLORS.textPrimary,
-              fontWeight: 500,
-              letterSpacing: '0.2em',
-              fontSize: '1.15rem',
-            }}
-          >
-            {formatDisplayDate(WEDDING_DATE)}
-          </p>
-        </div>
-
-        {/* Quote */}
-        {quote && (
-          <div className='text-center mb-12 max-w-md'>
-            <p
-              style={{
+          {/* Date and time info */}
+          <Box sx={{ mt: 4 }}>
+            <Typography
+              sx={{
                 fontFamily: FONTS.serif,
-                color: COLORS.textSecondary,
-                fontStyle: 'italic',
-                fontSize: '1.05rem',
-                lineHeight: 1.7,
+                fontSize: { xs: '0.85rem', sm: '0.95rem' },
+                color: 'rgba(250, 250, 248, 0.75)',
+                lineHeight: 1.8,
+                mb: 1,
+                letterSpacing: '0.02em',
               }}
             >
-              &quot;{quote}&quot;
-            </p>
-          </div>
-        )}
+              VÀO LÚC
+            </Typography>
+            <Typography
+              sx={{
+                fontFamily: FONTS.serif,
+                fontSize: { xs: '1rem', sm: '1.5rem' },
+                color: '#FAFAF8',
+                lineHeight: 2.5,
+                fontWeight: 800,
+                mb: 0.5,
+              }}
+            >
+              15:00 CHỦ NHẬT, NGÀY 05 THÁNG 04 NĂM 2026
+            </Typography>
+          </Box>
 
-        {/* Countdown Timer */}
-        <CountdownTimer weddingDate={WEDDING_DATE} />
+          {/* Countdown Timer */}
+          <Box sx={{ mt: 4 }}>
+            <CountdownTimer weddingDate={CEREMONY_DATE} />
+          </Box>
 
-        {/* Save the Date Button */}
-        <SaveTheDateButton />
-      </div>
-    </div>
+          {/* Save the Date Button */}
+          <SaveTheDateButton />
+        </Box>
+      </Box>
+    </Box>
   );
 }

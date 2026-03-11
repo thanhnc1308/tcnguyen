@@ -12,7 +12,7 @@ export default function Footer() {
         position: 'relative',
         py: { xs: 8, md: 10 },
         mt: 0,
-        backgroundImage: 'url(/images/wedding-bg.JPG)',
+        backgroundImage: 'url(/images/thankyou.jpg)',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
@@ -64,8 +64,8 @@ export default function Footer() {
             <br />
             Sự hiện diện của bạn là món quà ý nghĩa nhất.
             <br />
-            Chúng mình vô cùng trân quý khi được cùng bạn chia sẻ niềm hạnh
-            phúc trong ngày.
+            Chúng mình vô cùng trân quý khi được cùng bạn chia sẻ niềm hạnh phúc
+            trong ngày.
           </Typography>
 
           {/* Made with Love Message */}
@@ -85,22 +85,17 @@ export default function Footer() {
               lineHeight: 1.6,
             }}
           >
-            Made by{' '}
+            Crafted by{' '}
             <Tooltip title='and lots of help from AI :v' arrow placement='top'>
               <Box
                 component='span'
                 sx={{
-                  fontWeight: 600,
-                  color: 'rgba(255, 255, 255, 0.6)',
                   cursor: 'help',
                   textDecoration: 'underline',
-                  textDecorationStyle: 'dotted',
-                  textUnderlineOffset: '3px',
-                  transition: 'all 0.25s ease',
-                  '&:hover': {
-                    color: COLORS.heartRed,
-                    textDecorationColor: COLORS.heartRed,
-                  },
+                  fontWeight: 600,
+                  color: COLORS.heartRed,
+                  fontFamily: FONTS.script,
+                  fontSize: '1.1em',
                 }}
               >
                 Thành

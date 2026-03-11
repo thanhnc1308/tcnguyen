@@ -3,6 +3,7 @@ import {
   Geist_Mono,
   Allison,
   Cormorant_Garamond,
+  Dancing_Script,
 } from 'next/font/google';
 import './globals.css';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
@@ -27,6 +28,13 @@ const allison = Allison({
   display: 'swap',
 });
 
+const dancingScript = Dancing_Script({
+  variable: '--font-dancing-script',
+  subsets: ['latin', 'vietnamese'],
+  display: 'swap',
+  weight: ['400', '500', '600', '700'],
+});
+
 const cormorantGaramond = Cormorant_Garamond({
   variable: '--font-cormorant',
   subsets: ['latin', 'vietnamese'],
@@ -43,7 +51,7 @@ export default function RootLayout({
   return (
     <html lang='en' suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${allison} ${cormorantGaramond.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${allison} ${cormorantGaramond.variable} ${dancingScript.variable} antialiased`}
         suppressHydrationWarning
       >
         <AppRouterCacheProvider>

@@ -95,7 +95,7 @@ export default function WeddingGuestBook() {
     <Box
       id='guestbook'
       sx={{
-        py: { xs: 8, md: 12 },
+        py: { xs: 4, md: 4 },
         backgroundColor: COLORS.bgCream,
         position: 'relative',
         overflow: 'hidden',
@@ -112,7 +112,7 @@ export default function WeddingGuestBook() {
             }}
           >
             <Typography variant='h2' component='h2' sx={sectionHeadingStyle}>
-              Lời chúc
+              Sổ lưu bút
             </Typography>
           </Box>
         </ScrollReveal>

@@ -1,286 +1,247 @@
 'use client';
 
-import {
-  Box,
-  Typography,
-  Container,
-  Card,
-  CardContent,
-  Grid,
-  Divider,
-  Button,
-  Chip,
-} from '@mui/material';
-import {
-  LocationOn,
-  AccessTime,
-  Directions,
-  Event,
-  Restaurant,
-} from '@mui/icons-material';
-import { months, weekdays } from '../constants';
-import {
-  COLORS,
-  FONTS,
-  cardStyle,
-  primaryButtonStyle,
-  sectionHeadingStyle,
-} from '../constants/design';
+import { Box, Typography, Button } from '@mui/material';
+import { COLORS, FONTS } from '../constants/design';
 import { getEventsForSide } from '../constants/events';
 import ScrollReveal from './ScrollReveal';
 import { GuestSource } from '@/types/guest';
+import { CEREMONY_DATE } from '@/constants/wedding';
 
 interface EventInfoProps {
   side?: GuestSource;
-  title?: string;
-  subtitle?: string;
   backgroundImage?: string;
+}
+
+function MiniCalendar() {
+  const date = new Date(CEREMONY_DATE);
+  const year = date.getFullYear();
+  const month = date.getMonth(); // 0-indexed
+  const highlightDay = date.getDate();
+  const monthName = `Tháng ${month + 1}`;
+
+  const firstDay = new Date(year, month, 1).getDay();
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+  const weekDays = ['CN', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7'];
+
+  const cells: (number | null)[] = [];
+  for (let i = 0; i < firstDay; i++) cells.push(null);
+  for (let d = 1; d <= daysInMonth; d++) cells.push(d);
+
+  return (
+    <Box sx={{ maxWidth: 320, mx: 'auto', mt: 3 }}>
+      <Typography
+        sx={{
+          fontFamily: FONTS.serif,
+          fontSize: '1.1rem',
+          color: COLORS.textPrimary,
+          fontWeight: 600,
+          textAlign: 'center',
+          mb: 2,
+          letterSpacing: '0.05em',
+        }}
+      >
+        {monthName}
+      </Typography>
+
+      {/* Weekday headers */}
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(7, 1fr)',
+          gap: 0.5,
+          mb: 1,
+        }}
+      >
+        {weekDays.map((day) => (
+          <Typography
+            key={day}
+            sx={{
+              fontFamily: FONTS.serif,
+              fontSize: '0.7rem',
+              color: COLORS.textSecondary,
+              textAlign: 'center',
+              fontWeight: 500,
+            }}
+          >
+            {day}
+          </Typography>
+        ))}
+      </Box>
+
+      {/* Days grid */}
+      <Box
+        sx={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(7, 1fr)',
+          gap: 0.5,
+        }}
+      >
+        {cells.map((day, index) => (
+          <Box
+            key={index}
+            sx={{
+              textAlign: 'center',
+              py: 0.5,
+              borderRadius: '50%',
+              ...(day === highlightDay && {
+                backgroundColor: COLORS.accent,
+                color: '#fff',
+              }),
+            }}
+          >
+            <Typography
+              sx={{
+                fontFamily: FONTS.serif,
+                fontSize: '0.75rem',
+                color: day === highlightDay ? '#fff' : COLORS.textPrimary,
+                fontWeight: day === highlightDay ? 700 : 400,
+              }}
+            >
+              {day ?? ''}
+            </Typography>
+          </Box>
+        ))}
+      </Box>
+    </Box>
+  );
 }
 
 export default function EventInfo({
   side = GuestSource.Groom,
-  title = 'Thông Tin Sự Kiện',
-  backgroundImage = '/images/wedding-bg.JPG',
 }: EventInfoProps) {
   const events = getEventsForSide(side);
-  const handleDirections = (address: string, mapUrl?: string) => {
-    if (mapUrl) {
-      window.open(mapUrl, '_blank');
+  const event = events[0];
+
+  const handleDirections = () => {
+    if (event.mapUrl) {
+      window.open(event.mapUrl, '_blank');
     } else {
-      const encodedAddress = encodeURIComponent(address);
       window.open(
-        `https://www.google.com/maps/search/?api=1&query=${encodedAddress}`,
+        `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(event.address)}`,
         '_blank',
       );
     }
   };
 
-  const formatDate = (dateString: string) => {
-    const [day, month, year] = dateString.split('.');
-    const date = new Date(
-      Number.parseInt(year),
-      Number.parseInt(month) - 1,
-      Number.parseInt(day),
-    );
-
-    const weekday = weekdays[date.getDay()];
-    const dayNum = date.getDate();
-    const monthName = months[date.getMonth()];
-    const yearNum = date.getFullYear();
-
-    return `${weekday}, ${dayNum} ${monthName}, ${yearNum}`;
-  };
-
   return (
-    <Box
-      id='event'
-      sx={{
-        position: 'relative',
-        backgroundImage: `url('${backgroundImage}')`,
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-        backgroundRepeat: 'no-repeat',
-        display: 'flex',
-        alignItems: 'center',
-        py: { xs: 8, md: 12 },
-      }}
-    >
-      {/* Background Overlay */}
+    <Box id='event'>
+      {/* Time and Calendar section */}
       <Box
         sx={{
-          position: 'absolute',
-          inset: 0,
-          backgroundColor: COLORS.overlayLight,
-          backdropFilter: 'blur(2px)',
+          py: { xs: 1, md: 2 },
+          pt: '0 !important',
+          px: 3,
+          backgroundColor: COLORS.bgCream,
+          textAlign: 'center',
         }}
-      />
-
-      <Container maxWidth='lg' sx={{ position: 'relative', zIndex: 1 }}>
-        {/* Header */}
+      >
         <ScrollReveal>
-          <Box sx={{ textAlign: 'center', mb: 6 }}>
-            <Typography variant='h2' component='h2' sx={sectionHeadingStyle}>
-              {title}
-            </Typography>
-          </Box>
+          {/* Large time */}
+          <Typography
+            sx={{
+              fontFamily: FONTS.serif,
+              fontSize: { xs: '3.5rem', sm: '4.5rem' },
+              color: COLORS.textPrimary,
+              fontWeight: 700,
+            }}
+          >
+            {event.time}
+          </Typography>
+
+          <MiniCalendar />
         </ScrollReveal>
+      </Box>
 
-        {/* Events Grid */}
-        <Grid container spacing={4}>
-          {events.map((event, index) => (
-            <Grid size={{ xs: 12, md: 12 }} key={event.id}>
-              <ScrollReveal delay={index * 0.2}>
-                <Card
-                  sx={{
-                    height: '100%',
-                    ...cardStyle,
-                  }}
-                >
-                  <CardContent sx={{ p: 4 }}>
-                    {/* Event Type Badge */}
-                    <Box
-                      sx={{
-                        display: 'flex',
-                        justifyContent: 'space-between',
-                        alignItems: 'flex-start',
-                        mb: 3,
-                      }}
-                    >
-                      <Chip
-                        icon={
-                          event.type === 'ceremony' ? <Event /> : <Restaurant />
-                        }
-                        label={
-                          event.type === 'ceremony'
-                            ? 'LỄ THÀNH HÔN'
-                            : 'TIỆC CƯỚI'
-                        }
-                        sx={{
-                          backgroundColor:
-                            event.type === 'ceremony'
-                              ? `${COLORS.primary}14`
-                              : `${COLORS.accent}1A`,
-                          color:
-                            event.type === 'ceremony'
-                              ? COLORS.primary
-                              : COLORS.accentDark,
-                          fontWeight: 600,
-                          fontSize: '0.75rem',
-                          fontFamily: FONTS.serif,
-                        }}
-                      />
-                    </Box>
+      {/* Venue section */}
+      <Box
+        sx={{
+          py: { xs: 1, md: 2 },
+          px: 3,
+          backgroundColor: COLORS.bgCream,
+          textAlign: 'center',
+        }}
+      >
+        <ScrollReveal>
+          {/* "Tại" script */}
+          <Typography
+            sx={{
+              fontFamily: FONTS.script,
+              fontSize: { xs: '1.8rem', sm: '2.2rem' },
+              color: COLORS.accent,
+              fontWeight: 400,
+              mb: 1.5,
+            }}
+          >
+            Tại
+          </Typography>
 
-                    {/* Event Title */}
-                    <Typography
-                      variant='h4'
-                      component='h3'
-                      sx={{
-                        fontFamily: FONTS.script,
-                        color: COLORS.primary,
-                        fontWeight: 700,
-                        mb: 2,
-                        fontSize: { xs: '1.8rem', md: '2.2rem' },
-                      }}
-                    >
-                      {event.title}
-                    </Typography>
+          {/* Venue name */}
+          <Typography
+            sx={{
+              fontFamily: FONTS.serif,
+              fontSize: { xs: '1.6rem', sm: '2rem' },
+              color: COLORS.textPrimary,
+              fontWeight: 700,
+              mb: 1.5,
+              letterSpacing: '0.02em',
+            }}
+          >
+            {event.venue}
+          </Typography>
 
-                    {/* Date and Time */}
-                    <Box sx={{ mb: 3 }}>
-                      <Box
-                        sx={{ display: 'flex', alignItems: 'center', mb: 1 }}
-                      >
-                        <Event
-                          sx={{ color: COLORS.primary, mr: 1, fontSize: 20 }}
-                        />
-                        <Typography
-                          variant='body1'
-                          sx={{
-                            color: COLORS.textPrimary,
-                            fontWeight: 600,
-                            fontFamily: FONTS.serif,
-                          }}
-                        >
-                          {formatDate(event.date)}
-                        </Typography>
-                      </Box>
-                      <Box
-                        sx={{ display: 'flex', alignItems: 'center', ml: 3 }}
-                      >
-                        <AccessTime
-                          sx={{ color: COLORS.primary, mr: 1, fontSize: 18 }}
-                        />
-                        <Typography
-                          variant='body2'
-                          sx={{
-                            color: COLORS.textSecondary,
-                            fontFamily: FONTS.serif,
-                          }}
-                        >
-                          {event.time}
-                        </Typography>
-                      </Box>
-                    </Box>
+          {/* Address */}
+          <Typography
+            sx={{
+              fontFamily: FONTS.serif,
+              fontSize: { xs: '0.85rem', sm: '0.95rem' },
+              color: COLORS.textSecondary,
+              lineHeight: 1.6,
+              maxWidth: 400,
+              mx: 'auto',
+              mb: 1.5,
+            }}
+          >
+            {event.address}
+          </Typography>
 
-                    <Divider sx={{ my: 2, borderColor: COLORS.borderGold }} />
+          {/* Responsive Map */}
+          <Box
+            sx={{
+              width: '100%',
+              maxWidth: { md: 800 },
+              mx: 'auto',
+              aspectRatio: '4 / 3',
+              overflow: 'hidden',
+              mb: 1.5,
+            }}
+          >
+            {event.embededIframe}
+          </Box>
 
-                    {/* Venue Information */}
-                    <Box sx={{ mb: 3 }}>
-                      <Typography
-                        variant='h6'
-                        sx={{
-                          color: COLORS.primary,
-                          fontWeight: 600,
-                          mb: 1,
-                          fontSize: '1.1rem',
-                          fontFamily: FONTS.serif,
-                        }}
-                      >
-                        {event.venue}
-                      </Typography>
-                      <Box
-                        sx={{
-                          display: 'flex',
-                          alignItems: 'flex-start',
-                          mb: 2,
-                        }}
-                      >
-                        <LocationOn
-                          sx={{
-                            color: COLORS.primary,
-                            mr: 1,
-                            fontSize: 20,
-                            mt: 0.2,
-                          }}
-                        />
-                        <Typography
-                          variant='body2'
-                          sx={{
-                            color: COLORS.textSecondary,
-                            lineHeight: 1.5,
-                            flex: 1,
-                            fontFamily: FONTS.serif,
-                          }}
-                        >
-                          {event.address}
-                        </Typography>
-                      </Box>
-                    </Box>
-
-                    {/* Responsive Map */}
-                    <Box
-                      sx={{
-                        width: '100%',
-                        aspectRatio: '4 / 3',
-                        borderRadius: 2,
-                        overflow: 'hidden',
-                        mb: 2,
-                        border: `1px solid ${COLORS.borderGold}`,
-                      }}
-                    >
-                      {event.embededIframe}
-                    </Box>
-
-                    {/* Directions Button */}
-                    <Button
-                      variant='contained'
-                      startIcon={<Directions />}
-                      onClick={() =>
-                        handleDirections(event.address, event.mapUrl)
-                      }
-                      fullWidth
-                      sx={primaryButtonStyle}
-                    >
-                      Xem đường đi
-                    </Button>
-                  </CardContent>
-                </Card>
-              </ScrollReveal>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
+          {/* Map button */}
+          <Button
+            onClick={handleDirections}
+            sx={{
+              backgroundColor: COLORS.accent,
+              color: '#fff',
+              fontFamily: FONTS.serif,
+              fontSize: '0.85rem',
+              fontWeight: 600,
+              px: 4,
+              py: 1.2,
+              borderRadius: 2,
+              textTransform: 'none',
+              boxShadow: '0 4px 12px rgba(107, 127, 94, 0.25)',
+              '&:hover': {
+                backgroundColor: COLORS.accentDark,
+                boxShadow: '0 6px 16px rgba(107, 127, 94, 0.35)',
+              },
+            }}
+          >
+            Xem đường đi
+          </Button>
+        </ScrollReveal>
+      </Box>
     </Box>
   );
 }

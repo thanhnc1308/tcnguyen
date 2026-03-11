@@ -6,15 +6,10 @@ import { ContentCopy } from '@mui/icons-material';
 import Image from 'next/image';
 import { BANK_ACCOUNTS } from '@/constants/wedding';
 import toast from 'react-hot-toast';
-import { COLORS, FONTS, TRANSITIONS, cardStyle } from '../constants/design';
+import { COLORS, FONTS, TRANSITIONS } from '../constants/design';
 import ScrollReveal from './ScrollReveal';
 
-interface WeddingMonetaryGiftProps {
-  buttonVariant?: 'contained' | 'outlined' | 'text';
-  buttonSize?: 'small' | 'medium' | 'large';
-}
-
-export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
+export default function WeddingMonetaryGift() {
   const [showContent, setShowContent] = useState(false);
 
   const handleCopyAccount = (account: (typeof BANK_ACCOUNTS)[0]) => {
@@ -23,40 +18,49 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
   };
 
   return (
-    <Box sx={{ p: 3, backgroundColor: COLORS.bgWarm }}>
+    <Box sx={{ pb: { xs: 1, md: 2 }, backgroundColor: COLORS.bgCream }}>
       {!showContent ? (
-        <Box sx={{ textAlign: 'center' }}>
-          <Button
-            variant='contained'
+        <Box
+          sx={{
+            textAlign: 'center',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+          }}
+        >
+          <Box
             onClick={() => setShowContent(true)}
             sx={{
-              backgroundColor: COLORS.accent,
-              color: COLORS.textOnPrimary,
-              fontFamily: FONTS.script,
-              fontSize: '1.2rem',
-              py: 2,
-              px: 4,
-              borderRadius: 3,
-              textTransform: 'none',
-              boxShadow: '0 4px 12px rgba(107, 127, 94, 0.25)',
-              '&:hover': {
-                backgroundColor: COLORS.accentDark,
-                boxShadow: '0 6px 16px rgba(107, 127, 94, 0.35)',
-                transform: 'translateY(-2px)',
-              },
+              cursor: 'pointer',
               transition: `all ${TRANSITIONS.normal} ease`,
+              '&:hover': {
+                transform: 'scale(1.05)',
+              },
+              '&:active': {
+                transform: 'scale(0.98)',
+              },
+              width: 250,
+              height: 300,
+              position: 'relative',
             }}
           >
-            Nếu bạn muốn gửi quà mừng ...
-          </Button>
+            <Image
+              src='/images/gift-box.png'
+              alt='Hộp quà mừng'
+              fill
+              style={{ objectFit: 'contain' }}
+            />
+          </Box>
         </Box>
       ) : (
         <ScrollReveal>
           <Box
             sx={{
+              pt: 4,
+              px: 3,
               display: 'flex',
               gap: 3,
-              maxWidth: 900,
+              maxWidth: 800,
               mx: 'auto',
               flexDirection: { xs: 'column', md: 'row' },
             }}
@@ -66,11 +70,11 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                 key={account.id}
                 sx={{
                   flex: 1,
-                  ...cardStyle,
+                  backgroundColor: COLORS.bgWhite,
+                  borderRadius: 3,
+                  border: `1px solid ${COLORS.borderGold}`,
+                  boxShadow: '0 4px 16px rgba(0, 0, 0, 0.04)',
                   p: 3,
-                  '&:hover': {
-                    ...cardStyle['&:hover'],
-                  },
                 }}
               >
                 {/* Title */}
@@ -78,10 +82,11 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                   sx={{
                     textAlign: 'center',
                     color: COLORS.textSecondary,
-                    fontSize: '0.9rem',
-                    mb: 1,
+                    fontSize: '0.8rem',
+                    mb: 0.5,
                     fontWeight: 500,
                     fontFamily: FONTS.serif,
+                    letterSpacing: '0.1em',
                   }}
                 >
                   {account.title}
@@ -92,8 +97,8 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                   sx={{
                     textAlign: 'center',
                     fontWeight: 700,
-                    fontSize: '1.3rem',
-                    mb: 0.5,
+                    fontSize: '1.2rem',
+                    mb: 2,
                     color: COLORS.textPrimary,
                     fontFamily: FONTS.serif,
                   }}
@@ -106,13 +111,13 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                   sx={{
                     display: 'flex',
                     justifyContent: 'center',
-                    mb: 3,
+                    mb: 2.5,
                   }}
                 >
                   <Box
                     sx={{
-                      width: 200,
-                      height: 200,
+                      width: 180,
+                      height: 180,
                       position: 'relative',
                       border: `1px solid ${COLORS.borderGold}`,
                       borderRadius: 2,
@@ -129,10 +134,10 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                 </Box>
 
                 {/* Account Details */}
-                <Box sx={{ mb: 3 }}>
+                <Box sx={{ mb: 2.5 }}>
                   {[
-                    { label: 'Tên tài khoản', value: account.accountName },
-                    { label: 'Số tài khoản', value: account.accountNumber },
+                    { label: 'Tên TK', value: account.accountName },
+                    { label: 'Số TK', value: account.accountNumber },
                     { label: 'Ngân hàng', value: account.bankName },
                   ].map((item) => (
                     <Box
@@ -140,12 +145,12 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                       sx={{
                         display: 'flex',
                         justifyContent: 'space-between',
-                        mb: 1.5,
+                        mb: 1,
                       }}
                     >
                       <Typography
                         sx={{
-                          fontSize: '0.85rem',
+                          fontSize: '0.8rem',
                           color: COLORS.textSecondary,
                           fontWeight: 500,
                           fontFamily: FONTS.serif,
@@ -155,7 +160,7 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                       </Typography>
                       <Typography
                         sx={{
-                          fontSize: '0.85rem',
+                          fontSize: '0.8rem',
                           color: COLORS.textPrimary,
                           fontWeight: 600,
                           textAlign: 'right',
@@ -168,48 +173,25 @@ export default function WeddingMonetaryGift({}: WeddingMonetaryGiftProps) {
                   ))}
                 </Box>
 
-                {/* Large Account Number Display */}
-                <Box
-                  sx={{
-                    backgroundColor: COLORS.bgCream,
-                    borderRadius: 2,
-                    py: 2,
-                    mb: 2,
-                    textAlign: 'center',
-                  }}
-                >
-                  <Typography
-                    sx={{
-                      fontSize: '1.5rem',
-                      fontWeight: 700,
-                      color: COLORS.textPrimary,
-                      letterSpacing: '2px',
-                      fontFamily: 'monospace',
-                    }}
-                  >
-                    {account.accountNumber}
-                  </Typography>
-                </Box>
-
                 {/* Copy Button */}
                 <Button
                   fullWidth
                   variant='outlined'
-                  startIcon={<ContentCopy sx={{ fontSize: 18 }} />}
+                  startIcon={<ContentCopy sx={{ fontSize: 16 }} />}
                   onClick={() => handleCopyAccount(account)}
                   sx={{
-                    borderColor: COLORS.accent,
+                    borderColor: COLORS.borderGold,
                     color: COLORS.accent,
                     textTransform: 'none',
                     fontWeight: 600,
-                    fontSize: '0.9rem',
-                    py: 1.2,
+                    fontSize: '0.85rem',
+                    py: 1,
                     borderRadius: 2,
                     fontFamily: FONTS.serif,
                     transition: `all ${TRANSITIONS.normal} ease`,
                     '&:hover': {
-                      borderColor: COLORS.accentDark,
-                      backgroundColor: `${COLORS.accent}0A`,
+                      borderColor: COLORS.accent,
+                      backgroundColor: `${COLORS.accent}08`,
                     },
                   }}
                 >

@@ -39,7 +39,7 @@ export const COLORS = {
 } as const;
 
 export const FONTS = {
-  script: "'Dancing Script', cursive",
+  script: "var(--font-dancing-script), 'Dancing Script', cursive",
   serif: "'Cormorant Garamond', serif",
   body: "'Cormorant Garamond', serif",
   handwritten: "'Kalam', cursive",

@@ -2,7 +2,7 @@
 
 import { Box, Typography } from '@mui/material';
 import { COLORS, FONTS } from '../constants/design';
-import OrnamentalDivider from './OrnamentalDivider';
+import { BRIDE_NAME, GROOM_NAME } from '@/constants/wedding';
 import ScrollReveal from './ScrollReveal';
 
 export default function InvitationMessage() {
@@ -16,23 +16,33 @@ export default function InvitationMessage() {
       }}
     >
       <ScrollReveal>
-        <OrnamentalDivider />
+        {/* Large couple names in script */}
         <Typography
           sx={{
             fontFamily: FONTS.script,
-            fontSize: { xs: '1.6rem', sm: '2rem' },
+            fontSize: { xs: '3rem', sm: '4rem', md: '4.5rem' },
             color: COLORS.primary,
-            lineHeight: 1.6,
-            maxWidth: 600,
-            mx: 'auto',
-            mt: 3,
-            mb: 2,
+            fontWeight: 700,
+            lineHeight: 1.2,
+            mb: 4,
           }}
         >
-          Trân trọng kính mời bạn đến tham dự lễ cưới và bữa tiệc thân mật cùng
-          chúng mình!
+          {GROOM_NAME}
+          <br />
+          <Box
+            component='span'
+            sx={{
+              fontSize: '0.6em',
+              fontWeight: 400,
+              color: COLORS.accent,
+            }}
+          >
+            &amp;
+          </Box>
+          <br />
+          {BRIDE_NAME}
         </Typography>
-        <OrnamentalDivider />
+
       </ScrollReveal>
     </Box>
   );

@@ -9,6 +9,9 @@ import {
   Typography,
   styled,
   CircularProgress,
+  Radio,
+  RadioGroup,
+  FormControlLabel,
 } from '@mui/material';
 import { Guest } from '@/types/guest';
 import { getGuestPronoun } from '../helpers/guest';
@@ -16,21 +19,12 @@ import { capitalizeFirstLetter } from '@/utils';
 import { trpc } from '@/utils/trpc';
 import toast from 'react-hot-toast';
 import { COLORS, FONTS, TRANSITIONS } from '../constants/design';
-import OrnamentalDivider from './OrnamentalDivider';
 import ScrollReveal from './ScrollReveal';
-
-const FormContainer = styled(Box)(() => ({
-  backgroundColor: COLORS.bgCream,
-  padding: '40px 32px',
-  maxWidth: '600px',
-  margin: '0 auto',
-  borderRadius: '16px',
-}));
 
 const StyledTextField = styled(TextField)(() => ({
   '& .MuiOutlinedInput-root': {
     backgroundColor: COLORS.bgWhite,
-    borderRadius: '8px',
+    borderRadius: '4px',
     fontFamily: FONTS.serif,
     '& fieldset': {
       borderColor: COLORS.borderGold,
@@ -52,20 +46,17 @@ const StyledTextField = styled(TextField)(() => ({
       opacity: 1,
     },
   },
-  '& .MuiInputLabel-root': {
-    fontFamily: FONTS.serif,
-  },
 }));
 
 const SubmitButton = styled(Button)(() => ({
   backgroundColor: COLORS.accent,
   color: COLORS.textOnPrimary,
   fontWeight: 600,
-  fontSize: '14px',
+  fontSize: '0.9rem',
   padding: '14px 24px',
   borderRadius: '8px',
-  textTransform: 'uppercase',
-  letterSpacing: '2px',
+  textTransform: 'none',
+  letterSpacing: '0.05em',
   fontFamily: FONTS.serif,
   boxShadow: '0 4px 12px rgba(107, 127, 94, 0.25)',
   '&:hover': {
@@ -89,6 +80,7 @@ export default function InvitationResponse({
   const [numberOfGuests, setNumberOfGuests] = useState(
     guest?.memberCount?.toString() || '',
   );
+  const [attendance, setAttendance] = useState<string>('');
   const [message, setMessage] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
 
@@ -111,40 +103,25 @@ export default function InvitationResponse({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!attendance) {
+      toast.error('Vui lòng chọn xác nhận tham dự.');
+      return;
+    }
     submitMutation.mutate({
       guestId: guest?._id,
       name,
-      numberOfGuests: parseInt(numberOfGuests) || 1,
+      numberOfGuests:
+        attendance === 'accept' ? parseInt(numberOfGuests) || 1 : 0,
       message: message || undefined,
     });
   };
 
   if (isSubmitted) {
     return (
-      <Box id='rsvp'>
-        <FormContainer>
+      <Box id='rsvp' sx={{ backgroundColor: COLORS.bgCream }}>
+        <Box sx={{ maxWidth: 500, mx: 'auto', px: 3, py: 8 }}>
           <ScrollReveal>
-            <Box sx={{ textAlign: 'center', py: 4 }}>
-              <Box
-                sx={{
-                  width: 60,
-                  height: 60,
-                  borderRadius: '50%',
-                  backgroundColor: `${COLORS.accent}1A`,
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  mx: 'auto',
-                  mb: 2,
-                }}
-              >
-                <svg width='28' height='28' viewBox='0 0 24 24' fill='none'>
-                  <path
-                    d='M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z'
-                    fill={COLORS.heartRed}
-                  />
-                </svg>
-              </Box>
+            <Box sx={{ textAlign: 'center' }}>
               <Typography
                 sx={{
                   fontFamily: FONTS.script,
@@ -152,7 +129,6 @@ export default function InvitationResponse({
                   color: COLORS.accent,
                   fontWeight: 600,
                   mb: 2,
-                  lineHeight: 1.4,
                 }}
               >
                 Cảm ơn bạn đã phản hồi!
@@ -171,122 +147,50 @@ export default function InvitationResponse({
               </Typography>
             </Box>
           </ScrollReveal>
-        </FormContainer>
+        </Box>
       </Box>
     );
   }
 
   return (
-    <Box id='rsvp'>
-      <FormContainer>
+    <Box id='rsvp' sx={{ backgroundColor: COLORS.bgCream }}>
+      <Box sx={{ maxWidth: 500, mx: 'auto', px: 3, py: { xs: 1, md: 2 } }}>
         <ScrollReveal>
-          {/* Decorative header */}
-          <Box sx={{ textAlign: 'center', mb: 3 }}>
-            <svg
-              width='60'
-              height='40'
-              viewBox='0 0 60 40'
-              fill='none'
-              xmlns='http://www.w3.org/2000/svg'
-            >
-              <path
-                d='M5 20 Q15 5, 25 15 Q28 18, 30 20 Q32 18, 35 15 Q45 5, 55 20'
-                stroke={COLORS.accent}
-                strokeWidth='1'
-                fill='none'
-                opacity='0.5'
-              />
-              <path
-                d='M5 20 Q15 35, 25 25 Q28 22, 30 20 Q32 22, 35 25 Q45 35, 55 20'
-                stroke={COLORS.accent}
-                strokeWidth='1'
-                fill='none'
-                opacity='0.5'
-              />
-              <ellipse
-                cx='12'
-                cy='14'
-                rx='4'
-                ry='2'
-                transform='rotate(-20 12 14)'
-                fill={COLORS.accent}
-                opacity='0.2'
-              />
-              <ellipse
-                cx='48'
-                cy='14'
-                rx='4'
-                ry='2'
-                transform='rotate(20 48 14)'
-                fill={COLORS.accent}
-                opacity='0.2'
-              />
-              <ellipse
-                cx='12'
-                cy='26'
-                rx='4'
-                ry='2'
-                transform='rotate(20 12 26)'
-                fill={COLORS.accent}
-                opacity='0.2'
-              />
-              <ellipse
-                cx='48'
-                cy='26'
-                rx='4'
-                ry='2'
-                transform='rotate(-20 48 26)'
-                fill={COLORS.accent}
-                opacity='0.2'
-              />
-            </svg>
-          </Box>
+          {/* Intro text */}
+          <Typography
+            sx={{
+              fontFamily: FONTS.serif,
+              fontSize: { xs: '1rem', sm: '1rem' },
+              color: COLORS.textSecondary,
+              textAlign: 'center',
+              lineHeight: 1.8,
+              mb: 1,
+            }}
+          >
+            Hãy xác nhận sự có mặt của bạn để chúng mình
+            <br />
+            chuẩn bị đón tiếp một cách chu đáo nhất.
+            <br />
+            Trân trọng!
+          </Typography>
 
-          {/* Header */}
-          {!isKnownGuest && (
-            <Typography
-              sx={{
-                textAlign: 'center',
-                fontFamily: FONTS.script,
-                fontSize: '2rem',
-                color: COLORS.accent,
-                fontWeight: 600,
-                mb: 1,
-                lineHeight: 1.3,
-              }}
-            >
-              Cho chúng mình biết bạn có tham
-              <br />
-              dự được không nha.
-            </Typography>
-          )}
-
-          {isKnownGuest && (
-            <Typography
-              sx={{
-                textAlign: 'center',
-                fontFamily: FONTS.script,
-                fontSize: '2rem',
-                color: COLORS.accent,
-                fontWeight: 600,
-                mb: 1,
-                lineHeight: 1.3,
-              }}
-            >
-              {capitalizeFirstLetter(guestPronoun)} {name} cho chúng mình biết
-              bạn có tham
-              <br />
-              dự được không nha.
-            </Typography>
-          )}
-
-          {/* Divider */}
-          <Box sx={{ mb: 4 }}>
-            <OrnamentalDivider width={180} />
-          </Box>
+          {/* Heading */}
+          <Typography
+            sx={{
+              fontFamily: FONTS.serif,
+              fontSize: { xs: '1.5rem', sm: '1.8rem' },
+              color: COLORS.textPrimary,
+              fontWeight: 700,
+              textAlign: 'center',
+            }}
+          >
+            {isKnownGuest
+              ? `Thân mời ${capitalizeFirstLetter(guestPronoun)} ${name}`
+              : 'Thân mời bạn'}
+          </Typography>
 
           <Box component='form' onSubmit={handleSubmit}>
-            {/* Name Field */}
+            {/* Name Field - only for unknown guests */}
             {!isKnownGuest && (
               <Box sx={{ mb: 3 }}>
                 <Typography
@@ -294,49 +198,120 @@ export default function InvitationResponse({
                     mb: 1,
                     fontWeight: 500,
                     color: COLORS.textPrimary,
-                    fontSize: '14px',
+                    fontSize: '0.85rem',
                     fontFamily: FONTS.serif,
                   }}
                 >
-                  Cho chúng mình xin tên của bạn nhé?*
+                  Tên của bạn
                 </Typography>
                 <StyledTextField
                   fullWidth
                   variant='outlined'
                   value={name}
                   onChange={(e) => setName(e.target.value)}
-                  placeholder='Nhập họ và tên'
                   size='medium'
                   required
                 />
               </Box>
             )}
 
-            {/* Number of Guests Field */}
+            {/* Attendance options */}
             <Box sx={{ mb: 3 }}>
               <Typography
                 sx={{
-                  mb: 1,
+                  mb: 1.5,
                   fontWeight: 500,
                   color: COLORS.textPrimary,
-                  fontSize: '14px',
+                  fontSize: '0.85rem',
                   fontFamily: FONTS.serif,
                 }}
               >
-                Số lượng người tham gia?*
+                Bạn sẽ đến chia vui trong tiệc cưới của chúng mình chứ?
               </Typography>
-              <StyledTextField
-                fullWidth
-                variant='outlined'
-                value={numberOfGuests}
-                onChange={(e) => setNumberOfGuests(e.target.value)}
-                placeholder='Ví dụ: 1'
-                size='medium'
-                type='number'
-                required
-                slotProps={{ htmlInput: { min: 1 } }}
-              />
+              <RadioGroup
+                value={attendance}
+                onChange={(e) => setAttendance(e.target.value)}
+              >
+                <FormControlLabel
+                  value='accept'
+                  control={
+                    <Radio
+                      sx={{
+                        color: COLORS.borderGoldHover,
+                        '&.Mui-checked': { color: COLORS.accent },
+                      }}
+                    />
+                  }
+                  label='Rất sẵn lòng có mặt'
+                  sx={{
+                    border: `1px solid ${COLORS.borderGold}`,
+                    borderRadius: 1,
+                    mx: 0,
+                    mb: 1,
+                    py: 0.5,
+                    px: 1,
+                    backgroundColor: COLORS.bgWhite,
+                    '& .MuiFormControlLabel-label': {
+                      fontFamily: FONTS.serif,
+                      fontSize: '0.9rem',
+                      color: COLORS.textPrimary,
+                    },
+                  }}
+                />
+                <FormControlLabel
+                  value='decline'
+                  control={
+                    <Radio
+                      sx={{
+                        color: COLORS.borderGoldHover,
+                        '&.Mui-checked': { color: COLORS.accent },
+                      }}
+                    />
+                  }
+                  label='Rất tiếc phải từ chối'
+                  sx={{
+                    border: `1px solid ${COLORS.borderGold}`,
+                    borderRadius: 1,
+                    mx: 0,
+                    py: 0.5,
+                    px: 1,
+                    backgroundColor: COLORS.bgWhite,
+                    '& .MuiFormControlLabel-label': {
+                      fontFamily: FONTS.serif,
+                      fontSize: '0.9rem',
+                      color: COLORS.textPrimary,
+                    },
+                  }}
+                />
+              </RadioGroup>
             </Box>
+
+            {/* Number of Guests Field */}
+            {attendance === 'accept' && (
+              <Box sx={{ mb: 3 }}>
+                <Typography
+                  sx={{
+                    mb: 1,
+                    fontWeight: 500,
+                    color: COLORS.textPrimary,
+                    fontSize: '0.85rem',
+                    fontFamily: FONTS.serif,
+                  }}
+                >
+                  Và số lượng người tham gia
+                </Typography>
+                <StyledTextField
+                  fullWidth
+                  variant='outlined'
+                  value={numberOfGuests}
+                  onChange={(e) => setNumberOfGuests(e.target.value)}
+                  placeholder='Ví dụ: 1'
+                  size='medium'
+                  type='number'
+                  slotProps={{ htmlInput: { min: 1 } }}
+                />
+              </Box>
+            )}
 
             {/* Message Field */}
             <Box sx={{ mb: 4 }}>
@@ -345,7 +320,7 @@ export default function InvitationResponse({
                   mb: 1,
                   fontWeight: 500,
                   color: COLORS.textPrimary,
-                  fontSize: '14px',
+                  fontSize: '0.85rem',
                   fontFamily: FONTS.serif,
                 }}
               >
@@ -356,7 +331,7 @@ export default function InvitationResponse({
                 fullWidth
                 variant='outlined'
                 multiline
-                rows={4}
+                rows={3}
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder='Lời chúc...'
@@ -365,26 +340,24 @@ export default function InvitationResponse({
             </Box>
 
             {/* Submit Button */}
-            <Box sx={{ textAlign: 'center' }}>
-              <SubmitButton
-                type='submit'
-                variant='contained'
-                fullWidth
-                disabled={submitMutation.isPending}
-              >
-                {submitMutation.isPending ? (
-                  <CircularProgress
-                    size={24}
-                    sx={{ color: COLORS.textOnPrimary }}
-                  />
-                ) : (
-                  'Gửi phản hồi'
-                )}
-              </SubmitButton>
-            </Box>
+            <SubmitButton
+              type='submit'
+              variant='contained'
+              fullWidth
+              disabled={submitMutation.isPending}
+            >
+              {submitMutation.isPending ? (
+                <CircularProgress
+                  size={24}
+                  sx={{ color: COLORS.textOnPrimary }}
+                />
+              ) : (
+                'Gửi phản hồi'
+              )}
+            </SubmitButton>
           </Box>
         </ScrollReveal>
-      </FormContainer>
+      </Box>
     </Box>
   );
 }
