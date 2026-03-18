@@ -12,8 +12,13 @@ import GiftMessage from '@/features/invitation/components/GiftMessage';
 import InvitationHeading from '@/features/invitation/components/InvitationHeading';
 
 const PhotoGallery = dynamic(() => import('./PhotoGallery'), { ssr: false });
-const WeddingMonetaryGift = dynamic(() => import('./WeddingMonetaryGift'), { ssr: false });
-const WeddingGuestBook = dynamic(() => import('./WeddingGuestBook'), { ssr: false });
+const WeddingMonetaryGift = dynamic(() => import('./WeddingMonetaryGift'), {
+  ssr: false,
+});
+const WeddingGuestBook = dynamic(() => import('./WeddingGuestBook'), {
+  ssr: false,
+});
+
 import MusicToggle from '@/features/invitation/components/MusicToggle';
 import { Box, Fade, Grow } from '@mui/material';
 import { Guest, GuestSource } from '@/types/guest';

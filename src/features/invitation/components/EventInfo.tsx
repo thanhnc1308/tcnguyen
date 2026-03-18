@@ -136,7 +136,7 @@ export default function EventInfo({
         }}
       >
         <ScrollReveal>
-          {/* Large time */}
+          {/* Event time */}
           <Typography
             sx={{
               fontFamily: FONTS.serif,
@@ -146,6 +146,32 @@ export default function EventInfo({
             }}
           >
             {event.time}
+          </Typography>
+
+          {/* Date */}
+          <Typography
+            sx={{
+              fontFamily: FONTS.serif,
+              fontSize: { xs: '1rem', sm: '1.15rem' },
+              color: COLORS.textPrimary,
+              fontWeight: 700,
+              textTransform: 'uppercase',
+            }}
+          >
+            Chủ Nhật, ngày 05 tháng 04 năm 2026
+          </Typography>
+
+          {/* Lunar date */}
+          <Typography
+            sx={{
+              fontFamily: FONTS.serif,
+              fontSize: { xs: '0.8rem', sm: '0.9rem' },
+              fontStyle: 'italic',
+              color: COLORS.textSecondary,
+              mt: 0.5,
+            }}
+          >
+            (Tức ngày 18 tháng 02 năm Bính Ngọ)
           </Typography>
 
           <MiniCalendar />

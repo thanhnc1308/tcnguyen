@@ -119,7 +119,6 @@ export default function WeddingMonetaryGift() {
                       width: 180,
                       height: 180,
                       position: 'relative',
-                      border: `1px solid ${COLORS.borderGold}`,
                       borderRadius: 2,
                       overflow: 'hidden',
                     }}

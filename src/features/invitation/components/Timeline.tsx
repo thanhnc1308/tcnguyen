@@ -10,10 +10,9 @@ interface TimelineItem {
 }
 
 const timelineItems: TimelineItem[] = [
-  { time: '04:00 PM', title: 'Wedding Ceremony' },
-  { time: '06:00 PM', title: 'Dinner' },
-  { time: '07:00 PM', title: 'Reception' },
-  { time: '11:00 PM', title: 'Cocktails' },
+  { time: '9h30', title: 'Đón khách' },
+  { time: '10h', title: 'Bữa trưa vui vẻ' },
+  { time: '15h', title: 'Lễ vu quy' },
 ];
 
 export default function Timeline() {
@@ -30,7 +29,7 @@ export default function Timeline() {
         <ScrollReveal>
           <Box sx={{ textAlign: 'center', mb: 6 }}>
             <Typography variant='h2' component='h2' sx={sectionHeadingStyle}>
-              Timeline
+              Mốc thời gian
             </Typography>
           </Box>
         </ScrollReveal>

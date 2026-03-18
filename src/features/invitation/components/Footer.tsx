@@ -62,10 +62,10 @@ export default function Footer() {
           >
             Cảm ơn bạn đã dành tình cảm cho chúng mình.
             <br />
-            Sự hiện diện của bạn là món quà ý nghĩa nhất.
+            Chúng mình vô cùng trân quý khi được chia sẻ niềm hạnh phúc này cùng
+            bạn.
             <br />
-            Chúng mình vô cùng trân quý khi được cùng bạn chia sẻ niềm hạnh phúc
-            trong ngày.
+            Hẹn gặp bạn tại buổi lễ nhé!
           </Typography>
 
           {/* Made with Love Message */}

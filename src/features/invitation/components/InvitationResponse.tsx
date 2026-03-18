@@ -167,9 +167,8 @@ export default function InvitationResponse({
               mb: 1,
             }}
           >
-            Hãy xác nhận sự có mặt của bạn để chúng mình
-            <br />
-            chuẩn bị đón tiếp một cách chu đáo nhất.
+            Để tụi mình có thể đón tiếp bạn một cách trọn vẹn nhất, hãy xác nhận
+            sự có mặt của bạn nhé.
             <br />
             Trân trọng!
           </Typography>

@@ -18,11 +18,11 @@ export interface WeddingEvent {
 
 // const CEREMONY_EVENT: WeddingEvent = {
 //   id: '1',
-//   title: 'Nhà Trai',
+//   title: 'Tư gia Nhà Trai',
 //   type: 'ceremony',
 //   date: '14.01.2024',
 //   time: '09:00 - 11:00',
-//   venue: 'Nhà Trai',
+//   venue: 'Tư gia Nhà Trai',
 //   address: 'Thôn Trà Bồ, xã Đoàn Đào, tỉnh Hưng Yên',
 //   embededIframe: (
 //     <iframe
@@ -41,11 +41,11 @@ export interface WeddingEvent {
 
 const GROOM_RECEPTION_EVENT: WeddingEvent = {
   id: '2',
-  title: 'Nhà Trai',
+  title: 'Tư gia Nhà Trai',
   type: 'reception',
   date: '05.04.2026',
   time: '11:00',
-  venue: 'Nhà Trai',
+  venue: 'Tư gia Nhà Trai',
   address: 'Xóm 6, Thôn Trà Bồ, xã Đoàn Đào, tỉnh Hưng Yên',
   embededIframe: (
     <iframe
@@ -64,11 +64,11 @@ const GROOM_RECEPTION_EVENT: WeddingEvent = {
 
 const BRIDE_RECEPTION_EVENT: WeddingEvent = {
   id: '3',
-  title: 'Nhà Gái',
+  title: 'Tư gia Nhà Gái',
   type: 'reception',
   date: '05.04.2026',
   time: '11:00',
-  venue: 'Nhà Gái',
+  venue: 'Tư gia Nhà Gái',
   address: 'Xóm 1, Thôn Đặng Xá, xã Tiên Hoa, tỉnh Hưng Yên',
   embededIframe: (
     <iframe

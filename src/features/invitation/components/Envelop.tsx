@@ -1,6 +1,6 @@
 'use client';
 
-import { Avatar, Box, Typography } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useWeddingInvitation } from '@/features/invitation/context/WeddingInvitationContext';
 import { Guest } from '@/types/guest';
 import { BRIDE_NAME, GROOM_NAME } from '@/constants/wedding';
@@ -38,7 +38,7 @@ export default function Envelop({ guest }: { guest: Guest | null }) {
         {/* Guest greeting */}
         <Typography
           sx={{
-            fontSize: { xs: '0.85rem', sm: '0.95rem' },
+            fontSize: { xs: '1rem', sm: '1.5rem' },
             fontFamily: FONTS.serif,
             fontWeight: 500,
             letterSpacing: '0.15em',
@@ -62,37 +62,9 @@ export default function Envelop({ guest }: { guest: Guest | null }) {
         >
           Trân trọng kính mời
         </Typography>
-        <Avatar
-          sx={{
-            width: { xs: 64, sm: 80 },
-            height: { xs: 64, sm: 80 },
-            mb: 1.5,
-            bgcolor: COLORS.primary,
-            color: '#fff',
-            fontSize: { xs: '1.5rem', sm: '1.8rem' },
-            fontFamily: FONTS.display,
-            opacity: 0,
-            animation: 'fadeInDown 1s ease forwards',
-            animationDelay: '0.2s',
-            '@keyframes fadeInDown': {
-              from: {
-                opacity: 0,
-                transform: 'translateY(-16px)',
-              },
-              to: {
-                opacity: 1,
-                transform: 'translateY(0)',
-              },
-            },
-          }}
-          alt={guest?.name || 'Bạn'}
-          src='/images/wax-seal.webp'
-        >
-          {(guest?.name || 'Bạn').charAt(0).toUpperCase()}
-        </Avatar>
         <Typography
           sx={{
-            fontSize: { xs: '0.85rem', sm: '0.95rem' },
+            fontSize: { xs: '1.5rem', sm: '2.5rem' },
             fontFamily: FONTS.serif,
             fontWeight: 500,
             letterSpacing: '0.15em',
@@ -108,7 +80,7 @@ export default function Envelop({ guest }: { guest: Guest | null }) {
         </Typography>
         <Typography
           sx={{
-            fontSize: { xs: '0.85rem', sm: '0.95rem' },
+            fontSize: { xs: '1rem', sm: '1.5rem' },
             fontFamily: FONTS.serif,
             fontWeight: 500,
             letterSpacing: '0.15em',
@@ -149,7 +121,7 @@ export default function Envelop({ guest }: { guest: Guest | null }) {
         >
           <Typography
             sx={{
-              fontSize: { xs: '2.8rem', sm: '3.5rem', md: '4rem' },
+              fontSize: { xs: '3rem', sm: '4rem', md: '5rem' },
               fontFamily: FONTS.display,
               color: COLORS.primary,
               lineHeight: 1.1,
@@ -159,7 +131,7 @@ export default function Envelop({ guest }: { guest: Guest | null }) {
           </Typography>
           <Typography
             sx={{
-              fontSize: { xs: '1.8rem', sm: '2.2rem' },
+              fontSize: { xs: '2rem', sm: '2.5rem' },
               fontFamily: FONTS.display,
               color: COLORS.accent,
               lineHeight: 1,
@@ -170,7 +142,7 @@ export default function Envelop({ guest }: { guest: Guest | null }) {
           </Typography>
           <Typography
             sx={{
-              fontSize: { xs: '2.8rem', sm: '3.5rem', md: '4rem' },
+              fontSize: { xs: '3rem', sm: '4rem', md: '5rem' },
               fontFamily: FONTS.display,
               color: COLORS.primary,
               lineHeight: 1.1,
@@ -285,7 +257,7 @@ export default function Envelop({ guest }: { guest: Guest | null }) {
               bottom: '10%',
               mt: 2,
               whiteSpace: 'nowrap',
-              fontSize: { xs: '1.3rem', sm: '1.5rem' },
+              fontSize: { xs: '1.5rem', sm: '2.5rem' },
               fontFamily: FONTS.display,
               fontStyle: 'italic',
               color: COLORS.textSecondary,

@@ -9,7 +9,7 @@ export const BANK_ACCOUNTS = [
     id: 'bride',
     title: 'Cô Dâu',
     name: BRIDE_NAME,
-    bankName: 'MB',
+    bankName: 'VPBank',
     accountNumber: '0395875238',
     accountName: 'BÙI THỊ MẾN',
     qrCode: QR_CODE_BRIDE,
