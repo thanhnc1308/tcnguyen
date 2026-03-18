@@ -36,106 +36,102 @@ export default function Envelop({ guest }: { guest: Guest | null }) {
         }}
       >
         {/* Guest greeting */}
-        {guest?.name && (
-          <>
-            <Typography
-              sx={{
-                fontSize: { xs: '0.85rem', sm: '0.95rem' },
-                fontFamily: FONTS.serif,
-                fontWeight: 500,
-                letterSpacing: '0.15em',
-                color: COLORS.textSecondary,
-                mb: 2,
-                textAlign: 'center',
+        <Typography
+          sx={{
+            fontSize: { xs: '0.85rem', sm: '0.95rem' },
+            fontFamily: FONTS.serif,
+            fontWeight: 500,
+            letterSpacing: '0.15em',
+            color: COLORS.textSecondary,
+            mb: 2,
+            textAlign: 'center',
+            opacity: 0,
+            animation: 'fadeInDown 1s ease forwards',
+            animationDelay: '0.2s',
+            '@keyframes fadeInDown': {
+              from: {
                 opacity: 0,
-                animation: 'fadeInDown 1s ease forwards',
-                animationDelay: '0.2s',
-                '@keyframes fadeInDown': {
-                  from: {
-                    opacity: 0,
-                    transform: 'translateY(-16px)',
-                  },
-                  to: {
-                    opacity: 1,
-                    transform: 'translateY(0)',
-                  },
-                },
-              }}
-            >
-              Trân trọng kính mời
-            </Typography>
-            <Avatar
-              sx={{
-                width: { xs: 64, sm: 80 },
-                height: { xs: 64, sm: 80 },
-                mb: 1.5,
-                bgcolor: COLORS.primary,
-                color: '#fff',
-                fontSize: { xs: '1.5rem', sm: '1.8rem' },
-                fontFamily: FONTS.display,
+                transform: 'translateY(-16px)',
+              },
+              to: {
+                opacity: 1,
+                transform: 'translateY(0)',
+              },
+            },
+          }}
+        >
+          Trân trọng kính mời
+        </Typography>
+        <Avatar
+          sx={{
+            width: { xs: 64, sm: 80 },
+            height: { xs: 64, sm: 80 },
+            mb: 1.5,
+            bgcolor: COLORS.primary,
+            color: '#fff',
+            fontSize: { xs: '1.5rem', sm: '1.8rem' },
+            fontFamily: FONTS.display,
+            opacity: 0,
+            animation: 'fadeInDown 1s ease forwards',
+            animationDelay: '0.2s',
+            '@keyframes fadeInDown': {
+              from: {
                 opacity: 0,
-                animation: 'fadeInDown 1s ease forwards',
-                animationDelay: '0.2s',
-                '@keyframes fadeInDown': {
-                  from: {
-                    opacity: 0,
-                    transform: 'translateY(-16px)',
-                  },
-                  to: {
-                    opacity: 1,
-                    transform: 'translateY(0)',
-                  },
-                },
-              }}
-              alt={guest?.name || ''}
-              src='/images/wax-seal.webp'
-            >
-              {guest?.name?.charAt(0)?.toUpperCase()}
-            </Avatar>
-            <Typography
-              sx={{
-                fontSize: { xs: '0.85rem', sm: '0.95rem' },
-                fontFamily: FONTS.serif,
-                fontWeight: 500,
-                letterSpacing: '0.15em',
-                color: COLORS.textSecondary,
-                mb: 2,
-                textAlign: 'center',
+                transform: 'translateY(-16px)',
+              },
+              to: {
+                opacity: 1,
+                transform: 'translateY(0)',
+              },
+            },
+          }}
+          alt={guest?.name || 'Bạn'}
+          src='/images/wax-seal.webp'
+        >
+          {(guest?.name || 'Bạn').charAt(0).toUpperCase()}
+        </Avatar>
+        <Typography
+          sx={{
+            fontSize: { xs: '0.85rem', sm: '0.95rem' },
+            fontFamily: FONTS.serif,
+            fontWeight: 500,
+            letterSpacing: '0.15em',
+            color: COLORS.textSecondary,
+            mb: 2,
+            textAlign: 'center',
+            opacity: 0,
+            animation: 'fadeInDown 1s ease forwards',
+            animationDelay: '0.2s',
+          }}
+        >
+          {guest?.name || 'Bạn'}
+        </Typography>
+        <Typography
+          sx={{
+            fontSize: { xs: '0.85rem', sm: '0.95rem' },
+            fontFamily: FONTS.serif,
+            fontWeight: 500,
+            letterSpacing: '0.15em',
+            color: COLORS.textSecondary,
+            mb: 2,
+            textAlign: 'center',
+            opacity: 0,
+            animation: 'fadeInDown 1s ease forwards',
+            animationDelay: '0.2s',
+            '@keyframes fadeInDown': {
+              from: {
                 opacity: 0,
-                animation: 'fadeInDown 1s ease forwards',
-                animationDelay: '0.2s',
-              }}
-            >
-              {guest?.name}
-            </Typography>
-            <Typography
-              sx={{
-                fontSize: { xs: '0.85rem', sm: '0.95rem' },
-                fontFamily: FONTS.serif,
-                fontWeight: 500,
-                letterSpacing: '0.15em',
-                color: COLORS.textSecondary,
-                mb: 2,
-                textAlign: 'center',
-                opacity: 0,
-                animation: 'fadeInDown 1s ease forwards',
-                animationDelay: '0.2s',
-                '@keyframes fadeInDown': {
-                  from: {
-                    opacity: 0,
-                    transform: 'translateY(-16px)',
-                  },
-                  to: {
-                    opacity: 1,
-                    transform: 'translateY(0)',
-                  },
-                },
-              }}
-            >
-              đến dự lễ thành hôn của
-            </Typography>
-          </>
-        )}
+                transform: 'translateY(-16px)',
+              },
+              to: {
+                opacity: 1,
+                transform: 'translateY(0)',
+              },
+            },
+          }}
+        >
+          đến dự lễ thành hôn của
+        </Typography>
 
         {/* Couple names */}
         <Box
@@ -299,7 +295,7 @@ export default function Envelop({ guest }: { guest: Guest | null }) {
               animationDelay: '1.3s',
             }}
           >
-            Nhấn vào đây để mở phong bì
+            Nhấn vào đây để mở thiệp mời
           </Typography>
         </Box>
       </Box>

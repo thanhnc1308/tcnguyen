@@ -43,8 +43,8 @@ export default function WeddingInvitation({
     [isInvitationOpened, handleOpenInvitation],
   );
 
-  const shouldShowEnvelop = guest !== null && !isInvitationOpened;
-  const shouldShowContent = guest === null || isInvitationOpened;
+  const shouldShowEnvelop = !isInvitationOpened;
+  const shouldShowContent = isInvitationOpened;
 
   return (
     <WeddingInvitationContext.Provider value={contextValue}>
@@ -73,7 +73,7 @@ export default function WeddingInvitation({
           <Footer />
         </Box>
       </Grow>
-      {(isPlaying || guest === null) && (
+      {isPlaying && (
         <MusicToggle
           isPlaying={isPlaying}
           isMuted={isMuted}
