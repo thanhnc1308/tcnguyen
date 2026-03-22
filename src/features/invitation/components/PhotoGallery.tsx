@@ -60,6 +60,55 @@ const PHOTOS: WeddingPhoto[] = [
     width: 4652,
     height: 6978,
   },
+  {
+    id: '6',
+    src: '/images/gallery/6-BIL00196.JPG',
+    alt: '6 BIL00196',
+    width: 4310,
+    height: 6465,
+  },
+  {
+    id: '7',
+    src: '/images/gallery/7-BIL00573.JPG',
+    alt: '7 BIL00573',
+    width: 4564,
+    height: 6846,
+  },
+  {
+    id: '8',
+    src: '/images/gallery/8-BIL07734.JPG',
+    alt: '8 BIL07734',
+    width: 4652,
+    height: 6978,
+  },
+  {
+    id: '9',
+    src: '/images/gallery/9-BIL08229.JPG',
+    alt: '9 BIL08229',
+    width: 4672,
+    height: 7008,
+  },
+  {
+    id: '10',
+    src: '/images/gallery/91-BIL08541.JPG',
+    alt: '91 BIL08541',
+    width: 4473,
+    height: 6709,
+  },
+  {
+    id: '11',
+    src: '/images/gallery/92-BIL09147.JPG',
+    alt: '92 BIL09147',
+    width: 4617,
+    height: 6925,
+  },
+  {
+    id: '12',
+    src: '/images/gallery/93-BIL09867.JPG',
+    alt: '93 BIL09867',
+    width: 4672,
+    height: 7008,
+  },
 ];
 
 export default function PhotoGallery({

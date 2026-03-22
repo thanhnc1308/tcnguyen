@@ -239,6 +239,8 @@ export default function EventInfo({
               aspectRatio: '4 / 3',
               overflow: 'hidden',
               mb: 1.5,
+              borderRadius: 2,
+              boxShadow: '0 4px 12px rgba(0, 0, 0, 0.1)',
             }}
           >
             {event.embededIframe}
