@@ -127,7 +127,7 @@ export default function PhotoGallery({
     <Box
       id='gallery'
       sx={{
-        py: { xs: 4, md: 4 },
+        py: { xs: 3, md: 3 },
         backgroundColor: COLORS.bgCream,
         overflow: 'hidden',
       }}

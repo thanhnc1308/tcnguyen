@@ -35,14 +35,14 @@ export default function Timeline({ side }: { side: GuestSource }) {
     <Box
       id='timeline'
       sx={{
-        py: { xs: 8, md: 12 },
+        py: { xs: 4, md: 4 },
         px: 3,
         backgroundColor: COLORS.bgCream,
       }}
     >
       <Container maxWidth='sm'>
         <ScrollReveal>
-          <Box sx={{ textAlign: 'center', mb: 6 }}>
+          <Box sx={{ textAlign: 'center', mb: 2 }}>
             <Typography variant='h2' component='h2' sx={sectionHeadingStyle}>
               Mốc thời gian
             </Typography>
