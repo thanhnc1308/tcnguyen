@@ -12,6 +12,7 @@ import {
   UpdateAction,
   ViewInvitationAction,
 } from '@/features/guest-list/components/Table';
+import { ToggleInvitedAction } from '@/features/guest-list/components/ToggleInvitedAction';
 
 import {
   Guest,
@@ -131,6 +132,7 @@ export default async function GuestListPage(props: {
           hasActionsColumn
           getActions={(guest) => (
             <>
+              <ToggleInvitedAction id={guest._id} invited={guest.invited} />
               <UpdateAction id={guest._id} />
               <DeleteAction id={guest._id} />
               <ViewInvitationAction id={guest._id} />

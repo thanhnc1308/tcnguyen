@@ -257,6 +257,26 @@ const updateGuestById = async (
   redirect(listPagePath);
 };
 
+const toggleGuestInvited = async (guestId: string) => {
+  await requireAdmin();
+
+  try {
+    const guest = await guestModel.findById(guestId).exec();
+    if (!guest) {
+      return { message: 'Guest not found.' };
+    }
+    guest.invited = !guest.invited;
+    await guest.save();
+  } catch (e) {
+    console.error('toggleGuestInvited', e);
+    return {
+      message: 'Internal Server Error. Failed to toggle invited status.',
+    };
+  }
+
+  revalidatePath(listPagePath);
+};
+
 const deleteGuestById = async (guestId: string | null) => {
   await requireAdmin();
 
@@ -283,4 +303,5 @@ export {
   createGuest,
   updateGuestById,
   deleteGuestById,
+  toggleGuestInvited,
 };
