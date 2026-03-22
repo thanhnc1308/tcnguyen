@@ -109,7 +109,7 @@ const paginateGuestList = async ({
       status:
         (g.status as GuestConfirmationStatus) ||
         GuestConfirmationStatus.Pending,
-      memberCount: g.memberCount || 1,
+      memberCount: g.memberCount ?? 1,
       invited: g.invited ?? false,
       guestSource: (g.guestSource as GuestSource) || GuestSource.Groom,
       ageComparison:
@@ -151,7 +151,7 @@ const fetchGuestById = async (guestId: string): Promise<Guest | null> => {
     status:
       (_guest.status as GuestConfirmationStatus) ||
       GuestConfirmationStatus.Pending,
-    memberCount: _guest.memberCount || 1,
+    memberCount: _guest.memberCount ?? 1,
     invited: _guest.invited ?? false,
     guestSource: (_guest.guestSource as GuestSource) || GuestSource.Groom,
     ageComparison:

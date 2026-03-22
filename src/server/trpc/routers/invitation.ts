@@ -16,7 +16,10 @@ interface InvitationResponseLean {
 const submitResponseSchema = z.object({
   guestId: z.string().optional(),
   name: z.string().min(1, 'Name is required').max(100),
-  numberOfGuests: z.number().min(1, 'At least 1 guest is required').max(20, 'Maximum 20 guests'),
+  numberOfGuests: z
+    .number()
+    .min(0, 'Number of guests cannot be negative')
+    .max(5, 'Maximum 5 guests'),
   message: z.string().max(1000).optional(),
 });
 
@@ -49,9 +52,12 @@ export const invitationRouter = router({
           { upsert: true, new: true },
         );
 
-        // Update the guest's status to accepted
+        // Update the guest's status based on the number of guests
         await GuestModel.findByIdAndUpdate(guestId, {
-          status: GuestConfirmationStatus.Accepted,
+          status:
+            numberOfGuests === 0
+              ? GuestConfirmationStatus.Declined
+              : GuestConfirmationStatus.Accepted,
           memberCount: numberOfGuests,
         });
       } else {
