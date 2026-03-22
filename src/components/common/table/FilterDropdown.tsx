@@ -37,7 +37,7 @@ export default function FilterDropdown({
       className='h-10 rounded-md border border-gray-200 px-3 text-sm text-gray-700 outline-2'
       aria-label={`Filter by ${label}`}
     >
-      <option value=''>All</option>
+      <option value=''>{label}</option>
       {options.map((opt) => (
         <option key={opt.value} value={opt.value}>
           {opt.label}
