@@ -13,6 +13,7 @@ interface TimelineItem {
 const groomTimelineItems: TimelineItem[] = [
   { time: '10h', title: 'Đón khách' },
   { time: '11h', title: 'Bữa trưa vui vẻ' },
+  { time: '13h30', title: 'Lễ vu quy' },
   { time: '15h', title: 'Lễ thành hôn' },
 ];
 
@@ -20,6 +21,7 @@ const brideTimelineItems: TimelineItem[] = [
   { time: '9h30', title: 'Đón khách' },
   { time: '10h', title: 'Bữa trưa vui vẻ' },
   { time: '13h30', title: 'Lễ vu quy' },
+  { time: '15h', title: 'Lễ thành hôn' },
 ];
 
 function getTimelineItems(side: GuestSource): TimelineItem[] {

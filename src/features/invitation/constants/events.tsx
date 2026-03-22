@@ -67,7 +67,7 @@ const BRIDE_RECEPTION_EVENT: WeddingEvent = {
   title: 'Tư gia Nhà Gái',
   type: 'reception',
   date: '05.04.2026',
-  time: '11:00',
+  time: '10:00',
   venue: 'Tư gia Nhà Gái',
   address: 'Xóm 1, Thôn Đặng Xá, xã Tiên Hoa, tỉnh Hưng Yên',
   embededIframe: (
