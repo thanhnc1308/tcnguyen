@@ -6,6 +6,8 @@ import { ArrowBackIos, ArrowForwardIos } from '@mui/icons-material';
 import Image from 'next/image';
 import { COLORS, TRANSITIONS, sectionHeadingStyle } from '../constants/design';
 import ScrollReveal from './ScrollReveal';
+import { Guest, GuestAgeComparison } from '@/types/guest';
+import { getGuestPronoun } from '@/utils/guest';
 
 interface WeddingPhoto {
   id: string;
@@ -16,6 +18,7 @@ interface WeddingPhoto {
 }
 
 interface PhotoGalleryProps {
+  guest?: Guest | null;
   photos?: WeddingPhoto[];
 }
 
@@ -52,7 +55,14 @@ const PHOTOS: WeddingPhoto[] = [
   },
 ];
 
-export default function PhotoGallery({ photos = PHOTOS }: PhotoGalleryProps) {
+export default function PhotoGallery({
+  guest,
+  photos = PHOTOS,
+}: PhotoGalleryProps) {
+  const { wePronoun } = getGuestPronoun(
+    guest?.ageComparison ?? GuestAgeComparison.Same,
+    guest?.gender,
+  );
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
   const touchStartX = useRef(0);
@@ -119,7 +129,7 @@ export default function PhotoGallery({ photos = PHOTOS }: PhotoGalleryProps) {
       <ScrollReveal>
         <Box sx={{ textAlign: 'center', mb: 5 }}>
           <Typography variant='h2' component='h2' sx={sectionHeadingStyle}>
-            Một số khoảnh khắc của chúng mình
+            Một số khoảnh khắc của {wePronoun.toLowerCase()}
           </Typography>
         </Box>
       </ScrollReveal>

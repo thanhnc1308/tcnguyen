@@ -3,8 +3,15 @@
 import { Box, Typography } from '@mui/material';
 import { COLORS, FONTS } from '../constants/design';
 import ScrollReveal from './ScrollReveal';
+import { Guest, GuestAgeComparison } from '@/types/guest';
+import { getGuestPronoun } from '@/utils/guest';
 
-export default function InvitationHeading() {
+export default function InvitationHeading({ guest }: { guest: Guest | null }) {
+  const { guestPronoun, wePronoun } = getGuestPronoun(
+    guest?.ageComparison ?? GuestAgeComparison.Same,
+    guest?.gender,
+  );
+
   return (
     <Box
       sx={{
@@ -27,9 +34,9 @@ export default function InvitationHeading() {
             letterSpacing: '0.02em',
           }}
         >
-          TRÂN TRỌNG KÍNH MỜI BẠN TỚI THAM DỰ TIỆC
+          TRÂN TRỌNG KÍNH MỜI {guestPronoun.toUpperCase()} TỚI THAM DỰ TIỆC
           <br />
-          CHUNG VUI CÙNG CHÚNG MÌNH
+          CHUNG VUI CÙNG {wePronoun.toUpperCase()}
           <br />
           Vào lúc
         </Typography>

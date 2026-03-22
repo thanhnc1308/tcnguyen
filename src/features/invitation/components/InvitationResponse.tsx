@@ -13,8 +13,9 @@ import {
   RadioGroup,
   FormControlLabel,
 } from '@mui/material';
-import { Guest } from '@/types/guest';
+import { Guest, GuestAgeComparison } from '@/types/guest';
 import { trpc } from '@/utils/trpc';
+import { getGuestPronoun } from '@/utils/guest';
 import toast from 'react-hot-toast';
 import { COLORS, FONTS, TRANSITIONS } from '../constants/design';
 import ScrollReveal from './ScrollReveal';
@@ -74,6 +75,11 @@ export default function InvitationResponse({
   guest,
   onSuccess,
 }: InvitationResponseProps) {
+  const { guestPronoun, wePronoun } = getGuestPronoun(
+    guest?.ageComparison ?? GuestAgeComparison.Same,
+    guest?.gender,
+  );
+
   const [name, setName] = useState(guest?.name || '');
   const [numberOfGuests, setNumberOfGuests] = useState(
     guest?.memberCount?.toString() || '',
@@ -89,7 +95,7 @@ export default function InvitationResponse({
   const submitMutation = trpc.invitation.submitResponse.useMutation({
     onSuccess: () => {
       setIsSubmitted(true);
-      toast.success('Cảm ơn bạn đã phản hồi!');
+      toast.success(`Cảm ơn ${guestPronoun.toLowerCase()} đã phản hồi!`);
       utils.invitation.getResponses.invalidate();
       onSuccess?.();
     },
@@ -128,7 +134,7 @@ export default function InvitationResponse({
                   mb: 2,
                 }}
               >
-                Cảm ơn bạn đã phản hồi!
+                Cảm ơn {guestPronoun.toLowerCase()} đã phản hồi!
               </Typography>
               <Typography
                 sx={{
@@ -138,9 +144,11 @@ export default function InvitationResponse({
                   fontFamily: FONTS.serif,
                 }}
               >
-                Chúng mình rất vui khi nhận được phản hồi của bạn.
+                {wePronoun} rất vui khi nhận được phản hồi của{' '}
+                {guestPronoun.toLowerCase()}.
                 <br />
-                Hẹn gặp bạn trong ngày vui của chúng mình nhé!
+                Hẹn gặp {guestPronoun.toLowerCase()} trong ngày vui của{' '}
+                {wePronoun.toLowerCase()} nhé!
               </Typography>
             </Box>
           </ScrollReveal>
@@ -164,8 +172,9 @@ export default function InvitationResponse({
               mb: 1,
             }}
           >
-            Để tụi mình có thể đón tiếp bạn một cách trọn vẹn nhất, hãy xác nhận
-            sự có mặt của bạn nhé.
+            Để {wePronoun.toLowerCase()} có thể đón tiếp{' '}
+            {guestPronoun.toLowerCase()} một cách trọn vẹn nhất, hãy xác nhận sự
+            có mặt của {guestPronoun.toLowerCase()} nhé.
             <br />
             Trân trọng!
           </Typography>
@@ -180,7 +189,9 @@ export default function InvitationResponse({
               textAlign: 'center',
             }}
           >
-            {isKnownGuest ? `Thân mời ${name}` : 'Thân mời bạn'}
+            {isKnownGuest
+              ? `Thân mời ${name}`
+              : `Thân mời ${guestPronoun.toLowerCase()}`}
           </Typography>
 
           <Box component='form' onSubmit={handleSubmit}>
@@ -196,7 +207,7 @@ export default function InvitationResponse({
                     fontFamily: FONTS.serif,
                   }}
                 >
-                  Tên của bạn
+                  Tên của {guestPronoun.toLowerCase()}
                 </Typography>
                 <StyledTextField
                   fullWidth
@@ -220,7 +231,8 @@ export default function InvitationResponse({
                   fontFamily: FONTS.serif,
                 }}
               >
-                Bạn sẽ đến chia vui trong tiệc cưới của chúng mình chứ?
+                {guestPronoun} sẽ đến chia vui trong tiệc cưới của{' '}
+                {wePronoun.toLowerCase()} chứ?
               </Typography>
               <RadioGroup
                 value={attendance}
@@ -318,8 +330,8 @@ export default function InvitationResponse({
                   fontFamily: FONTS.serif,
                 }}
               >
-                Bạn có muốn để lại lời nhắn, hay lời chúc gì cho tụi mình không
-                ^^?
+                {guestPronoun} có muốn để lại lời nhắn, hay lời chúc gì cho{' '}
+                {wePronoun.toLowerCase()} không ^^?
               </Typography>
               <StyledTextField
                 fullWidth

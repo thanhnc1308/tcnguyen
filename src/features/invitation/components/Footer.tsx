@@ -3,8 +3,14 @@
 import { Box, Typography, Container, Tooltip } from '@mui/material';
 import { Favorite } from '@mui/icons-material';
 import { COLORS, FONTS } from '../constants/design';
+import { Guest, GuestAgeComparison } from '@/types/guest';
+import { getGuestPronoun } from '@/utils/guest';
 
-export default function Footer() {
+export default function Footer({ guest }: { guest: Guest | null }) {
+  const { guestPronoun, wePronoun } = getGuestPronoun(
+    guest?.ageComparison ?? GuestAgeComparison.Same,
+    guest?.gender,
+  );
   return (
     <Box
       component='footer'
@@ -60,12 +66,13 @@ export default function Footer() {
               mb: 4,
             }}
           >
-            Cảm ơn bạn đã dành tình cảm cho chúng mình.
+            Cảm ơn {guestPronoun.toLowerCase()} đã dành tình cảm cho{' '}
+            {wePronoun.toLowerCase()}.
             <br />
-            Chúng mình vô cùng trân quý khi được chia sẻ niềm hạnh phúc này cùng
-            bạn.
+            {wePronoun} vô cùng trân quý khi được chia sẻ niềm hạnh phúc này
+            cùng {guestPronoun.toLowerCase()}.
             <br />
-            Hẹn gặp bạn tại buổi lễ nhé!
+            Hẹn gặp {guestPronoun.toLowerCase()} tại buổi lễ nhé!
           </Typography>
 
           {/* Made with Love Message */}

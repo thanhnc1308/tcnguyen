@@ -3,8 +3,15 @@
 import { Box, Typography } from '@mui/material';
 import { COLORS, FONTS } from '../constants/design';
 import ScrollReveal from './ScrollReveal';
+import { Guest, GuestAgeComparison } from '@/types/guest';
+import { getGuestPronoun } from '@/utils/guest';
 
-export default function GiftMessage() {
+export default function GiftMessage({ guest }: { guest: Guest | null }) {
+  const { guestPronoun, wePronoun } = getGuestPronoun(
+    guest?.ageComparison ?? GuestAgeComparison.Same,
+    guest?.gender,
+  );
+
   return (
     <Box
       sx={{
@@ -24,8 +31,8 @@ export default function GiftMessage() {
             mx: 'auto',
           }}
         >
-          Sự hiện diện và lời chúc của bạn là món quà quý giá nhất đối với chúng
-          mình!
+          Sự hiện diện và lời chúc của {guestPronoun.toLowerCase()} là món quà
+          quý giá nhất đối với {wePronoun.toLowerCase()}!
         </Typography>
         <Typography
           sx={{
@@ -37,8 +44,8 @@ export default function GiftMessage() {
             fontFamily: FONTS.serif,
           }}
         >
-          Nếu bạn muốn gửi gắm thêm tình cảm, có thể tìm thấy thông tin bên dưới
-          đây. Chúng mình vô cùng trân trọng.
+          Nếu {guestPronoun.toLowerCase()} muốn gửi gắm thêm tình cảm, có thể
+          tìm thấy thông tin bên dưới đây. {wePronoun} vô cùng trân trọng.
         </Typography>
       </ScrollReveal>
     </Box>

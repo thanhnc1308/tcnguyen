@@ -67,15 +67,15 @@ export default function WeddingInvitation({
       >
         <Box>
           <Banner />
-          <InvitationHeading />
+          <InvitationHeading guest={guest} />
           <EventInfo side={resolvedSide} />
           <Timeline side={resolvedSide} />
-          <PhotoGallery />
-          <GiftMessage />
+          <PhotoGallery guest={guest} />
+          <GiftMessage guest={guest} />
           <WeddingMonetaryGift />
           <InvitationResponse guest={guest} />
           <WeddingGuestBook />
-          <Footer />
+          <Footer guest={guest} />
         </Box>
       </Grow>
       {isPlaying && (
