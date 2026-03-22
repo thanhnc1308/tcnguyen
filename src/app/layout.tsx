@@ -5,6 +5,7 @@ import {
   Cormorant_Garamond,
   Dancing_Script,
 } from 'next/font/google';
+import type { Metadata } from 'next';
 import './globals.css';
 import { AppRouterCacheProvider } from '@mui/material-nextjs/v15-appRouter';
 import { ThemeProvider } from '@mui/material/styles';
@@ -43,6 +44,12 @@ const cormorantGaramond = Cormorant_Garamond({
   weight: ['300', '400', '500', '600', '700'],
   style: ['normal', 'italic'],
 });
+
+export const metadata: Metadata = {
+  icons: {
+    icon: '/images/favicon.png',
+  },
+};
 
 export default function RootLayout({
   children,

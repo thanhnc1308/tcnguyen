@@ -53,6 +53,13 @@ const PHOTOS: WeddingPhoto[] = [
     width: 1536,
     height: 2048,
   },
+  {
+    id: '5',
+    src: '/images/gallery/5-entrance-photo.JPG',
+    alt: '5 entrance photo',
+    width: 4652,
+    height: 6978,
+  },
 ];
 
 export default function PhotoGallery({
