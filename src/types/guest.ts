@@ -13,6 +13,7 @@ export enum GuestAgeComparison {
   Older = 'older',
   Younger = 'younger',
   Same = 'same',
+  Teacher = 'teacher',
 }
 
 export enum GuestGender {
@@ -23,6 +24,7 @@ export enum GuestGender {
 export type Guest = {
   _id: string;
   name: string;
+  group?: string;
   status: GuestConfirmationStatus;
   memberCount: number;
   invited: boolean;

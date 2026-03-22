@@ -10,6 +10,7 @@ import '../mongodb'; // Auto-connect to MongoDB
 export interface Guest extends mongoose.Document {
   _id: string;
   name: string;
+  group?: string;
   memberCount: number;
   status: string;
   invited: boolean;
@@ -29,6 +30,10 @@ const GuestSchema = new mongoose.Schema<Guest>({
     type: String,
     required: [true, 'Please provide a name for this guest.'],
     maxlength: [60, 'Name cannot be more than 60 characters'],
+  },
+  group: {
+    type: String,
+    required: false,
   },
   memberCount: {
     type: Number,
@@ -58,6 +63,7 @@ const GuestSchema = new mongoose.Schema<Guest>({
       GuestAgeComparison.Older,
       GuestAgeComparison.Younger,
       GuestAgeComparison.Same,
+      GuestAgeComparison.Teacher,
     ],
     default: GuestAgeComparison.Same,
   },

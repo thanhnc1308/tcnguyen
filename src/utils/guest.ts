@@ -14,6 +14,11 @@ export function getGuestPronoun(
     return { guestPronoun: 'Bạn', wePronoun: 'Chúng mình' };
   }
 
+  if (ageComparison === GuestAgeComparison.Teacher) {
+    const guestPronoun = gender === GuestGender.Female ? 'Cô' : 'Thầy';
+    return { guestPronoun, wePronoun: 'Chúng em' };
+  }
+
   if (ageComparison === GuestAgeComparison.Older) {
     const guestPronoun = gender === GuestGender.Female ? 'Chị' : 'Anh';
     return { guestPronoun, wePronoun: 'Chúng em' };

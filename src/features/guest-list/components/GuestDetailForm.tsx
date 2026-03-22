@@ -258,6 +258,24 @@ export default function Form({
                   Younger
                 </label>
               </div>
+              <div className='flex items-center'>
+                <input
+                  id={GuestAgeComparison.Teacher}
+                  name='ageComparison'
+                  type='radio'
+                  value={GuestAgeComparison.Teacher}
+                  defaultChecked={
+                    guest.ageComparison === GuestAgeComparison.Teacher
+                  }
+                  className='h-4 w-4 cursor-pointer border-gray-300 bg-gray-100 text-gray-600 focus:ring-2'
+                />
+                <label
+                  htmlFor={GuestAgeComparison.Teacher}
+                  className='ml-2 flex cursor-pointer items-center gap-1.5 rounded-full px-3 py-1.5 text-xs font-medium'
+                >
+                  Teacher
+                </label>
+              </div>
             </div>
           </div>
         </fieldset>

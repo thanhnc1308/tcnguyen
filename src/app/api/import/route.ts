@@ -1,6 +1,11 @@
 import { auth } from '@/auth';
 import guestModel from '@/server/db/models/guest.model';
-import { GuestConfirmationStatus, GuestSource } from '@/types/guest';
+import {
+  GuestAgeComparison,
+  GuestConfirmationStatus,
+  GuestGender,
+  GuestSource,
+} from '@/types/guest';
 import { hash } from '@/utils';
 import { getUserRoleFromEmail } from '@/utils/auth';
 import { UserRole } from '@/types/auth';
@@ -37,19 +42,45 @@ export async function POST(req: NextRequest) {
       skipEmptyLines: true,
     });
 
-    const allGuests = parsedData
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      .map((guest: any) => guest.GuestName?.trim())
-      .filter(Boolean);
+    const ageComparisonMap: Record<string, GuestAgeComparison> = {
+      Older: GuestAgeComparison.Older,
+      Younger: GuestAgeComparison.Younger,
+      Same: GuestAgeComparison.Same,
+      Teacher: GuestAgeComparison.Teacher,
+    };
 
-    const newGuests = allGuests.map((guest) => {
+    const genderMap: Record<string, GuestGender> = {
+      Male: GuestGender.Male,
+      Female: GuestGender.Female,
+    };
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const validRows = parsedData.filter((row: any) => row.GuestName?.trim());
+
+    let currentGroup: string | undefined;
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const newGuests = validRows.map((row: any) => {
+      const name = row.GuestName.trim();
+      const group = row.Group?.trim();
+      if (group) currentGroup = group;
+
+      const memberCount = parseInt(row.Quantiy) || 1;
+      const invited = row.Invited?.trim().toLowerCase() === 'true';
+      const ageComparison =
+        ageComparisonMap[row.AgeComparison?.trim()] ?? GuestAgeComparison.Same;
+      const gender = genderMap[row.Gender?.trim()];
+
       return {
-        _id: hash(`${guestSource}-${guest}`),
-        name: guest,
-        memberCount: 1,
+        _id: hash(`${guestSource}-${name}`),
+        name,
+        group: currentGroup,
+        memberCount,
         status: GuestConfirmationStatus.Pending,
-        invited: false,
+        invited,
         guestSource,
+        ageComparison,
+        ...(gender && { gender }),
       };
     });
 
