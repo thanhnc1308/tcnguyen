@@ -126,10 +126,17 @@ const PHOTOS: WeddingPhoto[] = [
   },
   {
     id: '15',
-    src: '/images/gallery/7.2-BIL09867.JPG',
-    alt: '7.2 BIL09867',
+    src: '/images/gallery/7.2-BIL09050.JPG',
+    alt: '7.2 BIL09050',
     width: 4672,
     height: 7008,
+  },
+  {
+    id: '16',
+    src: '/images/gallery/7.3-BIL09391.JPG',
+    alt: '7.3 BIL09391',
+    width: 4531,
+    height: 6796,
   },
 ];
 
