@@ -98,6 +98,9 @@ export const invitationRouter = router({
           InvitationResponseModel.countDocuments(baseFilter),
         ]);
 
+        pinnedResponses.sort(
+          (a, b) => pinnedNames.indexOf(a.name) - pinnedNames.indexOf(b.name),
+        );
         const responses = [...pinnedResponses, ...unpinnedResponses];
 
         return {

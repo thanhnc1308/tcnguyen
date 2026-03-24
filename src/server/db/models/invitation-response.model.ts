@@ -23,7 +23,7 @@ const InvitationResponseSchema = new mongoose.Schema<InvitationResponse>(
     numberOfGuests: {
       type: Number,
       required: true,
-      min: 1,
+      min: 0,
     },
     message: {
       type: String,
