@@ -42,10 +42,11 @@ export const vi = {
       { time: '15h', title: 'Lễ thành hôn' },
     ] as readonly { time: string; title: string }[],
     brideEvents: [
-      { time: '9h30', title: 'Đón khách' },
-      { time: '10h', title: 'Bữa trưa vui vẻ' },
-      { time: '13h30', title: 'Lễ vu quy' },
-      { time: '15h', title: 'Lễ thành hôn' },
+      { time: '20h 04/04 (T7)', title: 'Tiệc trà + Ca nhạc' },
+      { time: '9h30 05/04 (CN)', title: 'Đón khách' },
+      { time: '10h 05/04 (CN)', title: 'Bữa cơm thân mật' },
+      { time: '13h30 05/04 (CN)', title: 'Lễ vu quy' },
+      { time: '15h 05/04 (CN)', title: 'Lễ thành hôn' },
     ] as readonly { time: string; title: string }[],
   },
   gallery: {

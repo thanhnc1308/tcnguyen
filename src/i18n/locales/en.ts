@@ -46,10 +46,11 @@ export const en: TranslationDict = {
       { time: '3:00 PM', title: 'Wedding Ceremony' },
     ],
     brideEvents: [
-      { time: '9:30 AM', title: 'Welcome Guests' },
-      { time: '10:00 AM', title: 'Lunch Reception' },
-      { time: '1:30 PM', title: 'Bride Departure Ceremony' },
-      { time: '3:00 PM', title: 'Wedding Ceremony' },
+      { time: '08:00 PM 04/04 (Sat)', title: 'Tea Party + Music' },
+      { time: '09:30 AM 05/04 (Sun)', title: 'Welcome Guests' },
+      { time: '10:00 AM 05/04 (Sun)', title: 'Intimate Lunch' },
+      { time: '01:30 PM 05/04 (Sun)', title: 'Bride Departure Ceremony' },
+      { time: '03:00 PM 05/04 (Sun)', title: 'Wedding Ceremony' },
     ],
   },
   gallery: {
