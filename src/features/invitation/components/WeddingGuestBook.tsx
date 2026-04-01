@@ -51,16 +51,6 @@ export default function WeddingGuestBook() {
     );
   }, [wishes.length]);
 
-  const goTo = useCallback(
-    (index: number) => {
-      if (wishes.length === 0) return;
-      setCurrentIndex(
-        ((index % wishes.length) + wishes.length) % wishes.length,
-      );
-    },
-    [wishes.length],
-  );
-
   // Track visibility with IntersectionObserver
   useEffect(() => {
     const el = sectionRef.current;
@@ -333,46 +323,6 @@ export default function WeddingGuestBook() {
                     <ArrowForwardIos sx={{ fontSize: 16 }} />
                   </IconButton>
                 </>
-              )}
-
-              {/* Dot indicators */}
-              {wishes.length > 1 && (
-                <Box
-                  sx={{
-                    display: 'flex',
-                    justifyContent: 'center',
-                    gap: 1,
-                    mt: 4,
-                  }}
-                >
-                  {wishes.map((_, index) => (
-                    <Box
-                      key={index}
-                      onClick={() => {
-                        goTo(index);
-                        setIsPaused(true);
-                        setTimeout(() => setIsPaused(false), 3000);
-                      }}
-                      sx={{
-                        width: currentIndex === index ? 24 : 8,
-                        height: 8,
-                        borderRadius: 4,
-                        backgroundColor:
-                          currentIndex === index
-                            ? COLORS.accent
-                            : COLORS.borderGoldHover,
-                        cursor: 'pointer',
-                        transition: `all ${TRANSITIONS.normal} ease`,
-                        '&:hover': {
-                          backgroundColor:
-                            currentIndex === index
-                              ? COLORS.accent
-                              : COLORS.primaryLight,
-                        },
-                      }}
-                    />
-                  ))}
-                </Box>
               )}
             </Box>
           )}
